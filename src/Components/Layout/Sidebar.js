@@ -30,7 +30,7 @@ const UserType = styled.div`
     display: block;
     font-size: 1.25rem;
     line-height: 1.5;
-    padding: .8125rem .5rem;
+    padding: 0.9rem 0.55rem;;
     transition: width .3s ease-in-out;
     white-space: nowrap;
 `;

@@ -17,7 +17,7 @@ const MenuList = styled.ul`
 `;
 
 const MenuItem = styled.li`
-  padding: 35px 25px; 
+  padding: 20px 25px; 
   color: white;
   cursor: pointer;
   font-family: 'Poppins', sans-serif; 
@@ -47,14 +47,37 @@ const MenuItem = styled.li`
   }
 `;
 
+const LogoutItem = styled.li`
+  padding: 20px 25px;
+  color: white;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif; 
+  font-weight: 500; 
+  font-size: 1.1em; 
+  letter-spacing: 0.5px;
+  display: flex; 
+  align-items: center; 
+  border-radius: 8px;
+  position: absolute;
+  bottom: 0;
+  
+  width: 80px; /* Reduced width */
+  left: 10px; /* Center it within the sidebar */
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Simple hover background */
+  }
+`;
+
 
 const MenuIcons = () => {
   return (
     <MenuWrapper>
       <MenuList>
-        <MenuItem><i className="fas fa-user"></i> Client User</MenuItem>
+        <MenuItem><i className="fas fa-user"></i> Client</MenuItem>
+        <MenuItem><i className="fas fa-user"></i> User</MenuItem>
         <MenuItem><i className="fas fa-chart-line"></i> Data Generation</MenuItem>
-        <MenuItem><i className="fas fa-sign-out-alt"></i>Logout</MenuItem>
+        <LogoutItem><i className="fas fa-sign-out-alt"></i>Logout</LogoutItem>
       </MenuList>
     </MenuWrapper>
   );
