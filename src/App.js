@@ -1,14 +1,18 @@
 
-import LoginPage from './Components/Loginpage';
 import Layout from './Components/Layout/Layout';
+import LoginPage from './Components/Login/Loginpage';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-
-     <Layout/> 
-  
-    </div>
+    <Router>
+      <div >
+        <Routes>
+          <Route path="/layout" element={<Layout />} />
+          <Route path="/login" element={<LoginPage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
