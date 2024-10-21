@@ -1,5 +1,4 @@
-
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -8,10 +7,10 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #f0f0f0;
+  background: linear-gradient(135deg, #5FA8D3 0%, #2A6F97 50%, #1B4965 100%);
 `;
 
-const Form = styled.div`
+const Form = styled.form`
   display: flex;
   flex-direction: column;
   padding: 30px;
@@ -23,24 +22,30 @@ const Form = styled.div`
 
 const Input = styled.input`
   padding: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 16px;
 `;
 
+const ErrorMessage = styled.p`
+  color: red;
+  font-size: 12px;
+  margin: 5px 0 10px;
+`;
+
 const Button = styled.button`
   padding: 10px;
-  background-color: #007bff;
+  background-color: ${props => (props.disabled ? "#cccccc" : "#007bff")};
   color: white;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
+  cursor: ${props => (props.disabled ? "not-allowed" : "pointer")};
   font-size: 16px;
   margin-top: 10px;
   
   &:hover {
-    background-color: #0056b3;
+    background-color: ${props => (props.disabled ? "#cccccc" : "#0056b3")};
   }
 `;
 
@@ -48,28 +53,119 @@ const Links = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
+`;
 
-  a {
-    color: #007bff;
-    text-decoration: none;
+const StyledLinkButton = styled.button`
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 0;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+`;
 
-    &:hover {
-      text-decoration: underline;
-    }
+const TogglePasswordButton = styled.button`
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 10px;
+  text-align: right;
+
+  &:hover {
+    text-decoration: underline;
   }
 `;
 
 function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [errors, setErrors] = useState({ email: "", password: "" });
+
+ 
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+ 
+  const validatePassword = (password) => {
+    return password.length >= 6;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validateEmail(email) && validatePassword(password)) {
+      alert(`Email: ${email}, Password: ${password}`);
+    }
+  };
+
+  const handleEmailChange = (e) => {
+    const value = e.target.value;
+    setEmail(value);
+    setErrors({
+      ...errors,
+      email: validateEmail(value) ? "" : "Invalid email address.",
+    });
+  };
+
+  const handlePasswordChange = (e) => {
+    const value = e.target.value;
+    setPassword(value);
+    setErrors({
+      ...errors,
+      password: validatePassword(value)
+        ? ""
+        : "Password must be at least 6 characters long.",
+    });
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <Container>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <h2>Login</h2>
-        <Input type="email" placeholder="Email" />
-        <Input type="password" placeholder="Password" />
-        <Button>Login</Button>
+        <Input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={handleEmailChange}
+        />
+        {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
+        
+        <Input
+          type={showPassword ? "text" : "password"}
+          placeholder="Password"
+          value={password}
+          onChange={handlePasswordChange}
+        />
+        {errors.password && <ErrorMessage>{errors.password}</ErrorMessage>}
+        
+        <TogglePasswordButton type="button" onClick={togglePasswordVisibility}>
+          {showPassword ? "Hide Password" : "Show Password"}
+        </TogglePasswordButton>
+        
+        <Button type="submit" disabled={!email || !password || errors.email || errors.password}>
+          Login
+        </Button>
+        
         <Links>
-          <a href="#">Forgot Password?</a>
-          <a href="#">Not a member? Register</a>
+          <StyledLinkButton onClick={() => alert("Forgot Password clicked")}>
+            Forgot Password?
+          </StyledLinkButton>
+          <StyledLinkButton onClick={() => alert("Register clicked")}>
+            Not a member? Register
+          </StyledLinkButton>
         </Links>
       </Form>
     </Container>
