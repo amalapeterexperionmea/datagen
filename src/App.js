@@ -7,7 +7,7 @@ function App() {
     <div className="App">
 
      <LoginPage/> 
-     <Layout/> 
+  
     </div>
   );
 }
