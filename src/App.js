@@ -14,8 +14,10 @@ function App() {
         <Routes>
           <Route path="" element={<LoginPage />} />
           <Route path="/layout" element={<Layout />} />
+          <Route path="/data-generation"  element ={<Data_generation/>}/>
           <Route path="/user" element={<User />} />
-          <Route path='/client' element={<Client/>}/>
+          <Route path="/client" element={<Client/>}/>
+          
         </Routes>
       </div>
     </Router>
