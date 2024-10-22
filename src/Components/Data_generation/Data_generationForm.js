@@ -7,7 +7,6 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
- 
   padding: 20px;
   overflow: hidden;
 `;
@@ -18,7 +17,7 @@ const FormWrapper = styled.div`
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   width: 100%;
-  max-width: 800px; /* Adjusted width to accommodate two columns */
+  max-width: 800px;
   max-height: 80vh;
   overflow-y: auto;
 `;
@@ -39,7 +38,7 @@ const FormRow = styled.div`
 const FormField = styled.div`
   display: flex;
   flex-direction: column;
-  width: 48%; /* Make two fields fit in a row */
+  width: 48%;
 `;
 
 const Label = styled.label`
@@ -69,9 +68,8 @@ const CheckboxWrapper = styled.div`
 `;
 
 const CheckboxLabel = styled.label`
-  
   margin-left: 10px;
-   color: #2a6f97;
+  color: #2a6f97;
   font-weight: bold;
   font-size: 13px;
 `;
@@ -116,22 +114,22 @@ const Button = styled.button`
 
 const DataGenerationForm = () => {
   const [formData, setFormData] = useState({
-    organizationuri: "shaa.experionmea.com",
-    fromdate: "2022-09-01",
-    todate: "2022-09-30",
+    organizationuri: "",
+    fromdate: "",
+    todate: "",
     includeweekends: false,
-    fromtime: "09:00",
-    totime: "18:00",
-    duration: { min: 60, max: 180 },
+    fromtime: "",
+    totime: "",
+    duration: { min: "", max: "" }, // Changed to empty strings
     generationmode: "daily",
     modeattributes: {
-      daily: { daupercent: { min: 3, max: 3 } },
-      bulk: { batchsize: 1, noofrecords: 1 },
+      daily: { daupercent: { min: "", max: "" } }, // Changed to empty strings
+      bulk: { batchsize: "", noofrecords: "" }, // Changed to empty strings
     },
   });
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(""); // State for error messages
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -197,8 +195,24 @@ const DataGenerationForm = () => {
       await axios.post("http://localhost:5000/api/generate", formData);
       setLoading(false);
       alert("Data generation completed!");
+      // Optionally reset the form after successful submission
+      setFormData({
+        organizationuri: "",
+        fromdate: "",
+        todate: "",
+        includeweekends: false,
+        fromtime: "",
+        totime: "",
+        duration: { min: "", max: "" },
+        generationmode: "daily",
+        modeattributes: {
+          daily: { daupercent: { min: "", max: "" } },
+          bulk: { batchsize: "", noofrecords: "" },
+        },
+      });
     } catch (error) {
       console.error("Error submitting form:", error);
+      setError("There was an error submitting the form. Please try again.");
       setLoading(false);
     }
   };
@@ -260,19 +274,17 @@ const DataGenerationForm = () => {
           </FormRow>
 
           <FormField>
-          <CheckboxWrapper>
-            <Checkbox
-              name="includeweekends"
-              checked={formData.includeweekends}
-              onChange={handleChange}
-            />
-            <CheckboxLabel htmlFor="includeweekends">
-              Include Weekends
-            </CheckboxLabel>
-          </CheckboxWrapper>
-        </FormField>
-        
-
+            <CheckboxWrapper>
+              <Checkbox
+                name="includeweekends"
+                checked={formData.includeweekends}
+                onChange={handleChange}
+              />
+              <CheckboxLabel htmlFor="includeweekends">
+                Include Weekends
+              </CheckboxLabel>
+            </CheckboxWrapper>
+          </FormField>
 
           {/* Row 3 */}
           <FormRow>
