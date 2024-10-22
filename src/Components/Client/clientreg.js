@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: left;
   width: 500px;
-  margin-top: 25px;
-  margin-left: -50px;
+  margin-top: 100px;
+  margin-left: 300px;
   padding: 30px;
   background-color: #f9f9f9;
   border-radius: 10px;
@@ -74,6 +75,7 @@ const CancelButton = styled.button`
 `;
 
 const Form = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     shortName: "",
@@ -130,7 +132,9 @@ const Form = () => {
     e.preventDefault();
     console.log("Form Submitted:", formData);
   };
-
+  const handleCancel = () => {
+    navigate("/client"); 
+  };
   return (
     <FormContainer>
       <Header>Client Registration</Header>
@@ -231,7 +235,7 @@ const Form = () => {
 
         <ButtonContainer>
           <GenerateButton type="submit">Generate</GenerateButton>
-          <CancelButton type="button" onClick={() => console.log("Cancelled")}>
+          <CancelButton type="button" onClick={handleCancel}>
             Cancel
           </CancelButton>
         </ButtonContainer>

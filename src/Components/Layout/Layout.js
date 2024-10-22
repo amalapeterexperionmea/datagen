@@ -14,12 +14,13 @@ const MainContent = styled.div`
   width: 100%;
 `;
 
-const Layout = () => {
+const Layout = ({ children }) => {
     return (
         <LayoutWrapper>
             <Sidebar />
             <MainContent>
               <Header/>
+              { children }
             </MainContent>
         </LayoutWrapper>
     );

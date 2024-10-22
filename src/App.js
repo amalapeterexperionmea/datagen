@@ -5,6 +5,7 @@ import User from './Components/User/User';
 import Client from './Components/Client/client'; 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import UserTable from './Components/User/UserTable';
+import Form from './Components/Client/clientreg';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="/user" element={<User />} />
           <Route path="/client" element={<Client/>}/>
           <Route path="/userlist" element={<UserTable />} />
+          <Route path="/form" element={<Layout> <Form /></Layout>} />
           
         </Routes>
       </div>

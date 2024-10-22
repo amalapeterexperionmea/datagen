@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Form from './clientreg';
 import Layout from '../Layout/Layout';
+import DataGridComponent from '../Menugrid/menugrid';
 
 
 const PageWrapper = styled.div`
@@ -17,7 +17,7 @@ const Client = () => {
     
     <PageWrapper>
         <Layout/>
-      <Form />
+        <DataGridComponent/>
     </PageWrapper>
   );
 };
