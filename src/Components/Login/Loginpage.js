@@ -134,7 +134,7 @@ function LoginPage() {
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
-        <h2>Login s</h2>
+        <h2>Login</h2>
         <Input
           type="email"
           placeholder="Email"
