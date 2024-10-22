@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-
 const FormContainer = styled.div`
-  display :flex;
+  display: flex;
   flex-direction: column;
   justify-content: left;
   width: 500px;
-  margin-top:25px;
-  margin-left:10px; 
+  margin-top: 25px;
+  margin-left: 10px;
   padding: 30px;
   background-color: #f9f9f9;
   border-radius: 10px;
@@ -24,7 +23,7 @@ const Header = styled.label`
   display: block;
   margin-top: 10px;
   font-weight: bold;
-  font-size:25px;
+  font-size: 25px;
 `;
 const Input = styled.input`
   width: 100%;
@@ -36,21 +35,21 @@ const Input = styled.input`
 `;
 const ButtonContainer = styled.div`
   display: flex;
-  justify-content: flex-end; 
-
+  justify-content: flex-end;
 `;
+
 const GenerateButton = styled.button`
   margin-top: 20px;
-   margin-right: 10px;
+  margin-right: 10px;
   padding: 10px 20px;
   background-color: #17a2b8;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
-  
+  font-size: 15px;
 `;
+
 const CancelButton = styled.button`
   margin-top: 20px;
   padding: 10px 20px;
@@ -59,8 +58,7 @@ const CancelButton = styled.button`
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
-  
+  font-size: 14px;
 `;
 
 const Form = () => {
@@ -68,9 +66,11 @@ const Form = () => {
     name: "",
     shortName: "",
     domain: "",
-    postgres: [],
-    mongodb: [],
+    postgres: [], 
+    mongodb: [], 
   });
+  const [currentPostgres, setCurrentPostgres] = useState(""); 
+  const [currentMongodb, setCurrentMongodb] = useState(""); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -79,16 +79,41 @@ const Form = () => {
       [name]: value,
     });
   };
-  const handleObjectChange = (e, dbName) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [dbName]: {
-        ...formData[dbName],
-        [name]: value,
-      },
-    });
+
+  const handleAddPostgres = () => {
+    if (currentPostgres) {
+      setFormData((prevData) => ({
+        ...prevData,
+        postgres: [...prevData.postgres, currentPostgres],
+      }));
+      setCurrentPostgres(""); 
+    }
   };
+
+  const handleAddMongodb = () => {
+    if (currentMongodb) {
+      setFormData((prevData) => ({
+        ...prevData,
+        mongodb: [...prevData.mongodb, currentMongodb],
+      }));
+      setCurrentMongodb(""); 
+    }
+  };
+
+  const handleRemovePostgres = (item) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      postgres: prevData.postgres.filter((entry) => entry !== item),
+    }));
+  };
+
+  const handleRemoveMongodb = (item) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      mongodb: prevData.mongodb.filter((entry) => entry !== item),
+    }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Submitted:", formData);
@@ -126,25 +151,77 @@ const Form = () => {
           onChange={handleChange}
         />
 
-        <Label htmlFor="postgresHost">PostgreSQL:</Label>
+        <Label>PostgreSQL:</Label>
         <Input
           type="text"
-          id="postgresHost"
-          name="host"
-          value={formData.postgres.host}
-          onChange={(e) => handleObjectChange(e, "postgres")}
+          value={currentPostgres}
+          onChange={(e) => setCurrentPostgres(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              handleAddPostgres();
+            }
+          }}
         />
-        <Label htmlFor="mongodbHost">MongoDB :</Label>
+        <div>
+          {formData.postgres.map((item, index) => (
+            <span
+              key={index}
+              style={{ marginRight: "10px", display: "inline-block" }}
+            >
+              {item}
+              <span
+                onClick={() => handleRemovePostgres(item)}
+                style={{
+                  cursor: "pointer",
+                  marginLeft: "5px",
+                  color: "black",
+                }}
+              >
+                ×
+              </span>
+            </span>
+          ))}
+        </div>
+
+        <Label>MongoDB:</Label>
         <Input
           type="text"
-          id="mongodbHost"
-          name="host"
-          value={formData.mongodb.host}
-          onChange={(e) => handleObjectChange(e, "mongodb")}
+          value={currentMongodb}
+          onChange={(e) => setCurrentMongodb(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              handleAddMongodb();
+            }
+          }}
         />
+        <div>
+          {formData.mongodb.map((item, index) => (
+            <span
+              key={index}
+              style={{ marginRight: "10px", display: "inline-block" }}
+            >
+              {item}
+              <span
+                onClick={() => handleRemoveMongodb(item)}
+                style={{
+                  cursor: "pointer",
+                  marginLeft: "5px",
+                  color: "black",
+                }}
+              >
+                ×
+              </span>
+            </span>
+          ))}
+        </div>
+
         <ButtonContainer>
-        <GenerateButton type="submit">Generate</GenerateButton>
-        <CancelButton type="submit">Cancel</CancelButton>
+          <GenerateButton type="submit">Generate</GenerateButton>
+          <CancelButton type="button" onClick={() => console.log("Cancelled")}>
+            Cancel
+          </CancelButton>
         </ButtonContainer>
       </form>
     </FormContainer>
