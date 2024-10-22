@@ -7,7 +7,7 @@ const FormContainer = styled.div`
   justify-content: left;
   width: 500px;
   margin-top: 25px;
-  margin-left: 10px;
+  margin-left: -50px;
   padding: 30px;
   background-color: #f9f9f9;
   border-radius: 10px;
@@ -18,10 +18,15 @@ const Label = styled.label`
   display: block;
   margin-top: 10px;
   font-weight: bold;
+  font-size: 13px;
+  color : #2a6f97;
 `;
 const Header = styled.label`
-  display: block;
+  display: flex;
+  align-items:center;
+  justify-content:center;
   margin-top: 10px;
+  color: #1b4965;
   font-weight: bold;
   font-size: 25px;
 `;
@@ -42,23 +47,30 @@ const GenerateButton = styled.button`
   margin-top: 20px;
   margin-right: 10px;
   padding: 10px 20px;
-  background-color: #17a2b8;
+  background-color: #2a6f97;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 15px;
+    &:hover {
+    opacity: 0.8;
+    background-color: #1b4965;
+  }
 `;
 
 const CancelButton = styled.button`
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: #17a2b8;
+  background-color: gray;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
+    &:hover {
+    opacity: 0.8;
+  }
 `;
 
 const Form = () => {
