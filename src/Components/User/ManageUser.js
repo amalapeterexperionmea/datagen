@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const FormContainer = styled.div`
   width: 60%;
   margin: 0 auto;
-  padding: 20px;
+  padding: 20px 20px 20px 100px;
   background-color: #f4f4f9;
   /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
 `;

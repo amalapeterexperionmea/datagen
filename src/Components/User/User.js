@@ -2,6 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ManageUser from './ManageUser';
+import Layout from '../Layout/Layout';
 
 // Styled Component for the page wrapper
 const PageWrapper = styled.div`
@@ -14,7 +15,9 @@ const PageWrapper = styled.div`
 
 const User = () => {
   return (
+    
     <PageWrapper>
+        <Layout/>
       <ManageUser />
     </PageWrapper>
   );
