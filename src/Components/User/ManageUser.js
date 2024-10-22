@@ -1,15 +1,17 @@
-// src/App.js
+
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // Styled Components
 const FormContainer = styled.div`
   width: 60%;
-  margin: 0 auto;
-  padding: 20px 20px 20px 100px;
+  /*margin : 0 auto;*/
+  margin: 0 0 0 200px;
+  padding: 20px 60px 20px 70px;
   background-color: #f4f4f9;
-  /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+  box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.1);
 `;
+
 
 const Title = styled.h2`
   text-align: left;  // Changed from center to left

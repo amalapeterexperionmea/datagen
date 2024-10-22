@@ -4,6 +4,7 @@ import LoginPage from './Components/Login/Loginpage';
 import User from './Components/User/User';
 import Client from './Components/Client/client'; 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import UserTable from './Components/User/UserTable';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/data-generation"  element ={<Data_generation/>}/>
           <Route path="/user" element={<User />} />
           <Route path="/client" element={<Client/>}/>
+          <Route path="/userlist" element={<UserTable />} />
           
         </Routes>
       </div>

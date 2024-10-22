@@ -4,7 +4,7 @@ import BaseMenuItem from './BaseMenuItem';
 
 const UserMenuItem = () => {
   return (
-    <Link to="/user" style={{ textDecoration: 'none' }}> {/* Set the desired route here */}
+    <Link to="/userlist" style={{ textDecoration: 'none' }}> {/* Set the desired route here */}
       <BaseMenuItem>
         <i className="fas fa-user"></i> User
       </BaseMenuItem>
