@@ -20,7 +20,12 @@ const Label = styled.label`
   margin-top: 10px;
   font-weight: bold;
 `;
-
+const Header = styled.label`
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+  font-size:25px;
+`;
 const Input = styled.input`
   width: 100%;
   padding: 8px;
@@ -91,7 +96,7 @@ const Form = () => {
 
   return (
     <FormContainer>
-      <h1>Client Registration</h1>
+      <Header>Client Registration</Header>
       <form onSubmit={handleSubmit}>
         <Label htmlFor="name">Name:</Label>
         <Input
