@@ -1,3 +1,4 @@
+import Data_generation from './Components/Data_generation/Data_generation';
 import Layout from './Components/Layout/Layout';
 import LoginPage from './Components/Login/Loginpage';
 import User from './Components/User/User';
