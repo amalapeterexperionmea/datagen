@@ -13,86 +13,62 @@ const Container = styled.div`
 
 const FormWrapper = styled.div`
   background-color: white;
-  padding: 20px;
+  padding: 10px; /* Further reduced padding */
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   width: 100%;
-  max-width: 800px;
-  max-height: 80vh;
-  overflow-y: auto;
+  max-width: 450px; /* Further reduced max width */
+  max-height: 85vh; /* Further reduced max height */
+  overflow: hidden; /* Hide overflow */
 `;
 
 const Title = styled.h2`
   text-align: center;
   color: #1b4965;
-  margin-bottom: 20px;
+  margin-bottom: 15px; /* Reduced margin */
   font-family: "Arial", sans-serif;
 `;
 
 const FormRow = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 15px;
+  margin-bottom: 8px; /* Further reduced bottom margin */
 `;
 
 const FormField = styled.div`
   display: flex;
   flex-direction: column;
-  width: 48%;
+  width: 48%; /* Kept width to allow two fields side by side */
+  margin-bottom: 8px; /* Further reduced margin */
 `;
 
 const Label = styled.label`
   color: #2a6f97;
   font-weight: bold;
-  font-size: 13px;
+  font-size: 12px; /* Further reduced font size */
   margin-bottom: 5px;
 `;
 
 const Input = styled.input`
   width: 100%;
-  padding: 10px;
+  padding: 6px; /* Reduced padding */
   border-radius: 6px;
   border: 1px solid #ccc;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 12px; /* Further reduced font size */
   &:focus {
     border-color: #2a6f97;
     outline: none;
   }
 `;
 
-const TimeContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const CheckboxWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-`;
-
-const CheckboxLabel = styled.label`
-  margin-left: 10px;
-  color: #2a6f97;
-  font-weight: bold;
-  font-size: 13px;
-`;
-
-const Checkbox = styled.input.attrs({ type: "checkbox" })`
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-`;
-
 const Select = styled.select`
   width: 100%;
-  padding: 10px;
+  padding: 6px; /* Reduced padding */
   border-radius: 6px;
   border: 1px solid #ccc;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 12px; /* Further reduced font size */
   &:focus {
     border-color: #2a6f97;
     outline: none;
@@ -100,21 +76,24 @@ const Select = styled.select`
 `;
 
 const Button = styled.button`
-  width: 100%;
-  padding: 10px;
+  width: 48%;
+  padding: 6px; /* Reduced padding */
   background-color: #2a6f97;
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 14px;
-  margin-top: 15px;
+  font-size: 12px; /* Further reduced font size */
+  margin-right: 2%; /* Adjusted margin */
   &:hover {
     background-color: #1b4965;
   }
-  &:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+`;
+
+const CancelButton = styled(Button)`
+  background-color: #e74c3c; /* Red background for cancel button */
+  &:hover {
+    background-color: #c0392b; /* Darker red on hover */
   }
 `;
 
@@ -125,11 +104,11 @@ const DataGenerationForm = () => {
     todate: "",
     includeweekends: false,
     fromtime: "",
-    fromtimePeriod: "AM", // Initial state for from time period
+    fromtimePeriod: "AM",
     totime: "",
-    totimePeriod: "AM", // Initial state for to time period
+    totimePeriod: "AM",
     duration: { min: "", max: "" },
-    generationmode: "daily",
+    generationmode: "daily", // Default to daily
     modeattributes: {
       daily: { daupercent: { min: "", max: "" } },
       bulk: { batchsize: "", noofrecords: "" },
@@ -179,13 +158,11 @@ const DataGenerationForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError(""); // Reset error message
+    setError("");
 
-    // Format the fromtime and totime with AM/PM
     const formattedFromTime = `${formData.fromtime} ${formData.fromtimePeriod}`;
     const formattedToTime = `${formData.totime} ${formData.totimePeriod}`;
 
-    // Prepare the data for submission
     const dataToSubmit = {
       ...formData,
       fromtime: formattedFromTime,
@@ -220,7 +197,6 @@ const DataGenerationForm = () => {
       await axios.post("http://localhost:5000/api/generate", dataToSubmit);
       setLoading(false);
       alert("Data generation completed!");
-      // Optionally reset the form after successful submission
       setFormData({
         organizationuri: "",
         fromdate: "",
@@ -242,6 +218,25 @@ const DataGenerationForm = () => {
       setError("There was an error submitting the form. Please try again.");
       setLoading(false);
     }
+  };
+
+  const handleCancel = () => {
+    setFormData({
+      organizationuri: "",
+      fromdate: "",
+      todate: "",
+      includeweekends: false,
+      fromtime: "",
+      fromtimePeriod: "AM",
+      totime: "",
+      totimePeriod: "AM",
+      duration: { min: "", max: "" },
+      generationmode: "daily",
+      modeattributes: {
+        daily: { daupercent: { min: "", max: "" } },
+        bulk: { batchsize: "", noofrecords: "" },
+      },
+    });
   };
 
   return (
@@ -290,56 +285,58 @@ const DataGenerationForm = () => {
 
             <FormField>
               <Label htmlFor="fromtime">From Time:</Label>
-              <TimeContainer>
-                <Input
-                  type="time"
-                  name="fromtime"
-                  value={formData.fromtime}
-                  onChange={handleChange}
-                  required
-                />
-                <Select name="fromtimePeriod" value={formData.fromtimePeriod} onChange={handleChange}>
-                  <option value="AM">AM</option>
-                  <option value="PM">PM</option>
-                </Select>
-              </TimeContainer>
+              <Input
+                type="time"
+                name="fromtime"
+                value={formData.fromtime}
+                onChange={handleChange}
+                required
+              />
             </FormField>
           </FormRow>
-
-          <FormField>
-            <CheckboxWrapper>
-              <Checkbox
-                name="includeweekends"
-                checked={formData.includeweekends}
-                onChange={handleChange}
-              />
-              <CheckboxLabel htmlFor="includeweekends">
-                Include Weekends
-              </CheckboxLabel>
-            </CheckboxWrapper>
-          </FormField>
 
           {/* Row 3 */}
           <FormRow>
             <FormField>
-              <Label htmlFor="totime">To Time:</Label>
-              <TimeContainer>
-                <Input
-                  type="time"
-                  name="totime"
-                  value={formData.totime}
-                  onChange={handleChange}
-                  required
-                />
-                <Select name="totimePeriod" value={formData.totimePeriod} onChange={handleChange}>
-                  <option value="AM">AM</option>
-                  <option value="PM">PM</option>
-                </Select>
-              </TimeContainer>
+              <Label htmlFor="fromtimePeriod">From Time Period:</Label>
+              <Select
+                name="fromtimePeriod"
+                value={formData.fromtimePeriod}
+                onChange={handleChange}
+              >
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+              </Select>
             </FormField>
 
             <FormField>
-              <Label htmlFor="duration.min">Min Duration:</Label>
+              <Label htmlFor="totime">To Time:</Label>
+              <Input
+                type="time"
+                name="totime"
+                value={formData.totime}
+                onChange={handleChange}
+                required
+              />
+            </FormField>
+          </FormRow>
+
+          {/* Row 4 */}
+          <FormRow>
+            <FormField>
+              <Label htmlFor="totimePeriod">To Time Period:</Label>
+              <Select
+                name="totimePeriod"
+                value={formData.totimePeriod}
+                onChange={handleChange}
+              >
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+              </Select>
+            </FormField>
+
+            <FormField>
+              <Label htmlFor="duration.min">Duration Min:</Label>
               <Input
                 type="number"
                 name="duration.min"
@@ -350,10 +347,10 @@ const DataGenerationForm = () => {
             </FormField>
           </FormRow>
 
-          {/* Row 4 */}
+          {/* Row 5 */}
           <FormRow>
             <FormField>
-              <Label htmlFor="duration.max">Max Duration:</Label>
+              <Label htmlFor="duration.max">Duration Max:</Label>
               <Input
                 type="number"
                 name="duration.max"
@@ -441,11 +438,16 @@ const DataGenerationForm = () => {
             </FormRow>
           )}
 
-          <Button type="submit" disabled={loading}>
-            {loading ? "Loading..." : "Generate Data"}
-          </Button>
-
           {error && <p style={{ color: "red" }}>{error}</p>}
+
+          <FormRow style={{ justifyContent: "flex-end" }}>
+            <Button type="submit" disabled={loading}>
+              {loading ? "Generating..." : "Generate Data"}
+            </Button>
+            <CancelButton type="button" onClick={handleCancel}>
+              Cancel
+            </CancelButton>
+          </FormRow>
         </form>
       </FormWrapper>
     </Container>
