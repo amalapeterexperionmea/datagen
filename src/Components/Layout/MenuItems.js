@@ -36,7 +36,7 @@ const BaseMenuItem = styled.li`
   }
 `;
 
-// Menu items configuration with adjustable margins
+// Menu items configuration 
 const menuItemsConfig = [
   {
     iconClass: "fas fa-user",
@@ -75,7 +75,7 @@ const MenuIcons = () => {
     if (!item.isLogout) {
       navigate(item.route);
     } else {
-      //logout
+      // Add your logout
     }
   };
 

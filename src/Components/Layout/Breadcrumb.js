@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 
-//breadcrump config
+// Breadcrumb config
 const HomeIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-house" viewBox="0 0 16 16">
     <path d="M8 .5l-7 7h2v7h10v-7h2l-7-7zM7 1.414L1 7h2v7h4v-4h2v4h4V7h2l-6-6-1 1z" />
@@ -18,12 +18,7 @@ const breadcrumbConfig = [
   { label: 'Client', path: '/client' },
   { label: 'User', path: '/user' },
   { label: 'Data Generation', path: '/data-generation' },
-  // Add more breadcrumb items as needed
 ];
-
-
-
-
 
 
 
@@ -77,13 +72,13 @@ export const Breadcrumb = ({ currentPath }) => {
     <BreadcrumbWrapper>
       {breadcrumbItems.map((item, index) => (
         <BreadcrumbItem key={index} onClick={() => handleBreadcrumbClick(index)}>
-          {item.icon && item.label === 'Home' ? (
+          {item.label === 'Home' ? (
+            item.icon /* Render only the icon for Home */
+          ) : (
             <>
-              {item.icon} {/* Render icon */}
+              {item.icon && item.label !== 'Home' && item.icon} {/* Render icon if present */}
               {item.label}
             </>
-          ) : (
-            item.label
           )}
         </BreadcrumbItem>
       ))}
