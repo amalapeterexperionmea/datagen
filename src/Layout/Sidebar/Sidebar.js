@@ -1,7 +1,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import MenuIcons from '../MenuItems/MenuItems';
+import MenuItem from '../MenuItems/MenuItems';
 
 const SidebarWrapper = styled.aside`
   background-color: #153448; 
@@ -54,7 +54,7 @@ const Sidebar = () => {
         <SidebarWrapper>
             <UserType>Admin</UserType>
             <Username>Experion</Username> {/* Display the username here */}
-            <MenuIcons />
+            <MenuItem />
         </SidebarWrapper>
     );
 };

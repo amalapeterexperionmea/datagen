@@ -3,8 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-
-
+import { menuItemsConfig } from '../../Config'; 
 
 const BaseMenuItem = styled.li`
   padding: 20px 25px;
@@ -38,52 +37,14 @@ const BaseMenuItem = styled.li`
   }
 `;
 
-
-
-
-// Menu items configuration 
-const menuItemsConfig = [
-  {
-    iconClass: "fas fa-user",
-    label: "Client",
-    route: "/client",
-    topMargin: '10px',
-    bottomMargin: '10px',
-  },
-  {
-    iconClass: "fas fa-users",
-    label: "User",
-    route: "/user",
-    topMargin: '10px',
-    bottomMargin: '10px',
-  },
-  {
-    iconClass: "fas fa-chart-line",
-    label: "Data Generation",
-    route: "/data-generation",
-    topMargin: '10px',
-    bottomMargin: '10px',
-  },
-  {
-    iconClass: "fas fa-sign-out-alt",
-    label: "Logout",
-    isLogout: true,
-    topMargin: 'auto', 
-    bottomMargin: '10px',
-  },
-];
-
-
-
-
-const MenuIcons = () => {
+const MenuItem = () => {
   const navigate = useNavigate();
 
   const handleItemClick = (item) => {
     if (!item.isLogout) {
       navigate(item.route);
     } else {
-      //  logout
+      // handle logout
     }
   };
 
@@ -109,4 +70,4 @@ const MenuIcons = () => {
   );
 };
 
-export default MenuIcons;
+export default MenuItem;

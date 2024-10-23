@@ -1,5 +1,8 @@
+
+
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom"; 
 
 const Container = styled.div`
   display: flex;
@@ -7,7 +10,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background: linear-gradient(135deg, #5FA8D3 0%, #2A6F97 50%, #1B4965 100%);
+  background: linear-gradient(135deg, #5fa8d3 0%, #2a6f97 50%, #1b4965 100%);
 `;
 
 const Form = styled.form`
@@ -88,22 +91,38 @@ function LoginPage() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({ email: "", password: "" });
+  const [loginError, setLoginError] = useState("");
 
- 
+  const navigate = useNavigate(); // Initialize navigation hook
+
+  // Hardcoded super admin credentials
+  const superAdmins = [
+    { email: "superadmin1@datagen.com", password: "admin123" },
+    { email: "superadmin2@datagen.com", password: "admin456" }
+  ];
+
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
- 
   const validatePassword = (password) => {
     return password.length >= 6;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validateEmail(email) && validatePassword(password)) {
-      alert(`Email: ${email}, Password: ${password}`);
+
+    // Check if email and password match any hardcoded super admin
+    const isAdmin = superAdmins.some(
+      (admin) => admin.email === email && admin.password === password
+    );
+
+    if (isAdmin) {
+      // Redirect to /layout if credentials are correct
+      navigate("/layout");
+    } else {
+      setLoginError("Invalid email or password.");
     }
   };
 
@@ -155,17 +174,22 @@ function LoginPage() {
           {showPassword ? "Hide Password" : "Show Password"}
         </TogglePasswordButton>
         
-        <Button type="submit" disabled={!email || !password || errors.email || errors.password}>
+        <Button
+          type="submit"
+          disabled={!email || !password || errors.email || errors.password}
+        >
           Login
         </Button>
+        
+        {loginError && <ErrorMessage>{loginError}</ErrorMessage>}
         
         <Links>
           <StyledLinkButton onClick={() => alert("Forgot Password clicked")}>
             Forgot Password?
           </StyledLinkButton>
-          <StyledLinkButton onClick={() => alert("Register clicked")}>
+          {/* <StyledLinkButton onClick={() => alert("Register clicked")}>
             Not a member? Register
-          </StyledLinkButton>
+          </StyledLinkButton> */}
         </Links>
       </Form>
     </Container>

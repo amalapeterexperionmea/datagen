@@ -1,23 +1,8 @@
 
-
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import HomeIconImage from '../icons/Homeicon.png'; 
-
-
-// Breadcrumb configuration
-const breadcrumbConfig = [
-  { label: 'Home', path: '/layout', icon: <img src={HomeIconImage} alt="Home" style={{ width: '32px', height: '32px' }} /> },
-  { label: 'Client List', path: '/client' },
-  { label: 'Client Form', path: '/form', parentPath: '/client' },
-  { label: 'User', path: '/user' },
-  { label: 'Data Generation', path: '/data-generation' }
-];
-
-
-
-
+import { breadcrumbConfig } from '../../Config'; // Import the configuration
 
 const BreadcrumbWrapper = styled.nav`
   position: fixed;  
@@ -40,23 +25,24 @@ const BreadcrumbItem = styled.span`
 
   &:hover {
     text-decoration: none;
-    color: darkblue; /* Change color on hover */
+    color: darkblue;
   }
 
-  display: flex; /* Ensure items are aligned */
-  align-items: center; /* Center icon and text vertically */
+  display: flex;
+  align-items: center;
 `;
 
 export const Breadcrumb = ({ currentPath }) => {
   const navigate = useNavigate();
 
-  // Function to get the breadcrumb items based on currentPath
   const getBreadcrumbItems = () => {
     const items = [];
     const currentItem = breadcrumbConfig.find(item => item.path === currentPath);
 
-    // Always add Home as icon only
-    items.push({ label: 'Home', path: '/layout', icon: breadcrumbConfig[0].icon }); // Using the Home icon image
+    // Add Home item with icon only if it’s not already the current path
+    if (currentPath !== '/layout') {
+      items.push(breadcrumbConfig[0]); // Home item
+    }
 
     if (currentItem) {
       // Add parent item if it exists
@@ -66,7 +52,6 @@ export const Breadcrumb = ({ currentPath }) => {
           items.push(parentItem); // Push parent item (e.g., Client)
         }
       }
-
       // Add the current item (e.g., Addclient)
       items.push(currentItem);
     }
@@ -76,27 +61,19 @@ export const Breadcrumb = ({ currentPath }) => {
 
   const breadcrumbItems = getBreadcrumbItems();
 
-  // Remove duplicate Home items
-  if (breadcrumbItems.length > 1 && breadcrumbItems[breadcrumbItems.length - 1].label === 'Home') {
-    breadcrumbItems.pop(); // Remove the last Home if it's a duplicate
-  }
-
   const handleBreadcrumbClick = (index) => {
-    navigate(breadcrumbItems[index].path); // Navigate to the selected path
+    const targetPath = breadcrumbItems[index].path;
+    if (targetPath) {
+      navigate(targetPath); // Navigate to the selected path
+    }
   };
 
   return (
     <BreadcrumbWrapper>
       {breadcrumbItems.map((item, index) => (
         <BreadcrumbItem key={index} onClick={() => handleBreadcrumbClick(index)}>
-          {item.label === 'Home' ? (
-            item.icon // Render the Home icon image
-          ) : (
-            <>
-              {item.icon} {/* Render icon if present */}
-              {item.label} {/* Render label for other items */}
-            </>
-          )}
+          {item.icon} {/* Render icon for each item */}
+          {item.label && index !== 0 && ` ${item.label}`} {/* Render label for other items except Home */}
         </BreadcrumbItem>
       ))}
     </BreadcrumbWrapper>
