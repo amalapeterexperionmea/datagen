@@ -1,7 +1,8 @@
 // src/App.js
 import React from 'react';
 import UserTableItem from './UserTableItem';
-import Layout from '../Layout/Layout';
+import Layout from '../../Layout/Layout'; // Adjusted import path
+
 import styled from 'styled-components';
 
 const PageWrapper = styled.div`
