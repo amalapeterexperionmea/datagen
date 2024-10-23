@@ -1,8 +1,9 @@
 
+
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { breadcrumbConfig } from '../../Config'; // Import the configuration
+import { breadcrumbConfig } from '../../Config'; 
 
 const BreadcrumbWrapper = styled.nav`
   position: fixed;  
@@ -52,7 +53,7 @@ export const Breadcrumb = ({ currentPath }) => {
           items.push(parentItem); // Push parent item (e.g., Client)
         }
       }
-      // Add the current item (e.g., Addclient)
+      // Add the current item (e.g., Client Form, Update Client)
       items.push(currentItem);
     }
 
