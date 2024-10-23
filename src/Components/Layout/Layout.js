@@ -1,4 +1,3 @@
-
 import React from 'react';
 import styled from 'styled-components';
 import Header from './Header';
@@ -15,16 +14,16 @@ const MainContent = styled.div`
   width: 100%;
 `;
 
-const Layout = () => {
-  const currentPath = window.location.pathname; // Get the current path
+const Layout = ({ children }) => { 
+  const currentPath = window.location.pathname; 
 
   return (
     <LayoutWrapper>
       <Sidebar />
       <MainContent>
         <Header />
-        <Breadcrumb currentPath={currentPath} /> {/* Pass the current path to the Breadcrumb */}
-        {/* Other components can be added here */}
+        <Breadcrumb currentPath={currentPath} /> 
+        {children} 
       </MainContent>
     </LayoutWrapper>
   );

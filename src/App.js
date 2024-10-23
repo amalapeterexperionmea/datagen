@@ -19,7 +19,7 @@ function App() {
           <Route path="/user" element={<User />} />
           <Route path="/client" element={<Client/>}/>
           <Route path="/userlist" element={<UserTable />} />
-          <Route path="/form" element={<Layout> <Form /></Layout>} />
+          <Route path="/form" element={<Layout><Form /></Layout>} />
           
         </Routes>
       </div>
