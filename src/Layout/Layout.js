@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Header from './Header/Header';
 import Sidebar from './Sidebar/Sidebar';
-import { Breadcrumb } from './Breadcrumb/Breadcrumb'; // Import the Breadcrumb component
+import { Breadcrumb } from './Breadcrumb/Breadcrumb'; 
 
 const LayoutWrapper = styled.div`
   display: flex;
