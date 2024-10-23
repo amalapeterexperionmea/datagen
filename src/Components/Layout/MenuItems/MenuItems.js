@@ -4,6 +4,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
+
+
 const BaseMenuItem = styled.li`
   padding: 20px 25px;
   color: white;
@@ -35,6 +37,9 @@ const BaseMenuItem = styled.li`
     color: #ffcc00;
   }
 `;
+
+
+
 
 // Menu items configuration 
 const menuItemsConfig = [
@@ -68,6 +73,9 @@ const menuItemsConfig = [
   },
 ];
 
+
+
+
 const MenuIcons = () => {
   const navigate = useNavigate();
 
@@ -75,7 +83,7 @@ const MenuIcons = () => {
     if (!item.isLogout) {
       navigate(item.route);
     } else {
-      // Add your logout
+      //  logout
     }
   };
 

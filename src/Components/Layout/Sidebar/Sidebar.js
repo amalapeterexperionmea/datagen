@@ -1,7 +1,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import MenuIcons from './MenuItems';
+import MenuIcons from '../MenuItems/MenuItems';
 
 const SidebarWrapper = styled.aside`
   background-color: #153448; 
