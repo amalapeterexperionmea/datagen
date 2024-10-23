@@ -243,7 +243,7 @@ const DataGenerationForm = () => {
     <Container>
       <FormWrapper>
         <form onSubmit={handleSubmit}>
-          <Title>Data Generation</Title>
+          <Title>Generate Data</Title>
 
           {/* Row 1 */}
           <FormRow>
