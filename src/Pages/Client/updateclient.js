@@ -44,7 +44,7 @@ const ButtonContainer = styled.div`
   justify-content: flex-end;
 `;
 
-const GenerateButton = styled.button`
+const UpdateButton = styled.button`
   margin-top: 20px;
   margin-right: 10px;
   padding: 10px 20px;
@@ -74,7 +74,7 @@ const CancelButton = styled.button`
   }
 `;
 
-const Form = () => {
+const Update = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
@@ -137,7 +137,7 @@ const Form = () => {
   };
   return (
     <FormContainer>
-      <Header>Client Registration</Header>
+      <Header>Update Client</Header>
       <form onSubmit={handleSubmit}>
         <Label htmlFor="name">Name:</Label>
         <Input
@@ -234,7 +234,7 @@ const Form = () => {
         </div>
 
         <ButtonContainer>
-          <GenerateButton type="submit">Add</GenerateButton>
+          <UpdateButton type="submit">Update</UpdateButton>
           <CancelButton type="button" onClick={handleCancel}>
             Cancel
           </CancelButton>
@@ -244,4 +244,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default Update;
