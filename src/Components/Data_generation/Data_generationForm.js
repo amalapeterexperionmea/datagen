@@ -61,6 +61,12 @@ const Input = styled.input`
   }
 `;
 
+const TimeContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 const CheckboxWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -119,12 +125,14 @@ const DataGenerationForm = () => {
     todate: "",
     includeweekends: false,
     fromtime: "",
+    fromtimePeriod: "AM", // Initial state for from time period
     totime: "",
-    duration: { min: "", max: "" }, // Changed to empty strings
+    totimePeriod: "AM", // Initial state for to time period
+    duration: { min: "", max: "" },
     generationmode: "daily",
     modeattributes: {
-      daily: { daupercent: { min: "", max: "" } }, // Changed to empty strings
-      bulk: { batchsize: "", noofrecords: "" }, // Changed to empty strings
+      daily: { daupercent: { min: "", max: "" } },
+      bulk: { batchsize: "", noofrecords: "" },
     },
   });
 
@@ -133,7 +141,13 @@ const DataGenerationForm = () => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    if (name.startsWith("duration")) {
+
+    if (name === "fromtimePeriod" || name === "totimePeriod") {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    } else if (name.startsWith("duration")) {
       const key = name.split(".")[1];
       setFormData({
         ...formData,
@@ -167,6 +181,17 @@ const DataGenerationForm = () => {
     setLoading(true);
     setError(""); // Reset error message
 
+    // Format the fromtime and totime with AM/PM
+    const formattedFromTime = `${formData.fromtime} ${formData.fromtimePeriod}`;
+    const formattedToTime = `${formData.totime} ${formData.totimePeriod}`;
+
+    // Prepare the data for submission
+    const dataToSubmit = {
+      ...formData,
+      fromtime: formattedFromTime,
+      totime: formattedToTime,
+    };
+
     const requiredFields = [
       "organizationuri",
       "fromdate",
@@ -180,8 +205,8 @@ const DataGenerationForm = () => {
 
     const allFieldsFilled = requiredFields.every((field) => {
       const value = field.includes(".")
-        ? field.split(".").reduce((acc, key) => acc[key], formData)
-        : formData[field];
+        ? field.split(".").reduce((acc, key) => acc[key], dataToSubmit)
+        : dataToSubmit[field];
       return value && value.toString().trim() !== "";
     });
 
@@ -192,7 +217,7 @@ const DataGenerationForm = () => {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/generate", formData);
+      await axios.post("http://localhost:5000/api/generate", dataToSubmit);
       setLoading(false);
       alert("Data generation completed!");
       // Optionally reset the form after successful submission
@@ -202,7 +227,9 @@ const DataGenerationForm = () => {
         todate: "",
         includeweekends: false,
         fromtime: "",
+        fromtimePeriod: "AM",
         totime: "",
+        totimePeriod: "AM",
         duration: { min: "", max: "" },
         generationmode: "daily",
         modeattributes: {
@@ -263,13 +290,19 @@ const DataGenerationForm = () => {
 
             <FormField>
               <Label htmlFor="fromtime">From Time:</Label>
-              <Input
-                type="time"
-                name="fromtime"
-                value={formData.fromtime}
-                onChange={handleChange}
-                required
-              />
+              <TimeContainer>
+                <Input
+                  type="time"
+                  name="fromtime"
+                  value={formData.fromtime}
+                  onChange={handleChange}
+                  required
+                />
+                <Select name="fromtimePeriod" value={formData.fromtimePeriod} onChange={handleChange}>
+                  <option value="AM">AM</option>
+                  <option value="PM">PM</option>
+                </Select>
+              </TimeContainer>
             </FormField>
           </FormRow>
 
@@ -290,23 +323,28 @@ const DataGenerationForm = () => {
           <FormRow>
             <FormField>
               <Label htmlFor="totime">To Time:</Label>
-              <Input
-                type="time"
-                name="totime"
-                value={formData.totime}
-                onChange={handleChange}
-                required
-              />
+              <TimeContainer>
+                <Input
+                  type="time"
+                  name="totime"
+                  value={formData.totime}
+                  onChange={handleChange}
+                  required
+                />
+                <Select name="totimePeriod" value={formData.totimePeriod} onChange={handleChange}>
+                  <option value="AM">AM</option>
+                  <option value="PM">PM</option>
+                </Select>
+              </TimeContainer>
             </FormField>
 
             <FormField>
-              <Label htmlFor="duration.min">Min Duration (minutes):</Label>
+              <Label htmlFor="duration.min">Min Duration:</Label>
               <Input
                 type="number"
                 name="duration.min"
                 value={formData.duration.min}
                 onChange={handleChange}
-                min="1"
                 required
               />
             </FormField>
@@ -315,13 +353,12 @@ const DataGenerationForm = () => {
           {/* Row 4 */}
           <FormRow>
             <FormField>
-              <Label htmlFor="duration.max">Max Duration (minutes):</Label>
+              <Label htmlFor="duration.max">Max Duration:</Label>
               <Input
                 type="number"
                 name="duration.max"
                 value={formData.duration.max}
                 onChange={handleChange}
-                min="1"
                 required
               />
             </FormField>
@@ -332,7 +369,6 @@ const DataGenerationForm = () => {
                 name="generationmode"
                 value={formData.generationmode}
                 onChange={handleChange}
-                required
               >
                 <option value="daily">Daily</option>
                 <option value="bulk">Bulk</option>
@@ -406,14 +442,10 @@ const DataGenerationForm = () => {
           )}
 
           <Button type="submit" disabled={loading}>
-            {loading ? "Generating..." : "Generate"}
+            {loading ? "Loading..." : "Generate Data"}
           </Button>
 
-          {error && <div style={{ color: "red", textAlign: "center" }}>{error}</div>}
-
-          {loading && (
-            <div style={{ textAlign: "center", color: "#1B4965" }}>Generating...</div>
-          )}
+          {error && <p style={{ color: "red" }}>{error}</p>}
         </form>
       </FormWrapper>
     </Container>
