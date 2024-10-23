@@ -13,49 +13,49 @@ const Container = styled.div`
 
 const FormWrapper = styled.div`
   background-color: white;
-  padding: 10px; /* Further reduced padding */
+  padding: 10px;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   width: 100%;
-  max-width: 450px; /* Further reduced max width */
-  max-height: 85vh; /* Further reduced max height */
-  overflow: hidden; /* Hide overflow */
+  max-width: 450px;
+  max-height: 85vh;
+  overflow: hidden;
 `;
 
 const Title = styled.h2`
   text-align: center;
   color: #1b4965;
-  margin-bottom: 15px; /* Reduced margin */
+  margin-bottom: 15px;
   font-family: "Arial", sans-serif;
 `;
 
 const FormRow = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 8px; /* Further reduced bottom margin */
+  margin-bottom: 8px;
 `;
 
 const FormField = styled.div`
   display: flex;
   flex-direction: column;
-  width: 48%; /* Kept width to allow two fields side by side */
-  margin-bottom: 8px; /* Further reduced margin */
+  width: 48%;
+  margin-bottom: 8px;
 `;
 
 const Label = styled.label`
   color: #2a6f97;
   font-weight: bold;
-  font-size: 12px; /* Further reduced font size */
+  font-size: 12px;
   margin-bottom: 5px;
 `;
 
 const Input = styled.input`
   width: 100%;
-  padding: 6px; /* Reduced padding */
+  padding: 6px;
   border-radius: 6px;
   border: 1px solid #ccc;
   box-sizing: border-box;
-  font-size: 12px; /* Further reduced font size */
+  font-size: 12px;
   &:focus {
     border-color: #2a6f97;
     outline: none;
@@ -64,11 +64,11 @@ const Input = styled.input`
 
 const Select = styled.select`
   width: 100%;
-  padding: 6px; /* Reduced padding */
+  padding: 6px;
   border-radius: 6px;
   border: 1px solid #ccc;
   box-sizing: border-box;
-  font-size: 12px; /* Further reduced font size */
+  font-size: 12px;
   &:focus {
     border-color: #2a6f97;
     outline: none;
@@ -77,23 +77,23 @@ const Select = styled.select`
 
 const Button = styled.button`
   width: 48%;
-  padding: 6px; /* Reduced padding */
+  padding: 6px;
   background-color: #2a6f97;
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 12px; /* Further reduced font size */
-  margin-right: 2%; /* Adjusted margin */
+  font-size: 12px;
+  margin-right: 2%;
   &:hover {
     background-color: #1b4965;
   }
 `;
 
 const CancelButton = styled(Button)`
-  background-color: #e74c3c; /* Red background for cancel button */
+  background-color: #e74c3c;
   &:hover {
-    background-color: #c0392b; /* Darker red on hover */
+    background-color: #c0392b;
   }
 `;
 
@@ -108,7 +108,7 @@ const DataGenerationForm = () => {
     totime: "",
     totimePeriod: "AM",
     duration: { min: "", max: "" },
-    generationmode: "daily", // Default to daily
+    generationmode: "daily",
     modeattributes: {
       daily: { daupercent: { min: "", max: "" } },
       bulk: { batchsize: "", noofrecords: "" },
@@ -336,7 +336,7 @@ const DataGenerationForm = () => {
             </FormField>
 
             <FormField>
-              <Label htmlFor="duration.min">Duration Min:</Label>
+              <Label htmlFor="duration.min">Duration Min (minutes):</Label>
               <Input
                 type="number"
                 name="duration.min"
@@ -350,7 +350,7 @@ const DataGenerationForm = () => {
           {/* Row 5 */}
           <FormRow>
             <FormField>
-              <Label htmlFor="duration.max">Duration Max:</Label>
+              <Label htmlFor="duration.max">Duration Max (minutes):</Label>
               <Input
                 type="number"
                 name="duration.max"
@@ -373,7 +373,18 @@ const DataGenerationForm = () => {
             </FormField>
           </FormRow>
 
-          {/* Dynamic Fields Based on Generation Mode */}
+          
+          <FormRow>
+            <FormField>
+              <Label htmlFor="includeweekends">Include Weekends:</Label>
+              <Input
+                type="checkbox"
+                name="includeweekends"
+                checked={formData.includeweekends}
+                onChange={handleChange}
+              />
+            </FormField>
+          </FormRow>
           {formData.generationmode === "daily" && (
             <FormRow>
               <FormField>
@@ -385,11 +396,9 @@ const DataGenerationForm = () => {
                   name="modeattributes.daily.daupercent.min"
                   value={formData.modeattributes.daily.daupercent.min}
                   onChange={handleChange}
-                  min="1"
-                  required
                 />
               </FormField>
-
+          
               <FormField>
                 <Label htmlFor="modeattributes.daily.daupercent.max">
                   DAU Percent Max (%):
@@ -399,13 +408,10 @@ const DataGenerationForm = () => {
                   name="modeattributes.daily.daupercent.max"
                   value={formData.modeattributes.daily.daupercent.max}
                   onChange={handleChange}
-                  min="1"
-                  required
                 />
               </FormField>
             </FormRow>
-          )}
-
+          )}{/* Row 7: Bulk Mode */}
           {formData.generationmode === "bulk" && (
             <FormRow>
               <FormField>
@@ -417,11 +423,9 @@ const DataGenerationForm = () => {
                   name="modeattributes.bulk.batchsize"
                   value={formData.modeattributes.bulk.batchsize}
                   onChange={handleChange}
-                  min="1"
-                  required
                 />
               </FormField>
-
+          
               <FormField>
                 <Label htmlFor="modeattributes.bulk.noofrecords">
                   Number of Records:
@@ -431,18 +435,18 @@ const DataGenerationForm = () => {
                   name="modeattributes.bulk.noofrecords"
                   value={formData.modeattributes.bulk.noofrecords}
                   onChange={handleChange}
-                  min="1"
-                  required
                 />
               </FormField>
             </FormRow>
           )}
+          
 
+          {/* Row 8 */}
           {error && <p style={{ color: "red" }}>{error}</p>}
 
-          <FormRow style={{ justifyContent: "flex-end" }}>
+          <FormRow>
             <Button type="submit" disabled={loading}>
-              {loading ? "Generating..." : "Generate Data"}
+              {loading ? "Generating..." : "Generate"}
             </Button>
             <CancelButton type="button" onClick={handleCancel}>
               Cancel
