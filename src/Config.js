@@ -8,7 +8,7 @@ export const breadcrumbConfig = [
   { label: 'Client List', path: '/client' },
   { label: 'Client Form', path: '/form', parentPath: '/client' },
   { label: 'Client Updation', path: '/update/', parentPath: '/client' },
-  { label: 'User', path: '/user' },
+  { label: 'AddUser', path: '/adduser' },
   { label: 'Data Generation', path: '/data-generation' }
 ];
 
@@ -24,7 +24,7 @@ export const menuItemsConfig = [
   {
     iconClass: "fas fa-users",
     label: "User",
-    route: "/user",
+    route: "/adduser",
     topMargin: '10px',
     bottomMargin: '10px',
   },
