@@ -1,11 +1,14 @@
 
 
 
+
 import React from 'react';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom'; // Import useLocation
 import Header from './Header/Header';
 import Sidebar from './Sidebar/Sidebar';
 import { Breadcrumb } from './Breadcrumb/Breadcrumb'; 
+import { Outlet } from 'react-router-dom'; // Import Outlet
 
 // Wrapper for the entire layout: sidebar, header, content
 const LayoutWrapper = styled.div`
@@ -14,7 +17,7 @@ const LayoutWrapper = styled.div`
 
 // The area for the main content (next to the sidebar)
 const MainContent = styled.div`
-  margin-left: 250px;
+  margin-left: 200px;
   padding: 30px;
   width: calc(100% - 250px); /* Adjust based on sidebar width */
   height: 100vh; /* Ensure it takes the full viewport height */
@@ -31,8 +34,9 @@ const ContentWrapper = styled.div`
   text-align: center; /* Center text inside the content */
 `;
 
-const Layout = ({ children }) => {
-  const currentPath = window.location.pathname; 
+const Layout = () => {
+  const location = useLocation(); // Get the current location
+  const currentPath = location.pathname; // Use pathname from useLocation
 
   return (
     <LayoutWrapper>
@@ -42,7 +46,7 @@ const Layout = ({ children }) => {
         <Breadcrumb currentPath={currentPath} /> 
         <MainContent>
           <ContentWrapper>
-            {children} {/* The children are now wrapped in ContentWrapper */}
+            <Outlet /> {/* Render child routes here */}
           </ContentWrapper>
         </MainContent>
       </div>
@@ -51,4 +55,3 @@ const Layout = ({ children }) => {
 };
 
 export default Layout;
-
