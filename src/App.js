@@ -17,6 +17,7 @@ function App() {
       <Routes>
         {/* LoginPage remains outside of the Layout */}
         <Route path="/" element={<LoginPage />} /> 
+        <Route path="/layout" element={<Layout />} />
 
         {/* The rest of the pages will be wrapped in Layout */}
         <Route element={<Layout />}>
