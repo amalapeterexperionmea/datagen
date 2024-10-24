@@ -38,7 +38,7 @@ const Button = styled(MuiButton)`
   }
 `;
 
-// Define columns for the DataGrid
+
 const columns = [
   { field: 'name', headerName: 'Name', width: 200 },           
   { field: 'shortname', headerName: 'Short Name', width: 200 }, 
@@ -47,7 +47,6 @@ const columns = [
   { field: 'mongodb', headerName: 'MongoDB', width: 200 },      
 ];
 
-// Rows defined
 const rows = [
   { id: 1, name: 'Project A', shortname: 'ProjA', domain: 'example.com', postgres: 'v12.6', mongodb: 'v4.4' },
   { id: 2, name: 'Project B', shortname: 'ProjB', domain: 'test.com', postgres: 'v13.2', mongodb: 'v5.0' },
@@ -62,9 +61,9 @@ const rows = [
 ];
 
 const DataGridContainer = styled.div`
-  border: 1px solid black;  /* Add a border to the container */
+  border: 1px solid black; 
   
-  overflow: hidden;         /* Ensure no scrollbars appear */
+  overflow: hidden;         
 `;
 
 export default function DataGridComponent() {
@@ -78,10 +77,7 @@ export default function DataGridComponent() {
     navigate(`/update/`); 
   };
 
-  // Adjusting the row height
-  const rowHeight = 40; 
-  const maxRows = Math.floor(500 / rowHeight); 
-  const limitedRows = rows.slice(0, maxRows); 
+
 
   return (
     <Container>
@@ -93,22 +89,22 @@ export default function DataGridComponent() {
       </Header>
       <DataGridContainer>
         <DataGrid
-          rows={limitedRows} // Use limited rows
+          rows={rows} 
           columns={columns}
           hideFooter
-          rowHeight={rowHeight} // Use the defined row height
+          rowHeight={40} 
           style={{
             width: "100%",
-            height: "500px", // Fixed height
-            border: "none", // No border on the DataGrid itself
+            height: "500px", 
+            border: "none", 
           }}
           sx={{
-            overflow: "hidden", // Prevent scroll bars
+            overflow: "hidden", 
             width: "100%",
             "& .MuiDataGrid-cell": {
               borderBottom: "none",
               borderRight: "none",
-              padding: "px", // Set padding to 0 to avoid overflow
+              padding: "px", 
             },
             "& .MuiDataGrid-columnHeaders": {
               borderBottom: "none",
