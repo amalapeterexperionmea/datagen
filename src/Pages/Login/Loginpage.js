@@ -97,7 +97,7 @@ function LoginPage() {
 
   // Hardcoded super admin credentials
   const superAdmins = [
-    { email: "superadmin1@datagen.com", password: "admin123" },
+    { email: "admin@gmail.com", password: "admin" },
     { email: "superadmin2@datagen.com", password: "admin456" }
   ];
 
@@ -107,7 +107,7 @@ function LoginPage() {
   };
 
   const validatePassword = (password) => {
-    return password.length >= 6;
+    return password.length >= 1;
   };
 
   const handleSubmit = (e) => {
@@ -142,7 +142,7 @@ function LoginPage() {
       ...errors,
       password: validatePassword(value)
         ? ""
-        : "Password must be at least 6 characters long.",
+        : "Password must be at least 1 characters long.",
     });
   };
 

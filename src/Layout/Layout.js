@@ -4,11 +4,11 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { useLocation } from 'react-router-dom'; // Import useLocation
+import { useLocation } from 'react-router-dom'; 
 import Header from './Header/Header';
 import Sidebar from './Sidebar/Sidebar';
 import { Breadcrumb } from './Breadcrumb/Breadcrumb'; 
-import { Outlet } from 'react-router-dom'; // Import Outlet
+import { Outlet } from 'react-router-dom'; 
 
 // Wrapper for the entire layout: sidebar, header, content
 const LayoutWrapper = styled.div`
