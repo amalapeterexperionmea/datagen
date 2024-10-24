@@ -11,10 +11,10 @@ const PageContainer = styled.div`
 `;
 
 const FormContainer = styled.div`
-  width: 60%;
+  width: 70%;
   margin: 0 0 0 20px;
   padding: 20px 60px 20px 70px;
-  background-color: #fff; // White background for the form
+  background-color: #f4f4f9; // White background for the form
   box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.1);
   border-radius: 8px; // Optional: Adds rounded corners
 `;

@@ -7,20 +7,20 @@ const PageContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f4f4f9; // Gray background for the entire page
+  background-color: #f4f4f9;
 `;
 
 const FormContainer = styled.div`
-  width: 60%;
+  width: 70%;
   margin: 0 0 0 20px;
   padding: 20px 60px 20px 70px;
-  background-color: #fff; // White background for the form
+  background-color: #f4f4f9;
   box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 8px; // Optional: Adds rounded corners
+  border-radius: 8px;
 `;
 
 const Title = styled.h2`
-  text-align: left;  // Changed from center to left
+  text-align: left;
   color: #333;
 `;
 
@@ -31,7 +31,7 @@ const FormRow = styled.div`
 `;
 
 const InputWrapper = styled.div`
-  width: 48%; // Adjusted to provide space between input fields
+  width: 48%;
 `;
 
 const InputField = styled.input`
@@ -52,7 +52,7 @@ const SelectField = styled.select`
 
 const ButtonContainer = styled.div`
   display: flex;
-  justify-content: flex-end; // Align buttons to the right
+  justify-content: flex-end;
   margin-top: 20px;
 `;
 
@@ -62,7 +62,7 @@ const Button = styled.button`
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  margin-left: 10px; // Space between buttons
+  margin-left: 10px;
 
   &:hover {
     opacity: 0.8;
@@ -70,12 +70,12 @@ const Button = styled.button`
 `;
 
 const SubmitButton = styled(Button)`
-  background-color: #17a2b8; // Changed to #17a2b8
+  background-color: #17a2b8;
   color: white;
 `;
 
 const CancelButton = styled(Button)`
-  background-color: gray; // Changed to gray
+  background-color: gray;
   color: white;
 `;
 
@@ -97,16 +97,13 @@ const AddUser = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-  };
+  // Removed handleSubmit function
 
   const handleCancel = () => {
     setFormData({
       name: '',
       username: '',
-      user_type: 'Super Admin', // Reset to default value
+      user_type: 'Super Admin',
       email: '',
       password: '',
       confirm_password: '',
@@ -114,10 +111,10 @@ const AddUser = () => {
   };
 
   return (
-    <PageContainer> 
+    <PageContainer>
       <FormContainer>
         <Title>Add User</Title>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e) => e.preventDefault()}> {/* Prevent default without handling submission */}
           <FormRow>
             <InputWrapper>
               <label>Name:</label>
@@ -183,7 +180,7 @@ const AddUser = () => {
             </InputWrapper>
           </FormRow>
           <ButtonContainer>
-            <SubmitButton type="submit">Add</SubmitButton> 
+            <SubmitButton type="submit">Add</SubmitButton>
             <CancelButton type="button" onClick={handleCancel}>Cancel</CancelButton>
           </ButtonContainer>
         </form>
