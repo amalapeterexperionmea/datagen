@@ -72,7 +72,6 @@ export default function DataGridComponent() {
     navigate('/form'); 
   };
   const handleRowClick = (params) => {
-    const rowId = params.id; 
     navigate(`/update/`); 
   };
   return (
