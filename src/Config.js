@@ -20,7 +20,7 @@ export const menuItemsConfig = [
     route: "/client",
     topMargin: '10px',
     bottomMargin: '10px',
-    disableHoverEffects: false, // Enable hover effects by default
+    disableHoverEffects: false, 
   },
   {
     iconClass: "fas fa-users",
@@ -28,7 +28,7 @@ export const menuItemsConfig = [
     route: "/adduser",
     topMargin: '10px',
     bottomMargin: '10px',
-    disableHoverEffects: false,  // Disable hover effects for this item
+    disableHoverEffects: false,  
   },
   {
     iconClass: "fas fa-chart-line",
