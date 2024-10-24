@@ -12,7 +12,7 @@ export const breadcrumbConfig = [
   { label: 'Data Generation', path: '/data-generation' }
 ];
 
-// Menu items configuration
+
 export const menuItemsConfig = [
   {
     iconClass: "fas fa-user",
@@ -20,6 +20,7 @@ export const menuItemsConfig = [
     route: "/client",
     topMargin: '10px',
     bottomMargin: '10px',
+    disableHoverEffects: false, // Enable hover effects by default
   },
   {
     iconClass: "fas fa-users",
@@ -27,6 +28,7 @@ export const menuItemsConfig = [
     route: "/adduser",
     topMargin: '10px',
     bottomMargin: '10px',
+    disableHoverEffects: false,  // Disable hover effects for this item
   },
   {
     iconClass: "fas fa-chart-line",
@@ -34,6 +36,7 @@ export const menuItemsConfig = [
     route: "/data-generation",
     topMargin: '10px',
     bottomMargin: '10px',
+    disableHoverEffects: false,
   },
   {
     iconClass: "fas fa-sign-out-alt",
@@ -41,5 +44,6 @@ export const menuItemsConfig = [
     isLogout: true,
     topMargin: 'auto',
     bottomMargin: '10px',
+    disableHoverEffects: true,
   },
 ];

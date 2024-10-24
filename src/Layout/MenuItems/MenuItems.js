@@ -20,17 +20,21 @@ const BaseMenuItem = styled.li`
   margin-top: ${({ topMargin }) => topMargin || '0'};
   margin-bottom: ${({ bottomMargin }) => bottomMargin || '0'};
 
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    transform: translateY(-3px) scaleX(1.02);
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
-  }
+  // Conditionally disable hover effects on the container
+  ${({ disableHoverEffects }) => !disableHoverEffects && `
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: translateY(-3px) scaleX(1.02);
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+    }
+  `}
 
   i {
     margin-right: 10px;
     transition: transform 0.4s, color 0.4s;
   }
 
+  // Always allow hover effects for the icon
   &:hover i {
     transform: scale(1.15);
     color: #ffcc00;
@@ -52,7 +56,13 @@ const MenuItem = () => {
     <nav style={{ backgroundColor: '#153448', padding: '15px', height: '100vh', width: '220px', display: 'flex', flexDirection: 'column' }}>
       <ul style={{ listStyleType: 'none', padding: 0, margin: 0, flexGrow: 1 }}>
         {menuItemsConfig.slice(0, -1).map((item, index) => (
-          <BaseMenuItem key={index} onClick={() => handleItemClick(item)} topMargin={item.topMargin} bottomMargin={item.bottomMargin}>
+          <BaseMenuItem
+            key={index}
+            onClick={() => handleItemClick(item)}
+            topMargin={item.topMargin}
+            bottomMargin={item.bottomMargin}
+            disableHoverEffects={item.disableHoverEffects}
+          >
             <i className={item.iconClass}></i>
             {item.label}
           </BaseMenuItem>
@@ -62,6 +72,7 @@ const MenuItem = () => {
         onClick={() => handleItemClick(menuItemsConfig[menuItemsConfig.length - 1])}
         topMargin={menuItemsConfig[menuItemsConfig.length - 1].topMargin}
         bottomMargin={menuItemsConfig[menuItemsConfig.length - 1].bottomMargin}
+        disableHoverEffects={menuItemsConfig[menuItemsConfig.length - 1].disableHoverEffects}
       >
         <i className={menuItemsConfig[menuItemsConfig.length - 1].iconClass}></i>
         {menuItemsConfig[menuItemsConfig.length - 1].label}
