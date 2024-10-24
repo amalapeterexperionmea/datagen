@@ -111,7 +111,7 @@ const AddUser = () => {
   };
 
   return (
-    <PageContainer>
+    <PageContainer> 
       <FormContainer>
         <Title>Add User</Title>
         <form onSubmit={(e) => e.preventDefault()}> {/* Prevent default without handling submission */}
