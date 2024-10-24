@@ -1,5 +1,3 @@
-
-
 import Data_generation from './Pages/Generate/Data_generation'; 
 import Layout from './Layout/Layout'; 
 import LoginPage from './Pages/Login/Loginpage';
@@ -13,25 +11,26 @@ import SearchUser from './Pages/User/Search';
 
 function App() {
   return (
+    
     <Router>
-      <Routes>
-        {/* LoginPage remains outside of the Layout */}
-        <Route path="/" element={<LoginPage />} /> 
-        <Route path="/layout" element={<Layout />} />
-
-        {/* The rest of the pages will be wrapped in Layout */}
-        <Route element={<Layout />}>
-          <Route path="/data-generation" element={<Data_generation />} />
-          <Route path="/client" element={<Client />} />
-          <Route path="/update" element={<Update />} />
-          <Route path="/form" element={<Form />} />
-          <Route path="/adduser" element={<AddUser />} />
-          <Route path="/edituser" element={<EditUser />} />
-          <Route path="/searchuser" element={<SearchUser />} />
-        </Route>
-      </Routes>
+      <div>
+        
+        <Routes>
+          <Route path="/" element={<LoginPage />} /> 
+          <Route path="/layout" element={<Layout />} />
+          <Route path="/data-generation" element={<Layout><Data_generation /></Layout>} />
+          <Route path="/client" element={<Layout><Client /></Layout>} />
+          <Route path="/update" element={<Layout><Update /></Layout>} />
+          <Route path="/form" element={<Layout><Form /></Layout>} />
+          <Route path="/adduser" element={<Layout><AddUser /></Layout>} />
+          <Route path="/edituser" element={<Layout><EditUser /></Layout>} />
+          <Route path="/searchuser" element={<SearchUser/>} />
+        </Routes>
+      </div>
     </Router>
   );
 }
 
 export default App;
+
+
