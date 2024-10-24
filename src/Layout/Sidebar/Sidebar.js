@@ -44,8 +44,7 @@ const Username = styled.div`
   border-bottom: 3px solid rgba(0, 0, 0, 0.3); 
   box-shadow: inset 0 -2px 6px rgba(0, 0, 0, 0.15); 
   font-family: "InterVariable", -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif; 
-  letter-spacing: 1.2px;
-  text-transform: uppercase; 
+  letter-spacing: 1.2px; 
   text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5); 
 `;
 
@@ -53,7 +52,7 @@ const Sidebar = () => {
     return (
         <SidebarWrapper>
             <UserType>Admin</UserType>
-            <Username>Experion</Username> {/* Display the username here */}
+            <Username>User Name</Username> {/* Display the username here */}
             <MenuItem />
         </SidebarWrapper>
     );
