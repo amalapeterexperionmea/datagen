@@ -10,20 +10,14 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 90px;
-  margin-left: -20px;
-  padding: 30px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 1000px; 
-  height: auto; 
+  max-width: 1000px;
 `;
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 97%;
   height:50px;
   margin-bottom: 20px; 
   margin-top: -20px;
@@ -46,10 +40,10 @@ const Button = styled(MuiButton)`
 
 const columns = [
   { field: 'name', headerName: 'Name', width: 200 },           
-  { field: 'shortname', headerName: 'Short Name', width: 150 }, 
-  { field: 'domain', headerName: 'Domain', width: 250 },       
-  { field: 'postgres', headerName: 'PostgreSQL', width: 150 }, 
-  { field: 'mongodb', headerName: 'MongoDB', width: 150 },      
+  { field: 'shortname', headerName: 'Short Name', width: 200 }, 
+  { field: 'domain', headerName: 'Domain', width: 200 },       
+  { field: 'postgres', headerName: 'PostgreSQL', width: 200 }, 
+  { field: 'mongodb', headerName: 'MongoDB', width: 200 },      
 ];
 
 const rows = [
@@ -86,9 +80,40 @@ export default function DataGridComponent() {
         rows={rows}
         columns={columns}
         hideFooter
-        rowHeight={40} 
-        style={{ width: '100%', height: '500px' }} 
+        rowHeight={40}
+        style={{
+          width: "100%",
+          height: "500px",
+          border: "1px solid black",
+        }}
+        sx={{
+           overflow: "hidden",
+           width:"100%",
+          "& .MuiDataGrid-cell": {
+            borderBottom: "none",
+            borderRight: "none",
+            padding :"-10px",
+          },
+          "& .MuiDataGrid-columnHeaders": {
+            borderBottom: "none",
+            borderRight: "none",
+            backgroundColor: '#f5f5f5', 
+            "& .MuiDataGrid-columnHeader": {
+              border: "none", 
+              "&:first-of-type": {
+                borderLeft: "none",
+              }
+            },
+          },
+          "& .MuiDataGrid-root .MuiDataGrid-columnHeader:focus, & .MuiDataGrid-root .MuiDataGrid-cell:focus": {
+            outline: 'none', 
+          },
+        }}
         onRowClick={handleRowClick}
+        checkboxSelection={false}
+        disableColumnMenu={true}
+        disableColumnResize={true}
+        disableExtendRowFullWidth={true}
       />
     </Container>
   );
