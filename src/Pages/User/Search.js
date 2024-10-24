@@ -14,7 +14,6 @@ const PageWrapper = styled.div`
 const SearchUser = () => {
   return (
     <PageWrapper>
-      <Layout />
       <DataGridComponent />
     </PageWrapper>
   );

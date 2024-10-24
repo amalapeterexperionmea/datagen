@@ -61,7 +61,7 @@ const Container = styled.div`
 const Data_generation = () => {
   return (
     <Container>
-      <Layout />
+      {/* <Layout /> */}
       <DataGenerationForm />
     </Container>
   );

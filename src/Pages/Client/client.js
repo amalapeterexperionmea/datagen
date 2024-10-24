@@ -14,7 +14,6 @@ const PageWrapper = styled.div`
 const Client = () => {
   return (
     <PageWrapper>
-      <Layout />
       <DataGridComponent />
     </PageWrapper>
   );
