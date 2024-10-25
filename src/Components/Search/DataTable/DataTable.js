@@ -23,6 +23,7 @@ const Header = styled.div`
 `;
 const Button = styled.button`
   background-color: #2a6f97;
+  width : 100px;
   margin-right :10px;
   margin-top:-10px;
   color: white; 
@@ -85,7 +86,7 @@ const DataTable = ({ columns, data,onAdd  }) => {
   return (
     <PageWrapper>
       <TableWrapper>
-        <Header><Button onClick={onAdd}>Add Client </Button></Header>
+        <Header><Button onClick={onAdd}>Add</Button></Header>
       
         <Table {...getTableProps()}>
           <thead>
