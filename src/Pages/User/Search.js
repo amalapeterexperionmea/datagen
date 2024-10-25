@@ -35,7 +35,7 @@ const navigate = useNavigate();
     []
   );
   const onAdd = () => {
-    navigate('/adduser'); 
+    navigate('/searchuser/adduser'); 
   };
 
   return (
