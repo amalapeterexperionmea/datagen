@@ -106,7 +106,7 @@ const DataTable = ({ columns, data, onAdd, basePath }) => {
     <PageWrapper>
       <TableWrapper>
         <HeaderTable>
-          {/* <Button onClick={onAdd}>Add</Button> */}
+          <Button onClick={onAdd}>Add</Button>
         </HeaderTable>
         <Table {...getTableProps()}>
           <thead>
