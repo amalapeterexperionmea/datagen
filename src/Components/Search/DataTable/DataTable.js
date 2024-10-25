@@ -18,7 +18,7 @@ const Header = styled.div`
   width: 97%;
   height: 50px;
   margin-bottom: 20px; 
-  margin-top: -20px;
+  margin-top: -105px;
 `;
 const Button = styled.button`
   background-color: #2a6f97;
