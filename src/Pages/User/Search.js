@@ -1,6 +1,6 @@
 // src/Pages/Client/Client.js
 import React from 'react';
-import DataTable from '../../Components/Search/DataTable/DataTable';
+import DataTable from '../../Components/Search/DataTable';
 import { useNavigate } from 'react-router-dom';
 
 const SearchUser = () => {
