@@ -6,8 +6,8 @@ import HomeIconImage from '../src/Layout/icons/Homeicon.png';
 export const breadcrumbConfig = [
   { label: '', path: '/', icon: <img src={HomeIconImage} alt="Home" style={{ width: '32px', height: '32px' }} /> },
   { label: 'Client List', path: '/client' },
-  { label: 'Client Form', path: '/form', parentPath: '/client' },
-  { label: 'Client Updation', path: '/update/', parentPath: '/client' },
+  { label: 'Client Form', path: '/client/form', parentPath: '/client' },
+  { label: 'Client Updation', path: '/client/update/', parentPath: '/client' },
   { label: 'AddUser', path: '/adduser' },
   { label: 'Data Generation', path: '/data-generation' }
 ];

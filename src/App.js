@@ -24,8 +24,8 @@ function App() {
             <Route path="/"/> 
             <Route path="data-generation" element={<DataGenerationForm/>} />
             <Route path="client" element={<Client />} />
-            <Route path="update" element={<Update />} />
-            <Route path="form" element={<Form />} />
+            <Route path="/client/update" element={<Update />} />
+            <Route path="/client/form" element={<Form />} />
             <Route path="adduser" element={<AddUser />} />
             <Route path="edituser" element={<EditUser />} />
             <Route path="searchuser" element={<SearchUser />} />

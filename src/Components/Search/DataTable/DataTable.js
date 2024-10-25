@@ -78,7 +78,7 @@ const DataTable = ({ columns, data,onAdd  }) => {
     usePagination
   );
   const handleRowClick = (row) => {
-    navigate(`/update/`); 
+    navigate(`/client/update/`); 
   };
   return (
     <PageWrapper>

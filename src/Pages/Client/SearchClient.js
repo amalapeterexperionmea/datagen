@@ -32,7 +32,7 @@ const Client = () => {
     []
   );
   const onAdd = () => {
-    navigate('/form'); 
+    navigate('/client/form'); 
   };
 
   return (
