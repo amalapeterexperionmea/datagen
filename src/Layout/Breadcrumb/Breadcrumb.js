@@ -80,3 +80,4 @@ export const Breadcrumb = ({ currentPath }) => {
     </BreadcrumbWrapper>
   );
 };
+
