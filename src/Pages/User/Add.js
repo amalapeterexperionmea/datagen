@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Button, Col, Form, Row, Container, Card } from "react-bootstrap";
+import { Button, Col, Form, Row, Container as BootstrapContainer, Card } from "react-bootstrap";
+import styled from "styled-components"; // Import styled-components
+
+// Create a styled container that extends the Bootstrap container
+const Container = styled(BootstrapContainer)`
+  margin-top: 80px; 
+`;
 
 const AddUser = () => {
   const [formData, setFormData] = useState({
