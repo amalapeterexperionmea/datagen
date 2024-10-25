@@ -68,6 +68,7 @@ const PaginationWrapper = styled.div`
 `;
 const PaginationButton = styled.button`
   height:25px;
+  width:80px;
   background-color: #17a2b8;
   color: white;
   border: none;
