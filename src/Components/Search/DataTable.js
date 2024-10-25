@@ -8,7 +8,7 @@ const PageWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 25px;
-  height: 100vh;
+  height: 97vh;
 `;
 
 const Header = styled.div`
@@ -25,7 +25,7 @@ const Header = styled.div`
 const Button = styled.button`
   background-color: #2a6f97;
   width: 100px;
-  margin-right: 10px;
+  margin-right: -35px;
   margin-top: -10px;
   color: white; 
   &:hover {
@@ -38,7 +38,6 @@ const TableWrapper = styled.div`
   margin: 20px;
   text-align: center;
   padding: 20px;
-  
   border-radius: 8px;
 `;
 
@@ -62,7 +61,24 @@ const Td = styled.td`
   text-align: center;
   cursor: pointer;
 `;
-
+const PaginationWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+`;
+const PaginationButton = styled.button`
+  height:25px;
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  margin-top:2px;
+  cursor: pointer;
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+`;
 const DataTable = ({ columns, data, onAdd, basePath }) => {
   const navigate = useNavigate();
   const {
@@ -71,6 +87,10 @@ const DataTable = ({ columns, data, onAdd, basePath }) => {
     headerGroups,
     page,
     prepareRow,
+    canPreviousPage,
+    canNextPage,
+    previousPage,
+    nextPage,
   } = useTable(
     {
       columns,
@@ -105,7 +125,7 @@ const DataTable = ({ columns, data, onAdd, basePath }) => {
               return (
                 <tr
                   {...row.getRowProps()}
-                  onClick={() => navigate(`${basePath}`)} // Use basePath and row id
+                  onClick={() => navigate(`${basePath}`)} 
                 >
                   {row.cells.map(cell => (
                     <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>
@@ -115,6 +135,14 @@ const DataTable = ({ columns, data, onAdd, basePath }) => {
             })}
           </tbody>
         </Table>
+        <PaginationWrapper>
+          <PaginationButton onClick={() => previousPage()} disabled={!canPreviousPage}>
+            Previous
+          </PaginationButton>
+          <PaginationButton onClick={() => nextPage()} disabled={!canNextPage}>
+            Next
+          </PaginationButton>
+        </PaginationWrapper>
       </TableWrapper>
     </PageWrapper>
   );
