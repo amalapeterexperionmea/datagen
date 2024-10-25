@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
+  
   justify-content: left;
   padding: 30px;
   background-color: #f4f4f9; 
@@ -22,6 +23,7 @@ const FormContainer = styled.div`
 
 const Label = styled.label`
   display: block;
+  
   margin-top: 10px;
   font-weight: bold;
   font-size: 13px;

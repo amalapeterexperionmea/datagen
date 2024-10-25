@@ -15,6 +15,7 @@ const Header = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  
   width: 97%;
   height: 50px;
   margin-bottom: 20px; 
@@ -32,6 +33,7 @@ const Button = styled.button`
 const TableWrapper = styled.div`
   width:1300px;
   margin: 20px;
+  text-align: center;
   padding: 20px;
   
   border-radius: 8px;
