@@ -4,7 +4,9 @@ import DataTable from '../../Components/Search/DataTable/DataTable';
 import { useNavigate } from 'react-router-dom';
 
 const SearchUser = () => {
-  // Column definitions
+  
+const navigate = useNavigate();
+ 
   const columns = React.useMemo(
     () => [
       { Header: 'Name', accessor: 'name' },
@@ -43,4 +45,4 @@ const SearchUser = () => {
   );
 };
 
-export default Client;
+export default SearchUser;
