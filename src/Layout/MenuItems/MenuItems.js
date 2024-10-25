@@ -53,7 +53,7 @@ const MenuItem = () => {
   };
 
   return (
-    <nav style={{ backgroundColor: '#153448', padding: '15px', height: '100vh', width: '220px', display: 'flex', flexDirection: 'column' }}>
+    <nav style={{ backgroundColor: '#153448', padding: '15px', height: '100vh', width: '245px', display: 'flex', flexDirection: 'column' }}>
       <ul style={{ listStyleType: 'none', padding: 0, margin: 0, flexGrow: 1 }}>
         {menuItemsConfig.slice(0, -1).map((item, index) => (
           <BaseMenuItem
