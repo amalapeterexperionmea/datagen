@@ -4,7 +4,7 @@ import HomeIconImage from '../src/Layout/icons/Homeicon.png';
 
 // Breadcrumb configuration
 export const breadcrumbConfig = [
-  { label: '', path: '/layout', icon: <img src={HomeIconImage} alt="Home" style={{ width: '32px', height: '32px' }} /> },
+  { label: '', path: '/', icon: <img src={HomeIconImage} alt="Home" style={{ width: '32px', height: '32px' }} /> },
   { label: 'Client List', path: '/client' },
   { label: 'Client Form', path: '/form', parentPath: '/client' },
   { label: 'Client Updation', path: '/update/', parentPath: '/client' },
@@ -12,7 +12,7 @@ export const breadcrumbConfig = [
   { label: 'Data Generation', path: '/data-generation' }
 ];
 
-
+//Menuitems configuration
 export const menuItemsConfig = [
   {
     iconClass: "fas fa-user",

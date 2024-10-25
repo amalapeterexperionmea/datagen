@@ -40,20 +40,20 @@ export const Breadcrumb = ({ currentPath }) => {
     const items = [];
     const currentItem = breadcrumbConfig.find(item => item.path === currentPath);
 
-    // Add Home item with icon only if it’s not already the current path
-    if (currentPath !== '/layout') {
-      items.push(breadcrumbConfig[0]); // Home item
+    
+    if (currentPath !== '/') {
+      items.push(breadcrumbConfig[0]); 
     }
 
     if (currentItem) {
-      // Add parent item if it exists
+      
       if (currentItem.parentPath) {
         const parentItem = breadcrumbConfig.find(item => item.path === currentItem.parentPath);
         if (parentItem) {
-          items.push(parentItem); // Push parent item (e.g., Client)
+          items.push(parentItem); 
         }
       }
-      // Add the current item (e.g., Client Form, Update Client)
+      
       items.push(currentItem);
     }
 
@@ -65,7 +65,7 @@ export const Breadcrumb = ({ currentPath }) => {
   const handleBreadcrumbClick = (index) => {
     const targetPath = breadcrumbItems[index].path;
     if (targetPath) {
-      navigate(targetPath); // Navigate to the selected path
+      navigate(targetPath); 
     }
   };
 
@@ -73,11 +73,10 @@ export const Breadcrumb = ({ currentPath }) => {
     <BreadcrumbWrapper>
       {breadcrumbItems.map((item, index) => (
         <BreadcrumbItem key={index} onClick={() => handleBreadcrumbClick(index)}>
-          {item.icon} {/* Render icon for each item */}
-          {item.label && index !== 0 && ` ${item.label}`} {/* Render label for other items except Home */}
+          {item.icon} 
+          {item.label && index !== 0 && ` ${item.label}`} 
         </BreadcrumbItem>
       ))}
     </BreadcrumbWrapper>
   );
 };
-

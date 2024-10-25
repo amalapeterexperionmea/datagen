@@ -1,29 +1,23 @@
-
 import React from "react";
 import styled from "styled-components";
-
 
 const StyledHeaderContainer = styled.header`
   position: fixed; 
   top: 0; 
   left: 0; 
   right: 0; 
-  height:44px;
+  height: 44px;
   display: flex;
   align-items: center;
-  padding: 0.5rem 10rem; 
-  margin-left: 250px;
-  background: linear-gradient(135deg, #5FA8D3 0%, #2A6F97 50%, #1B4965 100%); 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  padding: 0.5rem 10rem;
+  background: linear-gradient(135deg, #5FA8D3 0%, #2A6F97 50%, #1B4965 100%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 900; /* Ensure header is below the sidebar */
 `;
 
-
 const Header = () => {
-  
-
   return (
     <StyledHeaderContainer>
-     
     </StyledHeaderContainer>
   );
 };

@@ -120,7 +120,7 @@ function LoginPage() {
 
     if (isAdmin) {
       // Redirect to /layout if credentials are correct
-      navigate("/layout");
+      navigate("/");
     } else {
       setLoginError("Invalid email or password.");
     }
