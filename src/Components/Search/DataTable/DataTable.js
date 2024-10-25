@@ -1,23 +1,39 @@
-// components/DataTable.js
 import React from 'react';
 import { useTable, useSortBy, usePagination } from 'react-table';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
-// Styling components
 const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top:25px;
   height: 100vh;
-  background-color: #f4f4f9;
+ 
 `;
-
+const Header = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 97%;
+  height: 50px;
+  margin-bottom: 20px; 
+  margin-top: -20px;
+`;
+const Button = styled.button`
+  background-color: #2a6f97;
+  margin-right :10px;
+  margin-top:-10px;
+  color: white; 
+  &:hover {
+    background-color: #303f9f; 
+  }
+`;
 const TableWrapper = styled.div`
-  width: 80%;
+  width:1300px;
   margin: 20px;
   padding: 20px;
-  background-color: #fff;
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+  
   border-radius: 8px;
 `;
 
@@ -39,53 +55,36 @@ const Td = styled.td`
   padding: 10px;
   border: 1px solid #ddd;
   text-align: center;
-`;
-
-const PaginationWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-`;
-
-const PaginationButton = styled.button`
-  padding: 8px 16px;
-  margin: 0 5px;
-  background-color: #17a2b8;
-  color: white;
-  border: none;
-  border-radius: 4px;
   cursor: pointer;
-
-  &:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
 `;
 
-const DataTable = ({ columns, data }) => {
+
+
+const DataTable = ({ columns, data,onAdd  }) => {
+  const navigate = useNavigate();
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     page,
     prepareRow,
-    canPreviousPage,
-    canNextPage,
-    previousPage,
-    nextPage,
   } = useTable(
     {
       columns,
       data,
-      initialState: { pageSize: 5 },
+      initialState: { pageSize: 10 },
     },
     useSortBy,
     usePagination
   );
-
+  const handleRowClick = (row) => {
+    navigate(`/update/`); 
+  };
   return (
     <PageWrapper>
       <TableWrapper>
+        <Header><Button onClick={onAdd}>Add Client </Button></Header>
+      
         <Table {...getTableProps()}>
           <thead>
             {headerGroups.map(headerGroup => (
@@ -93,7 +92,6 @@ const DataTable = ({ columns, data }) => {
                 {headerGroup.headers.map(column => (
                   <Th {...column.getHeaderProps(column.getSortByToggleProps())}>
                     {column.render('Header')}
-                    {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
                   </Th>
                 ))}
               </tr>
@@ -103,7 +101,7 @@ const DataTable = ({ columns, data }) => {
             {page.map(row => {
               prepareRow(row);
               return (
-                <tr {...row.getRowProps()}>
+                <tr {...row.getRowProps()} onClick={() => handleRowClick(row)}>
                   {row.cells.map(cell => (
                     <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>
                   ))}
@@ -112,14 +110,14 @@ const DataTable = ({ columns, data }) => {
             })}
           </tbody>
         </Table>
-        <PaginationWrapper>
+        {/* <PaginationWrapper>
           <PaginationButton onClick={() => previousPage()} disabled={!canPreviousPage}>
             Previous
           </PaginationButton>
           <PaginationButton onClick={() => nextPage()} disabled={!canNextPage}>
             Next
           </PaginationButton>
-        </PaginationWrapper>
+        </PaginationWrapper> */}
       </TableWrapper>
     </PageWrapper>
   );

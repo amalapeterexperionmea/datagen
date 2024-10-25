@@ -2,10 +2,10 @@
 
 import Layout from './Layout/Layout'; 
 import LoginPage from './Pages/Login/Loginpage';
-import Client from './Pages/Client/client'; 
-import Form from './Pages/Client/clientreg'; 
+import Client from './Pages/Client/SearchClient'; 
+import Form from './Pages/Client/Add'; 
+import Update from './Pages/Client/edit';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Update from './Pages/Client/updateclient';
 import AddUser from './Pages/User/Add';
 import EditUser from './Pages/User/Edit';
 import SearchUser from './Pages/User/Search';

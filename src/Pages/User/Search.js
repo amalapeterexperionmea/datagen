@@ -1,6 +1,6 @@
 // src/Pages/Client/Client.js
 import React from 'react';
-import DataTable from '../DataTable/DataTable';
+import DataTable from '../../Components/Search/DataTable/DataTable';
 
 const SearchUser = () => {
   // Column definitions

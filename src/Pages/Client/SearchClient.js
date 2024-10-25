@@ -1,9 +1,9 @@
-// src/Pages/Client/Client.js
 import React from 'react';
-import DataTable from '../DataTable/DataTable';
+import DataTable from '../../Components/Search/DataTable/DataTable';
+import { useNavigate } from 'react-router-dom';
 
 const Client = () => {
-  // Column definitions
+  const navigate = useNavigate();
   const columns = React.useMemo(
     () => [
       { Header: 'Name', accessor: 'name' },
@@ -15,7 +15,7 @@ const Client = () => {
     []
   );
 
-  // Sample data
+
   const data = React.useMemo(
     () => [
       { id: 1, name: 'Project A', shortname: 'ProjA', domain: 'example.com', postgres: 'v12.6', mongodb: 'v4.4' },
@@ -31,11 +31,13 @@ const Client = () => {
     ],
     []
   );
+  const onAdd = () => {
+    navigate('/form'); 
+  };
 
   return (
     <div>
-      <h1>Projects Table</h1>
-      <DataTable columns={columns} data={data} />
+      <DataTable columns={columns} data={data} onAdd={onAdd} />
     </div>
   );
 };
