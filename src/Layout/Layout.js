@@ -80,7 +80,6 @@ const MainContent = styled.div`
 
 const ContentWrapper = styled.div`
   width: 100%;
-  text-align: center;
   margin: 0 auto;
   overflow: hidden;
   margin-top: 20px; /* Add margin to push content down */
