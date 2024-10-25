@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; 
 import { useTable, useSortBy, usePagination } from 'react-table';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
@@ -7,10 +7,10 @@ const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top:25px;
+  margin-top: 25px;
   height: 100vh;
- 
 `;
+
 const Header = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -21,18 +21,20 @@ const Header = styled.div`
   margin-bottom: 20px; 
   margin-top: -105px;
 `;
+
 const Button = styled.button`
   background-color: #2a6f97;
-  width : 100px;
-  margin-right :10px;
-  margin-top:-10px;
+  width: 100px;
+  margin-right: 10px;
+  margin-top: -10px;
   color: white; 
   &:hover {
     background-color: #303f9f; 
   }
 `;
+
 const TableWrapper = styled.div`
-  width:1300px;
+  width: 1300px;
   margin: 20px;
   text-align: center;
   padding: 20px;
@@ -61,9 +63,7 @@ const Td = styled.td`
   cursor: pointer;
 `;
 
-
-
-const DataTable = ({ columns, data,onAdd  }) => {
+const DataTable = ({ columns, data, onAdd, basePath }) => {
   const navigate = useNavigate();
   const {
     getTableProps,
@@ -80,14 +80,13 @@ const DataTable = ({ columns, data,onAdd  }) => {
     useSortBy,
     usePagination
   );
-  const handleRowClick = (row) => {
-    navigate(`/client/update/`); 
-  };
+
   return (
     <PageWrapper>
       <TableWrapper>
-        <Header><Button onClick={onAdd}>Add</Button></Header>
-      
+        <Header>
+          <Button onClick={onAdd}>Add</Button>
+        </Header>
         <Table {...getTableProps()}>
           <thead>
             {headerGroups.map(headerGroup => (
@@ -104,7 +103,10 @@ const DataTable = ({ columns, data,onAdd  }) => {
             {page.map(row => {
               prepareRow(row);
               return (
-                <tr {...row.getRowProps()} onClick={() => handleRowClick(row)}>
+                <tr
+                  {...row.getRowProps()}
+                  onClick={() => navigate(`${basePath}`)} // Use basePath and row id
+                >
                   {row.cells.map(cell => (
                     <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>
                   ))}
@@ -113,7 +115,6 @@ const DataTable = ({ columns, data,onAdd  }) => {
             })}
           </tbody>
         </Table>
-        
       </TableWrapper>
     </PageWrapper>
   );

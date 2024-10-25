@@ -20,27 +20,27 @@ const navigate = useNavigate();
   // Sample data
   const data = React.useMemo(
     () => [
-      { id: 1, name: 'kishore', username: 'Kishoreproject', email: 'example.com', usertype: 'Admin' },
-      { id: 2, name: 'kishore', username: 'Kishoreproject', email: 'example.com', usertype: 'Admin' },
-      { id: 3, name: 'kishore', username: 'Kishoreproject', email: 'example.com', usertype: 'Admin' },
-      { id: 4, name: 'kishore', username: 'Kishoreproject', email: 'example.com', usertype: 'Admin' },
-      { id: 5, name: 'kishore', username: 'Kishoreproject', email: 'example.com', usertype: 'Admin' },
-      { id: 6, name: 'kishore', username: 'Kishoreproject', email: 'example.com', usertype: 'Admin' },
-      { id: 7, name: 'kishore', username: 'Kishoreproject', email: 'example.com', usertype: 'Admin' },
-      { id: 8, name: 'kishore', username: 'Kishoreproject', email: 'example.com', usertype: 'Admin' },
-      { id: 9, name: 'kishore', username: 'Kishoreproject', email: 'example.com', usertype: 'Admin' },
-      { id: 10, name: 'kishore', username: 'Kishoreproject', email: 'example.com', usertype: 'Admin' },
+      { id: 1, name: 'kishore', username: 'project', email: 'example.com', usertype: 'Admin' },
+      { id: 2, name: 'kishore', username: 'project', email: 'example.com', usertype: 'Admin' },
+      { id: 3, name: 'kishore', username: 'project', email: 'example.com', usertype: 'Admin' },
+      { id: 4, name: 'kishore', username: 'project', email: 'example.com', usertype: 'Admin' },
+      { id: 5, name: 'kishore', username: 'project', email: 'example.com', usertype: 'Admin' },
+      { id: 6, name: 'kishore', username: 'project', email: 'example.com', usertype: 'Admin' },
+      { id: 7, name: 'kishore', username: 'project', email: 'example.com', usertype: 'Admin' },
+      { id: 8, name: 'kishore', username: 'project', email: 'example.com', usertype: 'Admin' },
+      { id: 9, name: 'kishore', username: 'project', email: 'example.com', usertype: 'Admin' },
+      { id: 10, name: 'kishore', username: 'project', email: 'example.com', usertype: 'Admin' },
     
     ],
     []
   );
   const onAdd = () => {
-    navigate('/searchuser/adduser'); 
+    navigate('/adduser'); 
   };
 
   return (
     <div>
-      <DataTable columns={columns} data={data} onAdd={onAdd} />
+      <DataTable columns={columns} data={data} onAdd={onAdd} basePath="/searchuser/edituser" />
     </div>
   );
 };

@@ -37,7 +37,7 @@ const Client = () => {
 
   return (
     <div>
-      <DataTable columns={columns} data={data} onAdd={onAdd} />
+      <DataTable columns={columns} data={data} onAdd={onAdd} basePath="/client/update" />
     </div>
   );
 };
