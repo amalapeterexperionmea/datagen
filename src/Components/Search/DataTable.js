@@ -11,7 +11,7 @@ const PageWrapper = styled.div`
   height: 97vh;
 `;
 
-const Header = styled.div`
+const HeaderTable = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -105,9 +105,9 @@ const DataTable = ({ columns, data, onAdd, basePath }) => {
   return (
     <PageWrapper>
       <TableWrapper>
-        <Header>
+        <HeaderTable>
           <Button onClick={onAdd}>Add</Button>
-        </Header>
+        </HeaderTable>
         <Table {...getTableProps()}>
           <thead>
             {headerGroups.map(headerGroup => (
