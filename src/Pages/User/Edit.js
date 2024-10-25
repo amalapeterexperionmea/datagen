@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-// Styled Components
+
 const PageContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -79,7 +79,7 @@ const CancelButton = styled(Button)`
   color: white;
 `;
 
-const EditUser = ({ existingData }) => { // Accept existingData as a prop
+const EditUser = ({ existingData }) => { 
   const [formData, setFormData] = useState({
     name: '',
     username: '',
@@ -90,14 +90,14 @@ const EditUser = ({ existingData }) => { // Accept existingData as a prop
   });
 
   useEffect(() => {
-    // Prefill the form with existing data
+    
     if (existingData) {
       setFormData({
         name: existingData.name || '',
         username: existingData.username || '',
         user_type: existingData.user_type || 'Super Admin',
         email: existingData.email || '',
-        password: '', // You might want to leave passwords empty for security
+        password: '', 
         confirm_password: '',
       });
     }
@@ -114,7 +114,7 @@ const EditUser = ({ existingData }) => { // Accept existingData as a prop
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-    // Add your update logic here
+    
   };
 
   const handleCancel = () => {
@@ -198,7 +198,7 @@ const EditUser = ({ existingData }) => { // Accept existingData as a prop
             </InputWrapper>
           </FormRow>
           <ButtonContainer>
-            <SubmitButton type="submit">Update</SubmitButton> {/* Updated button text */}
+            <SubmitButton type="submit">Update</SubmitButton> 
             <CancelButton type="button" onClick={handleCancel}>Cancel</CancelButton>
           </ButtonContainer>
         </form>

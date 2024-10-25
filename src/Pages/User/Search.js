@@ -1,9 +1,9 @@
-// src/Pages/Client/Client.js
+
 import React from 'react';
 import DataTable from '../../Components/Search/DataTable/DataTable';
 
 const SearchUser = () => {
-  // Column definitions
+ 
   const columns = React.useMemo(
     () => [
       { Header: 'UserName', accessor: 'username' },
@@ -14,7 +14,7 @@ const SearchUser = () => {
     []
   );
 
-  // Sample data
+  
   const data = React.useMemo(
     () => [
       { id: 1, username: 'Project A', name: 'ProjA', email: 'example.com', usertype: 'v12.6' },

@@ -20,7 +20,7 @@ const BaseMenuItem = styled.li`
   margin-top: ${({ topMargin }) => topMargin || '0'};
   margin-bottom: ${({ bottomMargin }) => bottomMargin || '0'};
 
-  // Conditionally disable hover effects on the container
+ 
   ${({ disableHoverEffects }) => !disableHoverEffects && `
     &:hover {
       background-color: rgba(255, 255, 255, 0.1);
@@ -34,7 +34,7 @@ const BaseMenuItem = styled.li`
     transition: transform 0.4s, color 0.4s;
   }
 
-  // Always allow hover effects for the icon
+  
   &:hover i {
     transform: scale(1.15);
     color: #ffcc00;
@@ -48,7 +48,7 @@ const MenuItem = () => {
     if (!item.isLogout) {
       navigate(item.route);
     } else {
-      // handle logout
+     
     }
   };
 

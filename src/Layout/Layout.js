@@ -82,7 +82,7 @@ const ContentWrapper = styled.div`
   width: 100%;
   margin: 0 auto;
   overflow: hidden;
-  margin-top: 20px; /* Add margin to push content down */
+  margin-top: 20px; 
   @media (max-width: 768px) {
     padding: 0 20px;
   }
@@ -101,22 +101,22 @@ const BreadcrumbWrapper = styled.div`
   padding: 10px 0;
   background-color: #f9f9f9;
   border-bottom: 1px solid #ddd;
-  position: relative; /* This helps define the stacking context */
-  height: 50px; /* Set a fixed height for the breadcrumb */
+  position: relative; 
+  height: 50px; 
 `;
 
 const BreadcrumbContainer = styled.div`
-  /* You can add additional styles here if needed */
+  /* */
 `;
 
 const Title = styled.h1`
-  font-size: 48px; /* Adjust the size as needed */
+  font-size: 48px; 
   font-weight: bold;
-  margin: 0; /* Remove margins for perfect centering */
-  display: flex; /* Center in flexbox */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  height: calc(100vh - 120px); /* Adjust height to center vertically, subtracting header and breadcrumb height */
+  margin: 0; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  height: calc(100vh - 120px); 
 `;
 
 const Layout = () => {
@@ -147,7 +147,7 @@ const Layout = () => {
           </BreadcrumbContainer>
         </BreadcrumbWrapper>
         <ContentWrapper>
-          {currentPath === '/' && <Title>DASHBOARD</Title>} {/* Conditionally render the Title */}
+          {currentPath === '/' && <Title>DASHBOARD</Title>} 
           <Outlet />
         </ContentWrapper>
       </MainContent>

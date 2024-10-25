@@ -110,14 +110,7 @@ const DataTable = ({ columns, data,onAdd  }) => {
             })}
           </tbody>
         </Table>
-        {/* <PaginationWrapper>
-          <PaginationButton onClick={() => previousPage()} disabled={!canPreviousPage}>
-            Previous
-          </PaginationButton>
-          <PaginationButton onClick={() => nextPage()} disabled={!canNextPage}>
-            Next
-          </PaginationButton>
-        </PaginationWrapper> */}
+        
       </TableWrapper>
     </PageWrapper>
   );

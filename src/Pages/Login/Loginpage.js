@@ -93,9 +93,9 @@ function LoginPage() {
   const [errors, setErrors] = useState({ email: "", password: "" });
   const [loginError, setLoginError] = useState("");
 
-  const navigate = useNavigate(); // Initialize navigation hook
+  const navigate = useNavigate(); 
 
-  // Hardcoded super admin credentials
+  
   const superAdmins = [
     { email: "admin@gmail.com", password: "admin" },
     { email: "superadmin2@datagen.com", password: "admin456" }
@@ -113,13 +113,13 @@ function LoginPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Check if email and password match any hardcoded super admin
+    
     const isAdmin = superAdmins.some(
       (admin) => admin.email === email && admin.password === password
     );
 
     if (isAdmin) {
-      // Redirect to /layout if credentials are correct
+     
       navigate("/");
     } else {
       setLoginError("Invalid email or password.");
@@ -187,9 +187,7 @@ function LoginPage() {
           <StyledLinkButton onClick={() => alert("Forgot Password clicked")}>
             Forgot Password?
           </StyledLinkButton>
-          {/* <StyledLinkButton onClick={() => alert("Register clicked")}>
-            Not a member? Register
-          </StyledLinkButton> */}
+         
         </Links>
       </Form>
     </Container>

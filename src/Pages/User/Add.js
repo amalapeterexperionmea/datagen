@@ -5,7 +5,7 @@ const AddUser = () => {
   const [formData, setFormData] = useState({
     name: '',
     username: '',
-    user_type: 'Super Admin', // Default value for user type
+    user_type: 'Super Admin', 
     email: '',
     password: '',
     confirm_password: '',

@@ -6,7 +6,7 @@ const app = express();
 const PORT = 5000;
 
 app.use(cors());
-app.use(express.json()); // Middleware to parse JSON requests
+app.use(express.json()); 
 
 // MongoDB connection
 mongoose.connect('mongodb+srv://admin:experion1234@datagen.ypvo3.mongodb.net/generator?retryWrites=true&w=majority', {
