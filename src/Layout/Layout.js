@@ -10,6 +10,7 @@ import Header from './Header/Header';
 import Sidebar from './Sidebar/Sidebar';
 import { Breadcrumb } from './Breadcrumb/Breadcrumb';
 import { Outlet } from 'react-router-dom';
+import Dashboard from './Dashboard/Dashboard'; 
 
 const LayoutWrapper = styled.div`
   display: flex;
@@ -147,7 +148,7 @@ const Layout = () => {
           </BreadcrumbContainer>
         </BreadcrumbWrapper>
         <ContentWrapper>
-          {currentPath === '/' && <Title>DASHBOARD</Title>} 
+        {currentPath === '/' ? <Dashboard /> : <Outlet />}
           <Outlet />
         </ContentWrapper>
       </MainContent>
