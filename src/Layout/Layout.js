@@ -1,6 +1,7 @@
 
 
 
+
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
@@ -107,17 +108,7 @@ const BreadcrumbWrapper = styled.div`
 `;
 
 const BreadcrumbContainer = styled.div`
-  /* */
-`;
-
-const Title = styled.h1`
-  font-size: 48px; 
-  font-weight: bold;
-  margin: 0; 
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
-  height: calc(100vh - 120px); 
+  /* Add any styles you want for breadcrumb container */
 `;
 
 const Layout = () => {
@@ -148,8 +139,7 @@ const Layout = () => {
           </BreadcrumbContainer>
         </BreadcrumbWrapper>
         <ContentWrapper>
-        {currentPath === '/' ? <Dashboard /> : <Outlet />}
-          <Outlet />
+          {currentPath === '/' ? <Dashboard /> : <Outlet />}
         </ContentWrapper>
       </MainContent>
     </LayoutWrapper>
