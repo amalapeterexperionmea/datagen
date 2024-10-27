@@ -15,7 +15,6 @@ const HeaderTable = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  
   width: 97%;
   height: 50px;
   margin-bottom: 20px; 
@@ -51,6 +50,7 @@ const Th = styled.th`
   cursor: pointer;
   padding: 10px;
   background: #e0e0e0;
+   width: 150px;
   color: #333;
   border: 1px solid #ddd;
 `;
@@ -60,7 +60,9 @@ const Td = styled.td`
   border: 1px solid #ddd;
   text-align: center;
   cursor: pointer;
+  width: 100px;
 `;
+
 const PaginationWrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -97,6 +99,7 @@ const DataTable = ({ columns, data, onAdd, basePath }) => {
       columns,
       data,
       initialState: { pageSize: 10 },
+      disableSortRemove: true,
     },
     useSortBy,
     usePagination
@@ -115,6 +118,8 @@ const DataTable = ({ columns, data, onAdd, basePath }) => {
                 {headerGroup.headers.map(column => (
                   <Th {...column.getHeaderProps(column.getSortByToggleProps())}>
                     {column.render('Header')}
+                    {column.isSorted ? (column.isSortedDesc ? ' ▼' : ' ▲') : ''}
+                    
                   </Th>
                 ))}
               </tr>
