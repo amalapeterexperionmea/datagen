@@ -1,6 +1,7 @@
 import React from 'react';
-import DataTable from '../../Components/Search/DataTable';
 import { useNavigate } from 'react-router-dom';
+import Search from '../../Components/Search';
+
 
 const Client = () => {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ const Client = () => {
 
   return (
     <div>
-      <DataTable columns={columns} data={data} onAdd={onAdd} basePath="/client/update" />
+      <Search columns={columns} data={data} onAdd={onAdd} basePath="/client/update"></Search>
     </div>
   );
 };

@@ -13,12 +13,10 @@ const PageWrapper = styled.div`
 
 const HeaderTable = styled.div`
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-  width: 97%;
-  height: 50px;
-  margin-bottom: 20px; 
-  margin-top: -105px;
+  margin-left:1105px;
+  margin-bottom: 25px; 
+  margin-top: -185px;
 `;
 
 const Button = styled.button`
@@ -37,13 +35,15 @@ const TableWrapper = styled.div`
   margin: 20px;
   text-align: center;
   padding: 20px;
-  border-radius: 8px;
+  
 `;
 
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
   background-color: #ffffff;
+  border-radius: 5px;
+  overflow: hidden;
 `;
 
 const Th = styled.th`
@@ -66,7 +66,7 @@ const Td = styled.td`
 const PaginationWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 15px;
 `;
 const PaginationButton = styled.button`
   height:25px;
