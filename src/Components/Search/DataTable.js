@@ -19,7 +19,7 @@ const HeaderTable = styled.div`
   margin-top: -185px;
 `;
 
-const Button = styled.button`
+const AddButton = styled.button`
   background-color: #2a6f97;
   width: 100px;
   margin-right: -35px;
@@ -30,7 +30,7 @@ const BackButton = styled.button`
   background-color: #2a6f97;
   width: 100px;
   margin-right: -35px;
-  margin-top: -10px;
+  margin-top: -370px;
   color: white; 
 `;
 const TableWrapper = styled.div`
@@ -117,7 +117,7 @@ const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack   })
     <PageWrapper>
       <TableWrapper>
         <HeaderTable>
-        {!isSearchActive && <Button onClick={onAdd} >Add</Button>}
+        {!isSearchActive && <AddButton onClick={onAdd} >Add</AddButton>}
         {isSearchActive && <BackButton onClick={onBack} >Back</BackButton>}
         </HeaderTable>
         <Table {...getTableProps()}>
