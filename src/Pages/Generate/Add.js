@@ -64,9 +64,9 @@ const DataGenerationForm = () => {
   };
 
   return (
-    <Container style={{ width: "100%", marginTop: "40px" }}>
+    <Container style={{ width: "100%", marginTop: "40px" , padding:"20px"}}>
       <Card className="shadow-sm">
-        <Card.Body style={{  backgroundColor: "#f4f4f9", maxHeight: "100vh", overflow: "hidden" }}>
+        <Card.Body style={{ padding:"10px" , backgroundColor: "#f4f4f9", maxHeight: "100vh", overflow: "hidden" }}>
           <h2 className="mb-3">Data Generation Form</h2>
           <Form onSubmit={handleSubmit}>
             <Row className="mb-2">
