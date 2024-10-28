@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Button, Col, Form, Row, Container, Card } from "react-bootstrap";
-
-
+ 
 const DataGenerationForm = () => {
   const [formData, setFormData] = useState({
     organizationuri: "",
@@ -19,14 +18,11 @@ const DataGenerationForm = () => {
       bulk: { batchsize: "", noofrecords: "" },
     },
   });
-
+ 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     if (type === "checkbox") {
-      setFormData({
-        ...formData,
-        [name]: checked,
-      });
+      setFormData({ ...formData, [name]: checked });
     } else if (name.includes(".")) {
       const [parent, child, subchild] = name.split(".");
       setFormData((prevState) => ({
@@ -34,26 +30,20 @@ const DataGenerationForm = () => {
         [parent]: {
           ...prevState[parent],
           [child]: subchild
-            ? {
-                ...prevState[parent][child],
-                [subchild]: value,
-              }
+            ? { ...prevState[parent][child], [subchild]: value }
             : value,
         },
       }));
     } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
+      setFormData({ ...formData, [name]: value });
     }
   };
-
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Data Submitted:", formData);
   };
-
+ 
   const handleCancel = () => {
     setFormData({
       organizationuri: "",
@@ -72,15 +62,15 @@ const DataGenerationForm = () => {
       },
     });
   };
-
+ 
   return (
-    <Container fluid className="p-0">
-      <Card className="text-black m-5" style={{ borderRadius: "0px" }}>
-        <Card.Body style={{ backgroundColor: "#f4f4f9" }}>
-          <h2>Data Generation Form</h2>
+    <Container style={{ width: "85%", marginTop: "40px" }}>
+      <Card className="shadow-sm">
+        <Card.Body style={{ padding: "10px", backgroundColor: "#f4f4f9", maxHeight: "80vh", overflow: "hidden" }}>
+          <h2 className="mb-3">Data Generation Form</h2>
           <Form onSubmit={handleSubmit}>
-            <Row className="mb-3">
-              <Form.Group as={Col} controlId="formOrganizationUri">
+            <Row className="mb-2">
+              <Form.Group as={Col} md={6} controlId="formOrganizationUri">
                 <Form.Label>Organization URI:</Form.Label>
                 <Form.Control
                   type="text"
@@ -89,8 +79,7 @@ const DataGenerationForm = () => {
                   onChange={handleInputChange}
                 />
               </Form.Group>
-
-              <Form.Group as={Col} controlId="formGenerationMode">
+              <Form.Group as={Col} md={6} controlId="formGenerationMode">
                 <Form.Label>Generation Mode:</Form.Label>
                 <Form.Select
                   name="generationmode"
@@ -102,9 +91,8 @@ const DataGenerationForm = () => {
                 </Form.Select>
               </Form.Group>
             </Row>
-
-            <Row className="mb-3">
-              <Form.Group as={Col} controlId="formFromDate">
+            <Row className="mb-2">
+              <Form.Group as={Col} md={6} controlId="formFromDate">
                 <Form.Label>From Date:</Form.Label>
                 <Form.Control
                   type="date"
@@ -113,8 +101,7 @@ const DataGenerationForm = () => {
                   onChange={handleInputChange}
                 />
               </Form.Group>
-
-              <Form.Group as={Col} controlId="formToDate">
+              <Form.Group as={Col} md={6} controlId="formToDate">
                 <Form.Label>To Date:</Form.Label>
                 <Form.Control
                   type="date"
@@ -124,8 +111,7 @@ const DataGenerationForm = () => {
                 />
               </Form.Group>
             </Row>
-
-            <Form.Group className="mb-3" controlId="formIncludeWeekends">
+            <Form.Group className="mb-2" controlId="formIncludeWeekends">
               <Form.Check
                 type="checkbox"
                 label="Include Weekends"
@@ -134,9 +120,8 @@ const DataGenerationForm = () => {
                 onChange={handleInputChange}
               />
             </Form.Group>
-
-            <Row className="mb-3">
-              <Form.Group as={Col} controlId="formFromTime">
+            <Row className="mb-2">
+              <Form.Group as={Col} md={3} controlId="formFromTime">
                 <Form.Label>From Time:</Form.Label>
                 <Form.Control
                   type="time"
@@ -145,8 +130,7 @@ const DataGenerationForm = () => {
                   onChange={handleInputChange}
                 />
               </Form.Group>
-
-              <Form.Group as={Col} controlId="formFromTimePeriod">
+              <Form.Group as={Col} md={3} controlId="formFromTimePeriod">
                 <Form.Label>From Time Period:</Form.Label>
                 <Form.Select
                   name="fromtimePeriod"
@@ -157,8 +141,7 @@ const DataGenerationForm = () => {
                   <option value="PM">PM</option>
                 </Form.Select>
               </Form.Group>
-
-              <Form.Group as={Col} controlId="formToTime">
+              <Form.Group as={Col} md={3} controlId="formToTime">
                 <Form.Label>To Time:</Form.Label>
                 <Form.Control
                   type="time"
@@ -167,8 +150,7 @@ const DataGenerationForm = () => {
                   onChange={handleInputChange}
                 />
               </Form.Group>
-
-              <Form.Group as={Col} controlId="formToTimePeriod">
+              <Form.Group as={Col} md={3} controlId="formToTimePeriod">
                 <Form.Label>To Time Period:</Form.Label>
                 <Form.Select
                   name="totimePeriod"
@@ -180,9 +162,8 @@ const DataGenerationForm = () => {
                 </Form.Select>
               </Form.Group>
             </Row>
-
-            <Row className="mb-3">
-              <Form.Group as={Col} controlId="formDurationMin">
+            <Row className="mb-2">
+              <Form.Group as={Col} md={6} controlId="formDurationMin">
                 <Form.Label>Duration Min:</Form.Label>
                 <Form.Control
                   type="number"
@@ -191,8 +172,7 @@ const DataGenerationForm = () => {
                   onChange={handleInputChange}
                 />
               </Form.Group>
-
-              <Form.Group as={Col} controlId="formDurationMax">
+              <Form.Group as={Col} md={6} controlId="formDurationMax">
                 <Form.Label>Duration Max:</Form.Label>
                 <Form.Control
                   type="number"
@@ -202,10 +182,9 @@ const DataGenerationForm = () => {
                 />
               </Form.Group>
             </Row>
-
             {formData.generationmode === "daily" && (
-              <Row className="mb-3">
-                <Form.Group as={Col} controlId="formDAUMin">
+              <Row className="mb-2">
+                <Form.Group as={Col} md={6} controlId="formDAUMin">
                   <Form.Label>DAU Percent Min:</Form.Label>
                   <Form.Control
                     type="number"
@@ -214,8 +193,7 @@ const DataGenerationForm = () => {
                     onChange={handleInputChange}
                   />
                 </Form.Group>
-
-                <Form.Group as={Col} controlId="formDAUMax">
+                <Form.Group as={Col} md={6} controlId="formDAUMax">
                   <Form.Label>DAU Percent Max:</Form.Label>
                   <Form.Control
                     type="number"
@@ -226,10 +204,9 @@ const DataGenerationForm = () => {
                 </Form.Group>
               </Row>
             )}
-
             {formData.generationmode === "bulk" && (
-              <Row className="mb-3">
-                <Form.Group as={Col} controlId="formBatchSize">
+              <Row className="mb-2">
+                <Form.Group as={Col} md={6} controlId="formBatchSize">
                   <Form.Label>Batch Size:</Form.Label>
                   <Form.Control
                     type="number"
@@ -238,8 +215,7 @@ const DataGenerationForm = () => {
                     onChange={handleInputChange}
                   />
                 </Form.Group>
-
-                <Form.Group as={Col} controlId="formNoOfRecords">
+                <Form.Group as={Col} md={6} controlId="formNoOfRecords">
                   <Form.Label>No. of Records:</Form.Label>
                   <Form.Control
                     type="number"
@@ -250,7 +226,6 @@ const DataGenerationForm = () => {
                 </Form.Group>
               </Row>
             )}
-
             <div className="d-flex justify-content-end mt-3">
               <Button variant="primary" type="submit">
                 Generate
@@ -270,5 +245,5 @@ const DataGenerationForm = () => {
     </Container>
   );
 };
-
+ 
 export default DataGenerationForm;
