@@ -44,8 +44,11 @@ const BackButton = styled.button`
   cursor: pointer; 
 `;
 const TableWrapper = styled.div`
+  position: fixed;
   width: 1300px;
   margin: 20px;
+  left:250px;
+  top:260px;
   text-align: center;
   padding: 20px;
   
@@ -81,28 +84,35 @@ const Td = styled.td`
 `;
 
 const PaginationWrapper = styled.div`
+  position: fixed;
+  bottom: 30px;
+  left: 58%;
+  transform: translateX(-50%);
   display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
+  gap: 1045px;
 `;
-const NoDataMessage = styled.div`
-  color: Black;
-  font-size: 22px;
-  margin-top: 20px;
-`;
+
 const PaginationButton = styled.button`
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
   height:25px;
   width:80px;
-  background-color: #17a2b8;
+  background-color: #2A6F97;
   color: white;
   border: none;
   border-radius: 4px;
-  margin-top:2px;
+  margin-top:1px;
   cursor: pointer;
   &:disabled {
     background-color: #ccc;
     cursor: not-allowed;
   }
+`;
+const NoDataMessage = styled.div`
+  color: Black;
+  font-size: 22px;
+  margin-top: 20px;
 `;
 const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack   }) => {
   const navigate = useNavigate();
