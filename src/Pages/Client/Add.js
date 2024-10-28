@@ -21,23 +21,42 @@ const Label = styled.label`
   display: block;
   margin-top: 10px;
   font-weight: bold;
-  font-size: 13px;
+  font-size: 14px;
   color: #2a6f97;
 `;
 
 const Header = styled.h2`
+  margin-top:-8px;
   text-align: center;
   color: #1b4965;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
+`;
+
+const InputContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 5px;
+`;
+
+const Tag = styled.span`
+  background-color: #2a6f97;
+  color: white;
+  border-radius: 3px;
+  padding: 3px 6px;
+  margin-right: 5px;
+  cursor: pointer;
 `;
 
 const Input = styled.input`
   width: 100%;
-  padding: 8px;
+  flex: 1;
   margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  box-sizing: border-box;
+  padding: 8px;
 `;
 
 const ButtonContainer = styled.div`
@@ -46,7 +65,7 @@ const ButtonContainer = styled.div`
 `;
 
 const GenerateButton = styled.button`
-  margin-top: 20px;
+  margin-top: 10px;
   margin-right: 10px;
   padding: 10px 20px;
   background-color: #2a6f97;
@@ -67,7 +86,7 @@ const GenerateButton = styled.button`
 `;
 
 const CancelButton = styled.button`
-  margin-top: 20px;
+  margin-top: 10px;
   padding: 10px 20px;
   background-color: gray;
   width: 85px;
@@ -75,7 +94,7 @@ const CancelButton = styled.button`
   color: white;
   border: none;
   border-radius: 5px;
-   display: flex; 
+  display: flex; 
   justify-content: center; 
   align-items: center; 
   cursor: pointer;
@@ -152,7 +171,7 @@ const Form = () => {
     <Container fluid className="p-0">
       <Row className="justify-content-center">
         <Col xs={12} md={8} lg={6}>
-          <Card className="text-black m-5"style={{ borderRadius: "10px", margin: "20px", overflow: 'hidden' }}>
+          <Card className="text-black m-5" style={{ borderRadius: "10px", margin: "20px", overflow: 'hidden' }}>
             <FormContainer>
               <Header>Registration Form</Header>
               <form onSubmit={handleSubmit}>
@@ -185,70 +204,44 @@ const Form = () => {
                 />
 
                 <Label>PostgreSQL:</Label>
-                <Input
-                  type="text"
-                  value={currentPostgres}
-                  onChange={(e) => setCurrentPostgres(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      e.preventDefault();
-                      handleAddPostgres();
-                    }
-                  }}
-                />
-                <div>
+                <InputContainer>
                   {formData.postgres.map((item, index) => (
-                    <span
-                      key={index}
-                      style={{ marginRight: "10px", display: "inline-block" }}
-                    >
-                      {item}
-                      <span
-                        onClick={() => handleRemovePostgres(item)}
-                        style={{
-                          cursor: "pointer",
-                          marginLeft: "5px",
-                          color: "black",
-                        }}
-                      >
-                        ×
-                      </span>
-                    </span>
+                    <Tag key={index} onClick={() => handleRemovePostgres(item)}>
+                      {item} ×
+                    </Tag>
                   ))}
-                </div>
+                  <Input
+                    type="text"
+                    value={currentPostgres}
+                    onChange={(e) => setCurrentPostgres(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        handleAddPostgres();
+                      }
+                    }}
+                  />
+                </InputContainer>
 
                 <Label>MongoDB:</Label>
-                <Input
-                  type="text"
-                  value={currentMongodb}
-                  onChange={(e) => setCurrentMongodb(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      e.preventDefault();
-                      handleAddMongodb();
-                    }
-                  }}
-                />
-                <div>
+                <InputContainer>
                   {formData.mongodb.map((item, index) => (
-                    <span
-                      key={index}
-                      style={{ marginRight: "10px", display: "inline-block" }}
-                    >
-                      {item}
-                      <span
-                        onClick={() => handleRemoveMongodb(item)}
-                        style={{
-                          cursor: "pointer",
-                          marginLeft: "5px",
-                          color: "black",
-                        }}
-                      >
-                        ×
-                      </span>
-                    </span>
+                    <Tag key={index} onClick={() => handleRemoveMongodb(item)}>
+                      {item} ×
+                    </Tag>
                   ))}
-                </div>
+                  <Input
+                    type="text"
+                    value={currentMongodb}
+                    onChange={(e) => setCurrentMongodb(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        handleAddMongodb();
+                      }
+                    }}
+                  />
+                </InputContainer>
 
                 <ButtonContainer>
                   <GenerateButton type="submit">Add</GenerateButton>

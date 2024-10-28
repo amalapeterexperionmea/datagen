@@ -27,7 +27,7 @@ const Label = styled.label`
 const Header = styled.h2`
   text-align: center;
   color: #1b4965;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 `;
 
 const Input = styled.input`
