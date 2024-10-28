@@ -67,7 +67,7 @@ const GeneratedGrid = () => {
   );
 
   const onGenerate = () => {
-    navigate('/data-generation'); 
+    navigate('/generate-grid/data-generation'); 
   };
 
   return (

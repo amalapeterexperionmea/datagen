@@ -20,8 +20,8 @@ function App() {
           <Route path="/login" element={<LoginPage />} /> 
           <Route element={<Layout/>}>
             <Route path="/"/> 
-            <Route path="/data-generation" element={<DataGenerationForm />} />
-            <Route path="/generate-grid/data-generation" element={<GeneratedGrid />} />
+            <Route path="/generate-grid/data-generation" element={<DataGenerationForm />} />
+            <Route path="/generate-grid" element={<GeneratedGrid />} />
             <Route path="/client" element={<Client />} />
             <Route path="/client/form" element={<Form />} />
             <Route path="/client/update" element={<Update />} />

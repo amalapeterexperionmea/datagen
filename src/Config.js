@@ -12,7 +12,8 @@ export const breadcrumbConfig = [
   { label: 'Search User', path: '/searchuser' },
   { label: 'Add User', path: '/searchuser/adduser', parentPath: '/searchuser' },
   { label: 'Edit User', path: '/searchuser/edituser', parentPath: '/searchuser' },
-  { label: 'Data Generation', path: '/data-generation' }
+  { label: 'Generated list', path: '/generate-grid' },
+  { label: 'Data Generation', path: '/generate-grid/data-generation', parentPath: '/generate-grid' }
 ];
 
 //Menuitems configuration
@@ -36,7 +37,7 @@ export const menuItemsConfig = [
   {
     iconClass: "fas fa-chart-line",
     label: "Data Generation",
-    route: "/generate-grid/data-generation",
+    route: "/generate-grid",
     topMargin: '10px',
     bottomMargin: '10px',
     disableHoverEffects: false,
