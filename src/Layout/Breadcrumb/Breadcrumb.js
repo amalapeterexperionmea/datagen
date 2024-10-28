@@ -1,5 +1,6 @@
 
 
+
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
@@ -18,19 +19,35 @@ const BreadcrumbItem = styled.span`
   margin-right: 10px;
   cursor: pointer;
   color: blue;
-
-  &:not(:last-child)::after {
-    content: '>';
-    margin-left: 10px;
-  }
+  display: flex;
+  align-items: center;
 
   &:hover {
     text-decoration: none;
-    color: darkblue;
   }
 
+  /* Add specific styles for the home icon */
+  ${({ isHome }) =>
+    isHome &&
+    `
+      &:hover > span {
+        transform: scale(1.1); /* Example hover effect */
+        color: green; /* Change color on hover */
+      }
+  `}
+`;
+
+const IconLabel = styled.span`
   display: flex;
   align-items: center;
+
+  &:hover {
+    color: darkblue; /* Change color on hover */
+  }
+`;
+
+const Separator = styled.span`
+  margin-left: 10px;
 `;
 
 export const Breadcrumb = ({ currentPath }) => {
@@ -40,13 +57,11 @@ export const Breadcrumb = ({ currentPath }) => {
     const items = [];
     const currentItem = breadcrumbConfig.find(item => item.path === currentPath);
 
-    
     if (currentPath !== '/') {
       items.push(breadcrumbConfig[0]); 
     }
 
     if (currentItem) {
-      
       if (currentItem.parentPath) {
         const parentItem = breadcrumbConfig.find(item => item.path === currentItem.parentPath);
         if (parentItem) {
@@ -72,9 +87,16 @@ export const Breadcrumb = ({ currentPath }) => {
   return (
     <BreadcrumbWrapper>
       {breadcrumbItems.map((item, index) => (
-        <BreadcrumbItem key={index} onClick={() => handleBreadcrumbClick(index)}>
-          {item.icon} 
-          {item.label && index !== 0 && ` ${item.label}`} 
+        <BreadcrumbItem 
+          key={index} 
+          onClick={() => handleBreadcrumbClick(index)} 
+          isHome={item.path === '/'} // Check if the item is the home icon
+        >
+          <IconLabel>
+            {item.icon} 
+            {item.label && index !== 0 && ` ${item.label}`} 
+          </IconLabel>
+          {index < breadcrumbItems.length - 1 && <Separator>></Separator>}
         </BreadcrumbItem>
       ))}
     </BreadcrumbWrapper>
