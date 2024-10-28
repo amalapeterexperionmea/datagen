@@ -106,7 +106,7 @@ function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({ email: "", password: "" });
   const [loginError, setLoginError] = useState("");
-  const [hasSubmitted, setHasSubmitted] = useState(false); // New state
+  const [hasSubmitted, setHasSubmitted] = useState(false); 
 
   const navigate = useNavigate();
 
@@ -173,7 +173,7 @@ function LoginPage() {
           value={email}
           onChange={handleEmailChange}
         />
-        {hasSubmitted && errors.email && <ErrorMessage>{errors.email}</ErrorMessage>} {/* Show error only if submitted */}
+        {hasSubmitted && errors.email && <ErrorMessage>{errors.email}</ErrorMessage>} 
 
         <Input
           type={showPassword ? "text" : "password"}
@@ -181,7 +181,7 @@ function LoginPage() {
           value={password}
           onChange={handlePasswordChange}
         />
-        {hasSubmitted && errors.password && <ErrorMessage>{errors.password}</ErrorMessage>} {/* Show error only if submitted */}
+        {hasSubmitted && errors.password && <ErrorMessage>{errors.password}</ErrorMessage>} 
 
         <TogglePasswordButton type="button" onClick={togglePasswordVisibility}>
           {showPassword ? "Hide Password" : "Show Password"}
