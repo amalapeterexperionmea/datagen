@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Col, Form, Row, Container, Card } from "react-bootstrap";
- 
+
 const DataGenerationForm = () => {
   const [formData, setFormData] = useState({
     organizationuri: "",
@@ -18,7 +18,7 @@ const DataGenerationForm = () => {
       bulk: { batchsize: "", noofrecords: "" },
     },
   });
- 
+
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     if (type === "checkbox") {
@@ -38,12 +38,12 @@ const DataGenerationForm = () => {
       setFormData({ ...formData, [name]: value });
     }
   };
- 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Data Submitted:", formData);
   };
- 
+
   const handleCancel = () => {
     setFormData({
       organizationuri: "",
@@ -62,11 +62,11 @@ const DataGenerationForm = () => {
       },
     });
   };
- 
+
   return (
-    <Container style={{ width: "85%", marginTop: "40px" }}>
+    <Container style={{ width: "100%", marginTop: "40px" }}>
       <Card className="shadow-sm">
-        <Card.Body style={{ padding: "10px", backgroundColor: "#f4f4f9", maxHeight: "80vh", overflow: "hidden" }}>
+        <Card.Body style={{  backgroundColor: "#f4f4f9", maxHeight: "100vh", overflow: "hidden" }}>
           <h2 className="mb-3">Data Generation Form</h2>
           <Form onSubmit={handleSubmit}>
             <Row className="mb-2">
@@ -245,5 +245,5 @@ const DataGenerationForm = () => {
     </Container>
   );
 };
- 
+
 export default DataGenerationForm;
