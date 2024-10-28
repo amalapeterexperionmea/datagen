@@ -17,23 +17,30 @@ const AddButton = styled.button`
   background-color: #2a6f97; 
   color: white; 
   width: 100px;
-  height: 40px;
+  height: 32px;
   border: none; 
   border-radius: 4px; 
-  padding: 10px 20px; 
-  cursor: pointer;  
+  padding: 0; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  cursor: pointer; 
 `;
+
 const BackButton = styled.button`
-  position: fixed; 
+ position: fixed; 
   top: 90px; 
   right: 40px; 
   background-color: #2a6f97; 
   color: white; 
   width: 100px;
-  height: 40px;
+  height: 32px;
   border: none; 
   border-radius: 4px; 
-  padding: 10px 20px; 
+  padding: 0; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
   cursor: pointer; 
 `;
 const TableWrapper = styled.div`
