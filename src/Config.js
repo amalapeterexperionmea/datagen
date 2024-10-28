@@ -36,7 +36,7 @@ export const menuItemsConfig = [
   {
     iconClass: "fas fa-chart-line",
     label: "Data Generation",
-    route: "/data-generation",
+    route: "/generate-grid/data-generation",
     topMargin: '10px',
     bottomMargin: '10px',
     disableHoverEffects: false,

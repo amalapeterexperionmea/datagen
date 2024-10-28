@@ -1,33 +1,31 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Search from '../../Components/Search';
-import DataTable from '../../Components/Search/DataTable';
+import { Container } from 'react-bootstrap';
+
 const GeneratedGrid = () => {
   const navigate = useNavigate();
-
-  // Adjust the columns to reflect the attributes of DataGenerationForm
   const columns = React.useMemo(
     () => [
-      { Header: 'Organization URI', accessor: 'organizationuri' },
-      { Header: 'From Date', accessor: 'fromdate' },
-      { Header: 'To Date', accessor: 'todate' },
-      { Header: 'Include Weekends', accessor: 'includeweekends' },
-      { Header: 'From Time', accessor: 'fromtime' },
-      { Header: 'From Time Period', accessor: 'fromtimePeriod' },
-      { Header: 'To Time', accessor: 'totime' },
-      { Header: 'To Time Period', accessor: 'totimePeriod' },
-      { Header: 'Duration Min', accessor: 'duration.min' },
-      { Header: 'Duration Max', accessor: 'duration.max' },
-      { Header: 'Generation Mode', accessor: 'generationmode' },
-      { Header: 'DAU Percent Min', accessor: 'modeattributes.daily.daupercent.min' },
-      { Header: 'DAU Percent Max', accessor: 'modeattributes.daily.daupercent.max' },
-      { Header: 'Batch Size', accessor: 'modeattributes.bulk.batchsize' },
-      { Header: 'No. of Records', accessor: 'modeattributes.bulk.noofrecords' },
+      { Header: 'Organization URI', accessor: 'organizationuri',width:"150px"},
+      { Header: 'From Date', accessor: 'fromdate',width:"150px" },
+      { Header: 'To Date', accessor: 'todate' ,width:"150px"},
+      { Header: 'Include Weekends', accessor: 'includeweekends' ,width:"150px"},
+      { Header: 'From Time', accessor: 'fromtime',width:"150px" },
+      { Header: 'From Time Period', accessor: 'fromtimePeriod' ,width:"150px"},
+      { Header: 'To Time', accessor: 'totime',width:"150px" },
+      { Header: 'To Time Period', accessor: 'totimePeriod',width:"150px" },
+      { Header: 'Duration Min', accessor: 'duration.min' ,width:"150px"},
+      { Header: 'Duration Max', accessor: 'duration.max' ,width:"150px"},
+      { Header: 'Generation Mode', accessor: 'generationmode' ,width:"150px"},
+      { Header: 'DAU Percent Min', accessor: 'modeattributes.daily.daupercent.min',width:"150px" },
+      { Header: 'DAU Percent Max', accessor: 'modeattributes.daily.daupercent.max' ,width:"150px"},
+      { Header: 'Batch Size', accessor: 'modeattributes.bulk.batchsize' ,width:"150px"},
+      { Header: 'No. of Records', accessor: 'modeattributes.bulk.noofrecords',width:"150px" },
     ],
-    []
+    [],
   );
 
-  // Example data reflecting DataGenerationForm attributes
   const data = React.useMemo(
     () => [
       {
@@ -64,20 +62,26 @@ const GeneratedGrid = () => {
           bulk: { batchsize: 200, noofrecords: 2000 },
         },
       },
-      // Additional rows as necessary...
     ],
     []
   );
 
-  const onAdd = () => {
-    navigate('/client/form'); 
+  const onGenerate = () => {
+    navigate('/data-generation'); 
   };
 
   return (
-    <div>
-      <Search columns={columns} data={data} onAdd={onAdd} basePath=" " />
-    </div>
+    <Container
+      fluid
+      style={{
+        overflowX: 'auto',
+        padding: '10px',
+        fontSize: '0.85rem',
+        lineHeight: '1.2',
+      }}
+    >
+      <Search columns={columns} data={data} onAdd={onGenerate} basePath=" " />
+    </Container>
   );
 };
-
 export default GeneratedGrid;   

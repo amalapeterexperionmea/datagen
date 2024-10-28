@@ -10,6 +10,7 @@ import AddUser from './Pages/User/Add';
 import EditUser from './Pages/User/Edit';
 import SearchUser from './Pages/User/Search';
 import DataGenerationForm from './Pages/Generate/Add';
+import GeneratedGrid from './Pages/Generate/Search';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route element={<Layout/>}>
             <Route path="/"/> 
             <Route path="/data-generation" element={<DataGenerationForm />} />
+            <Route path="/generate-grid/data-generation" element={<GeneratedGrid />} />
             <Route path="/client" element={<Client />} />
             <Route path="/client/form" element={<Form />} />
             <Route path="/client/update" element={<Update />} />

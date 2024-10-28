@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Button, Col, Form, Row, Container, Card } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+
 
 const DataGenerationForm = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +20,8 @@ const DataGenerationForm = () => {
       bulk: { batchsize: "", noofrecords: "" },
     },
   });
+ 
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -45,22 +49,7 @@ const DataGenerationForm = () => {
   };
 
   const handleCancel = () => {
-    setFormData({
-      organizationuri: "",
-      fromdate: "",
-      todate: "",
-      includeweekends: false,
-      fromtime: "",
-      fromtimePeriod: "AM",
-      totime: "",
-      totimePeriod: "AM",
-      duration: { min: "", max: "" },
-      generationmode: "daily",
-      modeattributes: {
-        daily: { daupercent: { min: "", max: "" } },
-        bulk: { batchsize: "", noofrecords: "" },
-      },
-    });
+    navigate("/generate-grid/data-generation");
   };
 
   return (
