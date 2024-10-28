@@ -25,11 +25,14 @@ const Button = styled.button`
   margin-right: -35px;
   margin-top: -10px;
   color: white; 
-  &:hover {
-    background-color: #303f9f; 
-  }
 `;
-
+const BackButton = styled.button`
+  background-color: #2a6f97;
+  width: 100px;
+  margin-right: -35px;
+  margin-top: -10px;
+  color: white; 
+`;
 const TableWrapper = styled.div`
   width: 1300px;
   margin: 20px;
@@ -53,6 +56,11 @@ const Th = styled.th`
    width: 150px;
   color: #333;
   border: 1px solid #ddd;
+  
+  ${({ isSorted }) => isSorted && `
+    background-color: #f0f0f0;
+    font-weight: bold;
+  `}
 `;
 
 const Td = styled.td`
@@ -82,7 +90,7 @@ const PaginationButton = styled.button`
     cursor: not-allowed;
   }
 `;
-const DataTable = ({ columns, data, onAdd, basePath }) => {
+const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack   }) => {
   const navigate = useNavigate();
   const {
     getTableProps,
@@ -109,7 +117,8 @@ const DataTable = ({ columns, data, onAdd, basePath }) => {
     <PageWrapper>
       <TableWrapper>
         <HeaderTable>
-          <Button onClick={onAdd}>Add</Button>
+        {!isSearchActive && <Button onClick={onAdd} >Add</Button>}
+        {isSearchActive && <BackButton onClick={onBack} >Back</BackButton>}
         </HeaderTable>
         <Table {...getTableProps()}>
           <thead>
