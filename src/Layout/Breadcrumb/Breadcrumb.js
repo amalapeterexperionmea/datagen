@@ -95,7 +95,7 @@ export const Breadcrumb = ({ currentPath }) => {
             {item.icon} 
             {item.label && index !== 0 && ` ${item.label}`} 
           </IconLabel>
-          {index < breadcrumbItems.length - 1 && <Separator>   {'>'} </Separator>}
+          {index < breadcrumbItems.length - 1 && <Separator>   {'|'} </Separator>}
         </BreadcrumbItem>
       ))}
     </BreadcrumbWrapper>
