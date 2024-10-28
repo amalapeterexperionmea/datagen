@@ -76,6 +76,11 @@ const PaginationWrapper = styled.div`
   justify-content: space-between;
   margin-top: 15px;
 `;
+const NoDataMessage = styled.div`
+  color: Black;
+  font-size: 22px;
+  margin-top: 20px;
+`;
 const PaginationButton = styled.button`
   height:25px;
   width:80px;
@@ -135,19 +140,27 @@ const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack   })
             ))}
           </thead>
           <tbody {...getTableBodyProps()}>
-            {page.map(row => {
+          {page.length > 0 ? (
+            page.map(row => {
               prepareRow(row);
               return (
                 <tr
-                  {...row.getRowProps()}
-                  onClick={() => navigate(`${basePath}`)} 
-                >
-                  {row.cells.map(cell => (
-                    <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>
-                  ))}
-                </tr>
-              );
-            })}
+                    {...row.getRowProps()}
+                    onClick={() => navigate(`${basePath}`)}
+                  >
+                    {row.cells.map(cell => (
+                      <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>
+                    ))}
+                  </tr>
+                );
+              })
+            ) : (
+              <tr>
+                <Td colSpan={columns.length}>
+                  <NoDataMessage>No Data </NoDataMessage> 
+                </Td>
+              </tr>
+            )}
           </tbody>
         </Table>
         <PaginationWrapper>
