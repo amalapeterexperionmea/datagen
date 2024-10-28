@@ -5,9 +5,9 @@ import styled from 'styled-components';
 const { Search } = Input;
 
 const Stylebar = styled(Search)`
+  position:fixed;
   width: 200px;
   margin-left: 920px;
-  margin-top: 25px;
 `;
 
 const SearchBar = ({ onSearch }) => (
