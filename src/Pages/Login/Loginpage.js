@@ -1,34 +1,89 @@
 
 
+
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import anime from "animejs/lib/anime.es.js"; 
+
+const Page = styled.div`
+  background: linear-gradient(to right, #2A6F97, #82A3B5);
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 40px);
+  position: absolute;
+  place-content: center;
+  width: calc(100% - 40px);
+`;
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background: linear-gradient(135deg, #5fa8d3 0%, #2a6f97 50%, #1b4965 100%);
-  font-family: 'Arial', sans-serif;
+  height: 410px;
+  margin: 0 auto;
+  width: 640px;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    height: 630px;
+    width: 320px;
+  }
 `;
 
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
+const Left = styled.div`
+  background: white;
+  height: calc(100% - 40px);
+  position: relative;
+  width: 50%;
   padding: 40px;
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
-  width: 350px;
-  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 767px) {
+    height: 100%;
+    width: calc(100% - 40px);
+    max-height: 270px;
+  }
+`;
+
+const Right = styled.div`
+  background: white;
+  position: relative;
+  width: 50%;
+  box-shadow: 0px 0px 40px 16px rgba(0, 0, 0, 0.22);
+  padding: 30px;
+
+  @media (max-width: 767px) {
+    height: 100%;
+    width: 100%;
+    max-height: 350px;
+  }
 `;
 
 const Title = styled.h2`
-  margin-bottom: 20px;
-  font-size: 24px;
-  color: #1b4965;
+  font-size: 50px;
+  font-weight: 900;
+  margin: 0;
+  
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); 
+  font-family: 'Poppins', sans-serif;
+`;
+
+const EULA = styled.div`
+  color: #2A6F97;
+  font-size: 20px;
+  line-height: 1.5;
+  margin-top: 20px;
+`;
+
+const Form = styled.form`
+  position: relative;
+  margin-top: -230px;
+`;
+
+const Label = styled.label`
+  color: black;
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
 `;
 
 const Input = styled.input`
@@ -37,11 +92,34 @@ const Input = styled.input`
   border-radius: 6px;
   border: 1px solid #ccc;
   font-size: 16px;
-  transition: border-color 0.3s;
+  width: 100%;
+  background: transparent;
+  color: black;
 
   &:focus {
     border-color: #007bff;
     outline: none;
+  }
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  gap: 20px;
+  margin-top: 15px;
+`;
+
+const Button = styled.button`
+  padding: 12px;
+  background-color: #2a6f97;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  flex: 1;
+
+  &:hover {
+    background-color: #0056b3;
   }
 `;
 
@@ -51,48 +129,27 @@ const ErrorMessage = styled.p`
   margin: 5px 0 15px;
 `;
 
-const Button = styled.button`
-  padding: 12px;
-  background-color: ${props => (props.disabled ? "#cccccc" : "#007bff")};
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: ${props => (props.disabled ? "not-allowed" : "pointer")};
-  font-size: 16px;
-  margin-top: 15px;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: ${props => (props.disabled ? "#cccccc" : "#0056b3")};
-  }
-`;
-
-const Links = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 15px;
-`;
-
-const StyledLinkButton = styled.button`
-  background: none;
-  border: none;
-  color: #007bff;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 14px;
-
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
 const TogglePasswordButton = styled.button`
   background: none;
   border: none;
   color: #007bff;
   cursor: pointer;
   font-size: 14px;
-  margin-bottom: 15px;
+  flex: 1;
+  text-align: left;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const ForgotPasswordButton = styled.button`
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 14px;
+  flex: 1;
   text-align: right;
 
   &:hover {
@@ -106,13 +163,12 @@ function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({ email: "", password: "" });
   const [loginError, setLoginError] = useState("");
-  const [hasSubmitted, setHasSubmitted] = useState(false); 
-
+  const [submitAttempted, setSubmitAttempted] = useState(false);
   const navigate = useNavigate();
 
   const superAdmins = [
-    { email: "admin@gmail.com", password: "admin" },
-    { email: "superadmin2@datagen.com", password: "admin456" },
+    { email: "admin@gmail.com", password: "admin" }
+    
   ];
 
   const validateEmail = (email) => {
@@ -126,83 +182,96 @@ function LoginPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setHasSubmitted(true); 
+    setSubmitAttempted(true);
+
+    const emailError = validateEmail(email) ? "" : "Invalid email address.";
+    const passwordError = validatePassword(password) ? "" : "Password must be at least 1 character long.";
+
+    setErrors({ email: emailError, password: passwordError });
 
     const isAdmin = superAdmins.some(
       (admin) => admin.email === email && admin.password === password
     );
 
-    if (isAdmin) {
+    if (!emailError && !passwordError && isAdmin) {
       navigate("/");
-    } else {
+    } else if (!isAdmin && !emailError && !passwordError) {
       setLoginError("Invalid email or password.");
     }
   };
 
   const handleEmailChange = (e) => {
-    const value = e.target.value;
-    setEmail(value);
-    setErrors({
-      ...errors,
-      email: validateEmail(value) ? "" : "Invalid email address.",
-    });
+    setEmail(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
-    const value = e.target.value;
-    setPassword(value);
-    setErrors({
-      ...errors,
-      password: validatePassword(value)
-        ? ""
-        : "Password must be at least 1 character long.",
-    });
+    setPassword(e.target.value);
   };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
+  // Animation for the SVG path
+  const animatePath = (offset) => {
+    anime({
+      targets: "path",
+      strokeDashoffset: offset,
+      duration: 700,
+      easing: "easeOutQuart",
+    });
+  };
+
   return (
-    <Container>
-      <Form onSubmit={handleSubmit}>
-        <Title>Login</Title>
-        <Input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={handleEmailChange}
-        />
-        {hasSubmitted && errors.email && <ErrorMessage>{errors.email}</ErrorMessage>} 
+    <Page>
+      <Container>
+        <Left>
+          <Title>Login</Title>
+          <EULA>Datagen</EULA>
+        </Left>
+        <Right>
+          <svg viewBox="0 0 320 300">
+            {/* SVG Path */}
+          </svg>
+          <Form onSubmit={handleSubmit}>
+            <Label htmlFor="email">Email</Label>
+            <Input
+              type="email"
+              id="email"
+              placeholder="Email"
+              value={email}
+              onChange={handleEmailChange}
+              onFocus={() => animatePath(0)}
+            />
+            {submitAttempted && errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
 
-        <Input
-          type={showPassword ? "text" : "password"}
-          placeholder="Password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-        {hasSubmitted && errors.password && <ErrorMessage>{errors.password}</ErrorMessage>} 
+            <Label htmlFor="password">Password</Label>
+            <Input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              placeholder="Password"
+              value={password}
+              onChange={handlePasswordChange}
+              onFocus={() => animatePath(-336)}
+            />
+            {submitAttempted && errors.password && <ErrorMessage>{errors.password}</ErrorMessage>}
 
-        <TogglePasswordButton type="button" onClick={togglePasswordVisibility}>
-          {showPassword ? "Hide Password" : "Show Password"}
-        </TogglePasswordButton>
+            <ButtonGroup>
+              <TogglePasswordButton type="button" onClick={togglePasswordVisibility}>
+                {showPassword ? "Hide Password" : "Show Password"}
+              </TogglePasswordButton>
 
-        <Button
-          type="submit"
-          disabled={!email || !password || errors.email || errors.password}
-        >
-          Login
-        </Button>
+              <Button type="submit">Login</Button>
 
-        {loginError && <ErrorMessage>{loginError}</ErrorMessage>}
-
-        <Links>
-          <StyledLinkButton onClick={() => alert("Forgot Password clicked")}>
-            Forgot Password?
-          </StyledLinkButton>
-        </Links>
-      </Form>
-    </Container>
+              <ForgotPasswordButton onClick={() => alert("Redirect to forgot password page")}>
+                Forgot Password?
+              </ForgotPasswordButton>
+            </ButtonGroup>
+            {submitAttempted && loginError && <ErrorMessage>{loginError}</ErrorMessage>}
+          </Form>
+        </Right>
+      </Container>
+    </Page>
   );
 }
 
