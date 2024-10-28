@@ -9,10 +9,7 @@ const FormContainer = styled.div`
   justify-content: left;
   padding: 30px;
   background-color: #f4f4f9; 
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  height: 100%; 
-  
+  height:540px;
   @media (max-width: 768px) {
     width: 100%;
     margin: 20px 0; 
@@ -48,14 +45,19 @@ const ButtonContainer = styled.div`
 `;
 
 const UpdateButton = styled.button`
-  margin-top: 20px;
+ margin-top: 20px;
   margin-right: 10px;
   padding: 10px 20px;
   background-color: #2a6f97;
+  width: 85px;
+  height: 32px;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
   font-size: 15px;
   &:hover {
     opacity: 0.8;
@@ -64,12 +66,17 @@ const UpdateButton = styled.button`
 `;
 
 const CancelButton = styled.button`
-  margin-top: 20px;
+   margin-top: 20px;
   padding: 10px 20px;
   background-color: gray;
+  width: 85px;
+  height: 32px;
   color: white;
   border: none;
   border-radius: 5px;
+   display: flex; 
+  justify-content: center; 
+  align-items: center; 
   cursor: pointer;
   font-size: 14px;
   &:hover {
