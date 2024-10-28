@@ -10,28 +10,31 @@ const PageWrapper = styled.div`
   margin-top: 25px;
   height: 97vh;
 `;
-
-const HeaderTable = styled.div`
-  display: flex;
-  align-items: center;
-  margin-left:1105px;
-  margin-bottom: 25px; 
-  margin-top: -185px;
-`;
-
 const AddButton = styled.button`
-  background-color: #2a6f97;
-  width: 100px;
-  margin-right: -35px;
-  margin-top: -10px;
+  position: fixed; 
+  top: 90px; 
+  right: 40px; 
+  background-color: #2a6f97; 
   color: white; 
+  width: 100px;
+  height: 40px;
+  border: none; 
+  border-radius: 4px; 
+  padding: 10px 20px; 
+  cursor: pointer;  
 `;
 const BackButton = styled.button`
-  background-color: #2a6f97;
-  width: 100px;
-  margin-right: -35px;
-  margin-top: -370px;
+  position: fixed; 
+  top: 90px; 
+  right: 40px; 
+  background-color: #2a6f97; 
   color: white; 
+  width: 100px;
+  height: 40px;
+  border: none; 
+  border-radius: 4px; 
+  padding: 10px 20px; 
+  cursor: pointer; 
 `;
 const TableWrapper = styled.div`
   width: 1300px;
@@ -42,8 +45,8 @@ const TableWrapper = styled.div`
 `;
 
 const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
+  width: 1205px;
+  margin-top:-150px;
   background-color: #ffffff;
   border-radius: 5px;
   overflow: hidden;
@@ -64,9 +67,8 @@ const Th = styled.th`
 `;
 
 const Td = styled.td`
-  padding: 10px;
+  padding: 8px;
   border: 1px solid #ddd;
-  text-align: center;
   cursor: pointer;
   width: 100px;
 `;
@@ -121,10 +123,8 @@ const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack   })
   return (
     <PageWrapper>
       <TableWrapper>
-        <HeaderTable>
-        {!isSearchActive && <AddButton onClick={onAdd} >Add</AddButton>}
-        {isSearchActive && <BackButton onClick={onBack} >Back</BackButton>}
-        </HeaderTable>
+      {!isSearchActive && <AddButton onClick={onAdd} >Add</AddButton>}
+      {isSearchActive && <BackButton onClick={onBack} >Back</BackButton>}
         <Table {...getTableProps()}>
           <thead>
             {headerGroups.map(headerGroup => (

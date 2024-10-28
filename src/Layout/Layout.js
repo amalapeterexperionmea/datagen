@@ -1,7 +1,3 @@
-
-
-
-
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
@@ -11,33 +7,27 @@ import Header from './Header/Header';
 import Sidebar from './Sidebar/Sidebar';
 import { Breadcrumb } from './Breadcrumb/Breadcrumb';
 import { Outlet } from 'react-router-dom';
-import Dashboard from './Dashboard/Dashboard'; 
-
+import Dashboard from './Dashboard/Dashboard';
+ 
 const LayoutWrapper = styled.div`
   display: flex;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
 `;
-
+ 
 const SidebarWrapper = styled.div`
   width: 250px;
   flex-shrink: 0;
-  transition: transform 0.3s ease;
-  background-color: #333;
-  color: white;
+  background-color: #153448; 
   position: fixed;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000;
-  transform: ${(props) => (props.isOpen ? 'translateX(0)' : 'translateX(-100%)')};
-  overflow: hidden;
-
-  @media (min-width: 768px) {
-    transform: translateX(0);
-    position: relative;
-  }
 `;
-
+ 
 const SidebarToggle = styled.button`
   position: fixed;
   top: 15px;
@@ -54,42 +44,42 @@ const SidebarToggle = styled.button`
   justify-content: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
-
+ 
   &:hover {
     background-color: #555;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   }
-
+ 
   @media (min-width: 768px) {
     display: none;
   }
-
+ 
   svg {
     font-size: 20px;
   }
 `;
-
+ 
 const MainContent = styled.div`
+  margin-left: 250px; /* Adjust to accommodate the sidebar */
   flex-grow: 1;
-  padding: 0px;
-  margin-left: ${(props) => (props.isOpen ? '0px' : '0')};
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
   overflow: hidden;
-  width: 100%;
+  transition: margin-left 0.3s ease;
+ 
+  @media (max-width: 768px) {
+    margin-left: 0; /* No margin for smaller screens */
+  }
 `;
-
+ 
 const ContentWrapper = styled.div`
   width: 100%;
   margin: 0 auto;
   overflow: hidden;
   margin-top: 20px; 
-  @media (max-width: 768px) {
-    padding: 0 20px;
-  }
+  padding: 0 20px; /* Ensure content has padding on smaller screens */
 `;
-
+ 
 const HeaderWrapper = styled.div`
   position: sticky;
   top: 0;
@@ -97,53 +87,48 @@ const HeaderWrapper = styled.div`
   z-index: 100;
   background-color: white;
 `;
-
-const BreadcrumbWrapper = styled.div`
+ 
+const BreadcrumbContainer = styled.div`
   width: 100%;
   padding: 10px 0;
   background-color: #f9f9f9;
   border-bottom: 1px solid #ddd;
-  position: relative; 
   height: 50px; 
 `;
-
-const BreadcrumbContainer = styled.div`
-  /* Add any styles you want for breadcrumb container */
-`;
-
+ 
 const Layout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const location = useLocation();
   const currentPath = location.pathname;
-
+ 
   return (
-    <LayoutWrapper>
-      <SidebarWrapper isOpen={isSidebarOpen}>
-        <Sidebar />
-      </SidebarWrapper>
-
+<LayoutWrapper>
+<SidebarWrapper>
+<Sidebar />
+</SidebarWrapper>
+ 
       <SidebarToggle
         isOpen={isSidebarOpen}
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-      >
+>
         {isSidebarOpen ? <FontAwesomeIcon icon={faTimes} /> : <FontAwesomeIcon icon={faBars} />}
-      </SidebarToggle>
-
-      <MainContent isOpen={isSidebarOpen}>
-        <HeaderWrapper>
-          <Header />
-        </HeaderWrapper>
-        <BreadcrumbWrapper>
-          <BreadcrumbContainer>
-            <Breadcrumb currentPath={currentPath} />
-          </BreadcrumbContainer>
-        </BreadcrumbWrapper>
+</SidebarToggle>
+ 
+      <MainContent style={{ marginLeft: isSidebarOpen ? '250px' : '0' }}>
+<HeaderWrapper>
+<Header />
+</HeaderWrapper>
+ 
+        <BreadcrumbContainer>
+<Breadcrumb currentPath={currentPath} />
+</BreadcrumbContainer>
+ 
         <ContentWrapper>
           {currentPath === '/' ? <Dashboard /> : <Outlet />}
-        </ContentWrapper>
-      </MainContent>
-    </LayoutWrapper>
+</ContentWrapper>
+</MainContent>
+</LayoutWrapper>
   );
 };
-
+ 
 export default Layout;
