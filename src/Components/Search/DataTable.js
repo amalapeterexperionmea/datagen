@@ -61,7 +61,7 @@ const Table = styled.table`
 
 const Th = styled.th`
   cursor: pointer;
-  padding: 10px;
+  padding: 15px;
   background: #e0e0e0;
    width: 150px;
   color: #333;
