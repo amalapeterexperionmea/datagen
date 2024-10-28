@@ -9,12 +9,15 @@ const FormContainer = styled.div`
   justify-content: left;
   padding: 30px;
   background-color: #f4f4f9;
-  height: 540px;
+  height: 550px;
 
   @media (max-width: 768px) {
     width: 100%;
     margin: 20px 0;
   }
+`;
+const StyledForm = styled.form`
+  max-height: 470px; 
 `;
 
 const Label = styled.label`
@@ -28,7 +31,7 @@ const Label = styled.label`
 const Header = styled.h2`
   text-align: center;
   color: #1b4965;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
 `;
 
 const Input = styled.input`
@@ -46,7 +49,7 @@ const ButtonContainer = styled.div`
 `;
 
 const GenerateButton = styled.button`
-  margin-top: 20px;
+  margin-top: 10px;
   margin-right: 10px;
   padding: 10px 20px;
   background-color: #2a6f97;
@@ -67,7 +70,7 @@ const GenerateButton = styled.button`
 `;
 
 const CancelButton = styled.button`
-  margin-top: 20px;
+  margin-top: 10px;
   padding: 10px 20px;
   background-color: gray;
   width: 85px;
@@ -158,7 +161,7 @@ const Form = () => {
           >
             <FormContainer>
               <Header>Registration Form</Header>
-              <form onSubmit={handleSubmit}>
+              <StyledForm  onSubmit={handleSubmit}>
                 <Label htmlFor="name">Name:</Label>
                 <Input
                   type="text"
@@ -259,7 +262,7 @@ const Form = () => {
                     Cancel
                   </CancelButton>
                 </ButtonContainer>
-              </form>
+              </StyledForm >
             </FormContainer>
           </Card>
         </Col>
