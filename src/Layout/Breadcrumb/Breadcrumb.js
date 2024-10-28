@@ -1,6 +1,3 @@
-
-
-
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
@@ -21,18 +18,20 @@ const BreadcrumbItem = styled.span`
   color: blue;
   display: flex;
   align-items: center;
+  transition: color 0.3s ease; 
 
   &:hover {
     text-decoration: none;
   }
 
-  /* Add specific styles for the home icon */
+  
   ${({ isHome }) =>
     isHome &&
     `
       &:hover > span {
-        transform: scale(1.1); /* Example hover effect */
-        color: green; /* Change color on hover */
+        transform: scale(1.1); 
+        color: green; 
+        transition: transform 0.3s ease, color 0.3s ease; 
       }
   `}
 `;
@@ -40,9 +39,9 @@ const BreadcrumbItem = styled.span`
 const IconLabel = styled.span`
   display: flex;
   align-items: center;
-
+  transition: color 0.3s ease; 
   &:hover {
-    color: darkblue; /* Change color on hover */
+    color: darkblue; 
   }
 `;
 
@@ -90,13 +89,13 @@ export const Breadcrumb = ({ currentPath }) => {
         <BreadcrumbItem 
           key={index} 
           onClick={() => handleBreadcrumbClick(index)} 
-          isHome={item.path === '/'} // Check if the item is the home icon
+          isHome={item.path === '/'} 
         >
           <IconLabel>
             {item.icon} 
             {item.label && index !== 0 && ` ${item.label}`} 
           </IconLabel>
-          {index < breadcrumbItems.length - 1 && <Separator>></Separator>}
+          {index < breadcrumbItems.length - 1 && <Separator>   {'>'} </Separator>}
         </BreadcrumbItem>
       ))}
     </BreadcrumbWrapper>
