@@ -240,8 +240,7 @@ const GeneratedGrid = () => {
         padding: '10px',
         fontSize: '0.75rem',  // Reduced font size for compactness
         lineHeight: '1',
-        maxHeight: '500px',    // Set maximum height to fit 10 rows within the view
-        overflowY: 'scroll',   // Enable vertical scroll if more than 10 rows
+           // Enable vertical scroll if more than 10 rows
       }}
     >
       <Search
