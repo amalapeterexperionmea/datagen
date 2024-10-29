@@ -5,11 +5,12 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import anime from "animejs/lib/anime.es.js"; 
+import loginPattern2 from "../../Layout/icons/loginpattern2.jpg";
 import loginPattern from "../../Layout/icons/loginpattern.jpg";
 
 
 const Page = styled.div`
-  background: url(${loginPattern});
+  background: url(${loginPattern2});
   background-size: cover; 
   background-repeat: no-repeat; 
   display: flex;
@@ -21,10 +22,6 @@ const Page = styled.div`
   top: 0;
   left: 0;
 `;
-
-
-
-
 
 
 const Container = styled.div`
@@ -41,6 +38,7 @@ const Container = styled.div`
 `;
 
 const Left = styled.div`
+  
   background: white;
   height: calc(100% - 40px);
   position: relative;
@@ -71,7 +69,7 @@ const Right = styled.div`
 
 const Title = styled.h2`
   font-size: 50px;
-  font-weight: 900;
+  font-weight: 100;
   margin: 0;
   
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); 
