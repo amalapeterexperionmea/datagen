@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { Button, Col, Form, Row, Container as BootstrapContainer, Card } from "react-bootstrap";
-import styled from "styled-components"; // Import styled-components
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components"; 
 
-// Create a styled container that extends the Bootstrap container
 const Container = styled(BootstrapContainer)`
   margin-top: 80px; 
 `;
 
 const AddUser = () => {
+  const navigate = useNavigate();
+  
   const [formData, setFormData] = useState({
     name: '',
     username: '',
@@ -34,6 +36,7 @@ const AddUser = () => {
       password: '',
       confirm_password: '',
     });
+    navigate("/searchuser");
   };
 
   const handleSubmit = (e) => {

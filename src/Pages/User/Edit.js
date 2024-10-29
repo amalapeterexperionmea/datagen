@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Col, Form, Row, Container as BootstrapContainer, Card } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled(BootstrapContainer)`
@@ -7,6 +8,8 @@ const Container = styled(BootstrapContainer)`
 `;
 
 const EditUser = ({ existingData }) => {
+  const navigate = useNavigate();
+  
   const [formData, setFormData] = useState({
     name: "",
     username: "",
@@ -39,18 +42,18 @@ const EditUser = ({ existingData }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
   };
 
   const handleCancel = () => {
     setFormData({
-      name: existingData.name || "",
-      username: existingData.username || "",
-      user_type: existingData.user_type || "Super Admin",
-      email: existingData.email || "",
+      name: existingData?.name || "",
+      username: existingData?.username || "",
+      user_type: existingData?.user_type || "Super Admin",
+      email: existingData?.email || "",
       password: "",
       confirm_password: "",
     });
+    navigate("/searchuser");
   };
 
   return (
