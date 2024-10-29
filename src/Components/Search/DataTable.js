@@ -188,7 +188,7 @@ const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack   })
             Previous
           </PaginationButton>
           <span>
-            {pageIndex + 1} / {pageOptions.length}
+            {pageIndex + 1} of {pageOptions.length}
           </span>
           <PaginationButton onClick={() => nextPage()} disabled={!canNextPage}>
             Next
