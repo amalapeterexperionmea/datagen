@@ -238,9 +238,9 @@ const GeneratedGrid = () => {
       style={{
         overflowX: 'auto',
         padding: '10px',
-        fontSize: '0.75rem',  // Reduced font size for compactness
+        fontSize: '0.75rem',  
         lineHeight: '1',
-           // Enable vertical scroll if more than 10 rows
+        
       }}
     >
       <Search
@@ -249,7 +249,7 @@ const GeneratedGrid = () => {
         onAdd={onGenerate}
         basePath="/generated-grid"
         rowStyle={{
-          height: '40px',     // Set a fixed row height for a compact row spacing
+          height: '40px',     
         }}
       />
     </Container>
