@@ -49,7 +49,7 @@ const DataGenerationForm = () => {
   };
 
   const handleCancel = () => {
-    navigate("/generate-grid");
+    navigate("/generated-grid");
   };
 
   return (
