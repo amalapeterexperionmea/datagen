@@ -140,8 +140,7 @@ const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack   })
   return (
     <PageWrapper>
       <TableWrapper>
-      {!isSearchActive && <AddButton onClick={onAdd} >Add</AddButton>}
-      {isSearchActive && <BackButton onClick={onBack} >Back</BackButton>}
+      {!isSearchActive ? <AddButton onClick={onAdd}>Add</AddButton> : <BackButton onClick={onBack}>Back</BackButton>}
         <Table {...getTableProps()}>
           <thead>
             {headerGroups.map(headerGroup => (
