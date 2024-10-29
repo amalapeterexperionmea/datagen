@@ -1,7 +1,7 @@
 import { Container, Card, Row, Col } from "react-bootstrap"; 
-import React, { useState } from "react"; 
+import React, { useState, useEffect } from "react"; 
 import styled from "styled-components"; 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const FormContainer = styled.div`
   display: flex;
@@ -86,6 +86,8 @@ const CancelButton = styled.button`
 
 const Update = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { rowData } = location.state || {};
   const [formData, setFormData] = useState({
     name: "",
     shortName: "",
@@ -93,8 +95,20 @@ const Update = () => {
     postgres: [],
     mongodb: [],
   });
+  
   const [currentPostgres, setCurrentPostgres] = useState("");
   const [currentMongodb, setCurrentMongodb] = useState("");
+  useEffect(() => {
+    if (rowData) {
+      setFormData({
+        name: rowData.name || "", 
+        shortName: rowData.shortname || "", 
+        domain: rowData.domain ||"", 
+        postgres: Array.isArray(rowData.postgres) ? rowData.postgres : [],  
+        mongodb: Array.isArray(rowData.mongodb) ? rowData.mongodb : [],
+      });
+    }
+  }, [rowData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -140,9 +154,8 @@ const Update = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Submitted:", formData);
+    navigate("/client"); 
   };
-
   const handleCancel = () => {
     navigate("/client");
   };

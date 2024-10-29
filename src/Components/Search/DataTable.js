@@ -163,7 +163,7 @@ const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack   })
               return (
                 <tr
                     {...row.getRowProps()}
-                    onClick={() => navigate(`${basePath}`)}
+                    onClick={() => navigate(`${basePath}`, { state: { rowData: row.original } })}
                   >
                     {row.cells.map(cell => (
                       <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>
