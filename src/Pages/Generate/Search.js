@@ -67,7 +67,7 @@ const GeneratedGrid = () => {
   );
 
   const onGenerate = () => {
-    navigate('/generate-grid/data-generation'); 
+    navigate('/generated-grid/data-generation'); 
   };
 
   return (
@@ -80,7 +80,7 @@ const GeneratedGrid = () => {
         lineHeight: '1.2',
       }}
     >
-      <Search columns={columns} data={data} onAdd={onGenerate} basePath=" " />
+      <Search columns={columns} data={data} onAdd={onGenerate} basePath="/generated-grid " />
     </Container>
   );
 };
