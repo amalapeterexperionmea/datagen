@@ -1,8 +1,5 @@
 
-
-
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,7 +8,7 @@ import Header from './Header/Header';
 import Sidebar from './Sidebar/Sidebar';
 import { Breadcrumb } from './Breadcrumb/Breadcrumb';
 import { Outlet } from 'react-router-dom';
-import Dashboard from './Dashboard/Dashboard'; 
+import Dashboard from './Dashboard/Dashboard';
 
 const LayoutWrapper = styled.div`
   display: flex;
@@ -71,8 +68,8 @@ const SidebarToggle = styled.button`
 
 const MainContent = styled.div`
   flex-grow: 1;
-  padding: 0px;
-  margin-left: ${(props) => (props.isOpen ? '0px' : '0')};
+  padding: 0;
+  margin-left: 0;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -84,7 +81,7 @@ const ContentWrapper = styled.div`
   width: 100%;
   margin: 0 auto;
   overflow: hidden;
-  margin-top: 20px; 
+  margin-top: 20px;
   @media (max-width: 768px) {
     padding: 0 20px;
   }
@@ -99,12 +96,14 @@ const HeaderWrapper = styled.div`
 `;
 
 const BreadcrumbWrapper = styled.div`
-  width: 100%;
+  width: ${(props) => (props.isOpen ? 'calc(100% - 250px)' : '100%')};
+  margin-left: ${(props) => (props.isOpen ? '250px' : '0')};
+  transition: all 0.3s ease;
   padding: 10px 0;
   background-color: #f9f9f9;
   border-bottom: 1px solid #ddd;
-  position: relative; 
-  height: 50px; 
+  position: relative;
+  height: 50px;
 `;
 
 const BreadcrumbContainer = styled.div`
@@ -112,9 +111,20 @@ const BreadcrumbContainer = styled.div`
 `;
 
 const Layout = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth >= 768);
   const location = useLocation();
   const currentPath = location.pathname;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSidebarOpen(window.innerWidth >= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <LayoutWrapper>
@@ -129,13 +139,13 @@ const Layout = () => {
         {isSidebarOpen ? <FontAwesomeIcon icon={faTimes} /> : <FontAwesomeIcon icon={faBars} />}
       </SidebarToggle>
 
-      <MainContent isOpen={isSidebarOpen}>
+      <MainContent>
         <HeaderWrapper>
           <Header />
         </HeaderWrapper>
-        <BreadcrumbWrapper>
+        <BreadcrumbWrapper isOpen={isSidebarOpen}>
           <BreadcrumbContainer>
-            <Breadcrumb currentPath={currentPath} />
+            <Breadcrumb currentPath={currentPath} isSidebarOpen={isSidebarOpen} />  
           </BreadcrumbContainer>
         </BreadcrumbWrapper>
         <ContentWrapper>

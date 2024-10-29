@@ -1,15 +1,20 @@
+
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { breadcrumbConfig } from '../../Config'; 
+import { breadcrumbConfig } from '../../Config';
 
 const BreadcrumbWrapper = styled.nav`
-  position: fixed;  
+  position: fixed;  /* Use fixed positioning */
   top: 75px;      
-  left: 270px;    
+  left: ${(props) => (props.isSidebarOpen ? '270px' : '20px')};  
   margin: 0;      
   display: flex;
   z-index: 1000;  
+
+  @media (min-width: 768px) {
+    left: ${(props) => (props.isSidebarOpen ? '270px' : '20px')};  
+  }
 `;
 
 const BreadcrumbItem = styled.span`
@@ -24,7 +29,6 @@ const BreadcrumbItem = styled.span`
     text-decoration: none;
   }
 
-  
   ${({ isHome }) =>
     isHome &&
     `
@@ -49,7 +53,7 @@ const Separator = styled.span`
   margin-left: 10px;
 `;
 
-export const Breadcrumb = ({ currentPath }) => {
+export const Breadcrumb = ({ currentPath, isSidebarOpen }) => {  
   const navigate = useNavigate();
 
   const getBreadcrumbItems = () => {
@@ -84,7 +88,7 @@ export const Breadcrumb = ({ currentPath }) => {
   };
 
   return (
-    <BreadcrumbWrapper>
+    <BreadcrumbWrapper isSidebarOpen={isSidebarOpen}> 
       {breadcrumbItems.map((item, index) => (
         <BreadcrumbItem 
           key={index} 
@@ -95,7 +99,7 @@ export const Breadcrumb = ({ currentPath }) => {
             {item.icon} 
             {item.label && index !== 0 && ` ${item.label}`} 
           </IconLabel>
-          {index < breadcrumbItems.length - 1 && <Separator>   {'|'} </Separator>}
+          {index < breadcrumbItems.length - 1 && <Separator>{' | '}</Separator>}
         </BreadcrumbItem>
       ))}
     </BreadcrumbWrapper>

@@ -13,15 +13,18 @@ import DataGenerationForm from './Pages/Generate/Add';
 import GeneratedGrid from './Pages/Generate/Search';
 
 function App() {
-  
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return localStorage.getItem("isAuthenticated") === "true"; 
-  });
+
 
   
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return sessionStorage.getItem("isAuthenticated") === "true"; 
+  });
   useEffect(() => {
-    localStorage.setItem("isAuthenticated", isAuthenticated);
+    sessionStorage.setItem("isAuthenticated", isAuthenticated);
   }, [isAuthenticated]);
+  
+
+  
 
   return (
     <Router>
