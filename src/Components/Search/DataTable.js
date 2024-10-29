@@ -86,10 +86,10 @@ const Td = styled.td`
 const PaginationWrapper = styled.div`
   position: fixed;
   bottom: 30px;
-  left: 58%;
+  right:-60px;
   transform: translateX(-50%);
   display: flex;
-  gap: 1045px;
+  gap: 10px;
 `;
 
 const PaginationButton = styled.button`
@@ -109,6 +109,7 @@ const PaginationButton = styled.button`
     cursor: not-allowed;
   }
 `;
+
 const NoDataMessage = styled.div`
   color: Black;
   font-size: 22px;
@@ -126,6 +127,9 @@ const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack   })
     canNextPage,
     previousPage,
     nextPage,
+    state: { pageIndex },
+    pageOptions,
+
   } = useTable(
     {
       columns,
@@ -183,6 +187,9 @@ const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack   })
           <PaginationButton onClick={() => previousPage()} disabled={!canPreviousPage}>
             Previous
           </PaginationButton>
+          <span>
+            {pageIndex + 1} / {pageOptions.length}
+          </span>
           <PaginationButton onClick={() => nextPage()} disabled={!canNextPage}>
             Next
           </PaginationButton>
