@@ -10,15 +10,18 @@ import loginPattern from "../../Layout/icons/loginpattern.jpg";
 
 const Page = styled.div`
   background: url(${loginPattern});
-  background-size: cover; /* Adjusts the image to cover the entire area */
-  background-repeat: no-repeat; /* Prevents image from repeating */
+  background-size: cover; 
+  background-repeat: no-repeat; 
   display: flex;
   flex-direction: column;
-  height: calc(100% - 40px);
-  position: absolute;
+  height: 100vh; 
+  width: 100vw; 
   place-content: center;
-  width: calc(100% - 40px);
+  position: fixed; 
+  top: 0;
+  left: 0;
 `;
+
 
 
 
