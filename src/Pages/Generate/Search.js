@@ -62,6 +62,169 @@ const GeneratedGrid = () => {
           bulk: { batchsize: 200, noofrecords: 2000 },
         },
       },
+
+      {
+        id: 2,
+        organizationuri: 'http://test.com',
+        fromdate: '2023-02-01',
+        todate: '2023-02-28',
+        includeweekends: false,
+        fromtime: '10:00',
+        fromtimePeriod: 'AM',
+        totime: '04:00',
+        totimePeriod: 'PM',
+        duration: { min: 45, max: 90 },
+        generationmode: 'bulk',
+        modeattributes: {
+          daily: { daupercent: { min: 15, max: 25 } },
+          bulk: { batchsize: 200, noofrecords: 2000 },
+        },
+      },
+
+      {
+        id: 2,
+        organizationuri: 'http://test.com',
+        fromdate: '2023-02-01',
+        todate: '2023-02-28',
+        includeweekends: false,
+        fromtime: '10:00',
+        fromtimePeriod: 'AM',
+        totime: '04:00',
+        totimePeriod: 'PM',
+        duration: { min: 45, max: 90 },
+        generationmode: 'bulk',
+        modeattributes: {
+          daily: { daupercent: { min: 15, max: 25 } },
+          bulk: { batchsize: 200, noofrecords: 2000 },
+        },
+      },
+
+      {
+        id: 2,
+        organizationuri: 'http://test.com',
+        fromdate: '2023-02-01',
+        todate: '2023-02-28',
+        includeweekends: false,
+        fromtime: '10:00',
+        fromtimePeriod: 'AM',
+        totime: '04:00',
+        totimePeriod: 'PM',
+        duration: { min: 45, max: 90 },
+        generationmode: 'bulk',
+        modeattributes: {
+          daily: { daupercent: { min: 15, max: 25 } },
+          bulk: { batchsize: 200, noofrecords: 2000 },
+        },
+      },
+
+      {
+        id: 2,
+        organizationuri: 'http://test.com',
+        fromdate: '2023-02-01',
+        todate: '2023-02-28',
+        includeweekends: false,
+        fromtime: '10:00',
+        fromtimePeriod: 'AM',
+        totime: '04:00',
+        totimePeriod: 'PM',
+        duration: { min: 45, max: 90 },
+        generationmode: 'bulk',
+        modeattributes: {
+          daily: { daupercent: { min: 15, max: 25 } },
+          bulk: { batchsize: 200, noofrecords: 2000 },
+        },
+      },
+
+      {
+        id: 2,
+        organizationuri: 'http://test.com',
+        fromdate: '2023-02-01',
+        todate: '2023-02-28',
+        includeweekends: false,
+        fromtime: '10:00',
+        fromtimePeriod: 'AM',
+        totime: '04:00',
+        totimePeriod: 'PM',
+        duration: { min: 45, max: 90 },
+        generationmode: 'bulk',
+        modeattributes: {
+          daily: { daupercent: { min: 15, max: 25 } },
+          bulk: { batchsize: 200, noofrecords: 2000 },
+        },
+      },
+
+      {
+        id: 2,
+        organizationuri: 'http://test.com',
+        fromdate: '2023-02-01',
+        todate: '2023-02-28',
+        includeweekends: false,
+        fromtime: '10:00',
+        fromtimePeriod: 'AM',
+        totime: '04:00',
+        totimePeriod: 'PM',
+        duration: { min: 45, max: 90 },
+        generationmode: 'bulk',
+        modeattributes: {
+          daily: { daupercent: { min: 15, max: 25 } },
+          bulk: { batchsize: 200, noofrecords: 2000 },
+        },
+      },
+       
+      {
+        id: 2,
+        organizationuri: 'http://test.com',
+        fromdate: '2023-02-01',
+        todate: '2023-02-28',
+        includeweekends: false,
+        fromtime: '10:00',
+        fromtimePeriod: 'AM',
+        totime: '04:00',
+        totimePeriod: 'PM',
+        duration: { min: 45, max: 90 },
+        generationmode: 'bulk',
+        modeattributes: {
+          daily: { daupercent: { min: 15, max: 25 } },
+          bulk: { batchsize: 200, noofrecords: 2000 },
+        },
+      },
+
+      {
+        id: 2,
+        organizationuri: 'http://test.com',
+        fromdate: '2023-02-01',
+        todate: '2023-02-28',
+        includeweekends: false,
+        fromtime: '10:00',
+        fromtimePeriod: 'AM',
+        totime: '04:00',
+        totimePeriod: 'PM',
+        duration: { min: 45, max: 90 },
+        generationmode: 'bulk',
+        modeattributes: {
+          daily: { daupercent: { min: 15, max: 25 } },
+          bulk: { batchsize: 200, noofrecords: 2000 },
+        },
+      },
+
+       {
+        id: 2,
+        organizationuri: 'http://test.com',
+        fromdate: '2023-02-01',
+        todate: '2023-02-28',
+        includeweekends: false,
+        fromtime: '10:00',
+        fromtimePeriod: 'AM',
+        totime: '04:00',
+        totimePeriod: 'PM',
+        duration: { min: 45, max: 90 },
+        generationmode: 'bulk',
+        modeattributes: {
+          daily: { daupercent: { min: 15, max: 25 } },
+          bulk: { batchsize: 200, noofrecords: 2000 },
+        },
+      },
+
     ],
     []
   );
@@ -69,19 +232,29 @@ const GeneratedGrid = () => {
   const onGenerate = () => {
     navigate('/generated-grid/data-generation'); 
   };
-
-  return (
-    <Container
+      return (
+  <Container
       fluid
       style={{
         overflowX: 'auto',
         padding: '10px',
-        fontSize: '0.85rem',
-        lineHeight: '1.2',
+        fontSize: '0.75rem',  // Reduced font size for compactness
+        lineHeight: '1',
+        maxHeight: '500px',    // Set maximum height to fit 10 rows within the view
+        overflowY: 'scroll',   // Enable vertical scroll if more than 10 rows
       }}
     >
-      <Search columns={columns} data={data} onAdd={onGenerate} basePath="/generated-grid " />
+      <Search
+        columns={columns}
+        data={data}
+        onAdd={onGenerate}
+        basePath="/generated-grid"
+        rowStyle={{
+          height: '40px',     // Set a fixed row height for a compact row spacing
+        }}
+      />
     </Container>
   );
 };
-export default GeneratedGrid;   
+
+export default GeneratedGrid;
