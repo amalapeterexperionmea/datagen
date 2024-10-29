@@ -6,7 +6,7 @@ const { Search } = Input;
 
 const Stylebar = styled(Search)`
   position: fixed;
-  top:89px;
+  top:90px;
   left: 1170px; 
   width: 200px;
 `;
