@@ -5,10 +5,12 @@ import styled from 'styled-components';
 const { Search } = Input;
 
 const Stylebar = styled(Search)`
-  position:fixed;
+  position: fixed;
+  top:89px;
+  left: 1170px; 
   width: 200px;
-  margin-left: 920px;
 `;
+
 
 const SearchBar = ({ onSearch }) => (
   <Stylebar
