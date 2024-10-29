@@ -39,7 +39,7 @@ const Container = styled.div`
 
 const Left = styled.div`
   
-  background:#FFFDD0;
+  background:#F0F0F0;
   height: calc(100% - 40px);
   position: relative;
   width: 50%;
@@ -238,8 +238,7 @@ function LoginPage({ setIsAuthenticated }) {
         <Left>
           <Title>Login</Title>
           <EULA>Datagen</EULA>
-          <EULA>Username:admin@gmail.com</EULA>
-          <EULA>password:admin</EULA>
+         
         </Left>
         <Right>
           <svg viewBox="0 0 320 300">
