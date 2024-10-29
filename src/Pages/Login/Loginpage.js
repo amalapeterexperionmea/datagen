@@ -192,22 +192,23 @@ function LoginPage({ setIsAuthenticated }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitAttempted(true);
-
+  
     const emailError = validateEmail(email) ? "" : "Invalid email address.";
     const passwordError = validatePassword(password) ? "" : "Password must be at least 1 character long.";
     setErrors({ email: emailError, password: passwordError });
-
+  
     const isAdmin = superAdmins.some(
       (admin) => admin.email === email && admin.password === password
     );
-
+  
     if (!emailError && !passwordError && isAdmin) {
-      setIsAuthenticated(true); // Set authenticated status
-      navigate("/"); // Redirect to the main layout
+      setIsAuthenticated(true); 
+      navigate("/"); 
     } else if (!isAdmin && !emailError && !passwordError) {
       setLoginError("Invalid email or password.");
     }
   };
+  
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -221,7 +222,7 @@ function LoginPage({ setIsAuthenticated }) {
     setShowPassword(!showPassword);
   };
 
-  // Animation for the SVG path
+  
   const animatePath = (offset) => {
     anime({
       targets: "path",
@@ -237,6 +238,8 @@ function LoginPage({ setIsAuthenticated }) {
         <Left>
           <Title>Login</Title>
           <EULA>Datagen</EULA>
+          <EULA>Username:admin@gmail.com</EULA>
+          <EULA>password:admin</EULA>
         </Left>
         <Right>
           <svg viewBox="0 0 320 300">

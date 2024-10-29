@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from './Layout/Layout'; 
 import LoginPage from './Pages/Login/Loginpage';
 import Client from './Pages/Client/SearchClient'; 
@@ -13,7 +13,15 @@ import DataGenerationForm from './Pages/Generate/Add';
 import GeneratedGrid from './Pages/Generate/Search';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return localStorage.getItem("isAuthenticated") === "true"; 
+  });
+
+  
+  useEffect(() => {
+    localStorage.setItem("isAuthenticated", isAuthenticated);
+  }, [isAuthenticated]);
 
   return (
     <Router>
