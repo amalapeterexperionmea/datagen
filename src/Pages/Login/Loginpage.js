@@ -5,9 +5,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import anime from "animejs/lib/anime.es.js"; 
+import loginPattern from "../../Layout/icons/loginpattern.jpg";
+
 
 const Page = styled.div`
-  background: linear-gradient(to right, #2A6F97, #82A3B5);
+  background: url(${loginPattern});
+  background-size: cover; /* Adjusts the image to cover the entire area */
+  background-repeat: no-repeat; /* Prevents image from repeating */
   display: flex;
   flex-direction: column;
   height: calc(100% - 40px);
@@ -15,6 +19,10 @@ const Page = styled.div`
   place-content: center;
   width: calc(100% - 40px);
 `;
+
+
+
+
 
 const Container = styled.div`
   display: flex;
@@ -276,3 +284,5 @@ function LoginPage() {
 }
 
 export default LoginPage;
+
+
