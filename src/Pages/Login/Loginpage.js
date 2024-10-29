@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import anime from "animejs/lib/anime.es.js"; 
 import loginPattern2 from "../../Layout/icons/loginpattern2.jpg";
-import loginPattern from "../../Layout/icons/loginpattern.jpg";
+
 
 
 const Page = styled.div`
@@ -166,7 +166,7 @@ const ForgotPasswordButton = styled.button`
   }
 `;
 
-function LoginPage() {
+function LoginPage({ setIsAuthenticated }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -195,7 +195,6 @@ function LoginPage() {
 
     const emailError = validateEmail(email) ? "" : "Invalid email address.";
     const passwordError = validatePassword(password) ? "" : "Password must be at least 1 character long.";
-
     setErrors({ email: emailError, password: passwordError });
 
     const isAdmin = superAdmins.some(
@@ -203,7 +202,8 @@ function LoginPage() {
     );
 
     if (!emailError && !passwordError && isAdmin) {
-      navigate("/");
+      setIsAuthenticated(true); // Set authenticated status
+      navigate("/"); // Redirect to the main layout
     } else if (!isAdmin && !emailError && !passwordError) {
       setLoginError("Invalid email or password.");
     }
