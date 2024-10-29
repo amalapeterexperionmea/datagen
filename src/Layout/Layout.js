@@ -40,11 +40,11 @@ const SidebarToggle = styled.button`
   top: 15px;
   left: ${(props) => (props.isOpen ? '250px' : '15px')};
   z-index: 1100;
-  background-color: #333;
-  color: white;
+  background-color: white;
+  color: #153448;
   border: none;
-  padding: 10px;
-  border-radius: 50%;
+  padding: 5px;
+  
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -53,7 +53,7 @@ const SidebarToggle = styled.button`
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: #555;
+ 
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   }
 
@@ -107,7 +107,7 @@ const BreadcrumbWrapper = styled.div`
 `;
 
 const BreadcrumbContainer = styled.div`
-  /* Add any styles you want for breadcrumb container */
+  
 `;
 
 const Layout = () => {
