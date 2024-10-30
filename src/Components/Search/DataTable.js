@@ -86,7 +86,7 @@ const Td = styled.td`
 const PaginationWrapper = styled.div`
   position: fixed;
   bottom: 30px;
-  right:-60px;
+  right:-70px;
   transform: translateX(-50%);
   display: flex;
   gap: 10px;
