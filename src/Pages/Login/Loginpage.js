@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import anime from "animejs/lib/anime.es.js";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
 import loginPattern2 from "../../Layout/icons/loginpattern2.jpg";
 
 const Page = styled.div`
@@ -48,8 +49,6 @@ const Left = styled.div`
   }
 `;
 
-
-
 const Right = styled.div`
   background-color: white;
   width: 50%;
@@ -69,7 +68,7 @@ const Title = styled.h2`
   font-weight: 300;
   color: #ffffff;
   text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   margin-bottom: 10px;
   text-align: center;
 `;
@@ -85,13 +84,14 @@ const EULA = styled.div`
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
+  margin-top: 20px; /* Added margin to maintain position */
 `;
 
 const Form = styled.form`
   display: flex;
+  margin-top: -60px;
   flex-direction: column;
   gap: 15px;
-  margin-top: -270px;
 `;
 
 const Label = styled.label`
@@ -111,6 +111,11 @@ const Input = styled.input`
     border-color: #2a6f97;
     outline: none;
   }
+`;
+
+const InputWrapper = styled.div`
+  position: relative;
+  width: 100%;
 `;
 
 const ButtonGroup = styled.div`
@@ -139,20 +144,24 @@ const ErrorContainer = styled.div`
   font-size: 12px;
   text-align: center;
   position: absolute;
-  margin-top: 20px;
+  margin-top: 10px;
   top: 105%;
   left: 50%;
   transform: translateX(-50%);
 `;
 
 const TogglePasswordButton = styled.button`
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
   background: none;
   border: none;
   color: #2a6f97;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 18px;
   &:hover {
-    text-decoration: underline;
+    color: #0056b3;
   }
 `;
 
@@ -178,7 +187,7 @@ function LoginPage({ setIsAuthenticated }) {
   const navigate = useNavigate();
 
   const superAdmins = [
-    { email: "admin@gmail.com", password: "admin" }
+    { email: "admin@gmail.com", password: "admin" },
   ];
 
   const validateEmail = (email) => {
@@ -203,8 +212,8 @@ function LoginPage({ setIsAuthenticated }) {
     );
 
     if (!emailError && !passwordError && isAdmin) {
-      setIsAuthenticated(true); 
-      navigate("/"); 
+      setIsAuthenticated(true);
+      navigate("/");
     } else if (!isAdmin && !emailError && !passwordError) {
       setLoginError("Invalid email or password.");
     }
@@ -239,38 +248,33 @@ function LoginPage({ setIsAuthenticated }) {
           <EULA></EULA>
         </Left>
         <Right>
-          <svg viewBox="0 0 320 300">
-            {/* SVG Path */}
-          </svg>
           <Wrapper>
             <Form onSubmit={handleSubmit}>
               <Label htmlFor="email">Email</Label>
               <Input
                 type="email"
                 id="email"
-                placeholder="Email"
                 value={email}
                 onChange={handleEmailChange}
                 onFocus={() => animatePath(0)}
               />
 
               <Label htmlFor="password">Password</Label>
-              <Input
-                type={showPassword ? "text" : "password"}
-                id="password"
-                placeholder="Password"
-                value={password}
-                onChange={handlePasswordChange}
-                onFocus={() => animatePath(-336)}
-              />
+              <InputWrapper>
+                <Input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  value={password}
+                  onChange={handlePasswordChange}
+                  onFocus={() => animatePath(-336)}
+                />
+                <TogglePasswordButton type="button" onClick={togglePasswordVisibility}>
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </TogglePasswordButton>
+              </InputWrapper>
 
               <ButtonGroup>
-                <TogglePasswordButton type="button" onClick={togglePasswordVisibility}>
-                  {showPassword ? "Hide Password" : "Show Password"}
-                </TogglePasswordButton>
-
                 <Button type="submit">Login</Button>
-
                 <ForgotPasswordButton onClick={() => alert("Redirect to forgot password page")}>
                   Forgot Password?
                 </ForgotPasswordButton>
