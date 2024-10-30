@@ -7,13 +7,13 @@ const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: left;
-  padding-left:15px;
-  padding-top:10px;
-  background-color: #f4f4f9; 
-  height:550px;
+  padding-left: 15px;
+  padding-top: 10px;
+  background-color: #f4f4f9;
+  height: 550px;
   @media (max-width: 768px) {
     width: 100%;
-    margin: 0px 0; 
+    margin: 0px 0;
   }
 `;
 
@@ -40,14 +40,25 @@ const Input = styled.input`
   box-sizing: border-box;
 `;
 
+const TextArea = styled.textarea`
+  width: 96%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  resize: vertical;
+  height: 60px;
+`;
+
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-right:20px;
+  margin-right: 20px;
 `;
 
 const UpdateButton = styled.button`
- margin-top: 20px;
+  margin-top: 20px;
   margin-right: 10px;
   padding: 10px 20px;
   background-color: #2a6f97;
@@ -68,7 +79,7 @@ const UpdateButton = styled.button`
 `;
 
 const CancelButton = styled.button`
-   margin-top: 20px;
+  margin-top: 20px;
   padding: 10px 20px;
   background-color: gray;
   width: 85px;
@@ -76,7 +87,7 @@ const CancelButton = styled.button`
   color: white;
   border: none;
   border-radius: 5px;
-   display: flex; 
+  display: flex; 
   justify-content: center; 
   align-items: center; 
   cursor: pointer;
@@ -94,21 +105,18 @@ const Update = () => {
     name: "",
     shortName: "",
     domain: "",
-    postgres: [],
-    mongodb: [],
+    postgres: "",
+    mongodb: "",
   });
-  
-  const [currentPostgres, setCurrentPostgres] = useState("");
-  const [currentMongodb, setCurrentMongodb] = useState("");
 
   useEffect(() => {
     if (rowData) {
       setFormData({
         name: rowData.name || "", 
         shortName: rowData.shortname || "", 
-        domain: rowData.domain ||"", 
-        postgres: Array.isArray(rowData.postgres) ? rowData.postgres : [],  
-        mongodb: Array.isArray(rowData.mongodb) ? rowData.mongodb : [],
+        domain: rowData.domain || "", 
+        postgres: rowData.postgres || "",
+        mongodb: rowData.mongodb || "",
       });
     }
   }, [rowData]);
@@ -121,48 +129,11 @@ const Update = () => {
     });
   };
 
-  const handleAddPostgres = () => {
-    if (currentPostgres && formData.postgres.length < 8) {
-      setFormData((prevData) => ({
-        ...prevData,
-        postgres: [...prevData.postgres, currentPostgres],
-      }));
-      setCurrentPostgres("");
-    } else if (formData.postgres.length >= 8) {
-      alert("You can only add a maximum of 8 PostgreSQL entries.");
-    }
-  };
-
-  const handleAddMongodb = () => {
-    if (currentMongodb && formData.mongodb.length < 8) {
-      setFormData((prevData) => ({
-        ...prevData,
-        mongodb: [...prevData.mongodb, currentMongodb],
-      }));
-      setCurrentMongodb("");
-    } else if (formData.mongodb.length >= 8) {
-      alert("You can only add a maximum of 8 MongoDB entries.");
-    }
-  };
-
-  const handleRemovePostgres = (item) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      postgres: prevData.postgres.filter((entry) => entry !== item),
-    }));
-  };
-
-  const handleRemoveMongodb = (item) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      mongodb: prevData.mongodb.filter((entry) => entry !== item),
-    }));
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate("/client"); 
   };
+
   const handleCancel = () => {
     navigate("/client");
   };
@@ -204,70 +175,20 @@ const Update = () => {
                 />
 
                 <Label>PostgreSQL:</Label>
-                <Input
-                  type="text"
-                  value={currentPostgres}
-                  onChange={(e) => setCurrentPostgres(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      e.preventDefault();
-                      handleAddPostgres();
-                    }
-                  }}
+                <TextArea
+                  name="postgres"
+                  value={formData.postgres}
+                  onChange={handleChange}
+                  placeholder="Enter PostgreSQL entries here, separated by new lines"
                 />
-                <div>
-                  {formData.postgres.map((item, index) => (
-                    <span
-                      key={index}
-                      style={{ marginRight: "10px", display: "inline-block" }}
-                    >
-                      {item}
-                      <span
-                        onClick={() => handleRemovePostgres(item)}
-                        style={{
-                          cursor: "pointer",
-                          marginLeft: "5px",
-                          color: "black",
-                        }}
-                      >
-                        ×
-                      </span>
-                    </span>
-                  ))}
-                </div>
 
                 <Label>MongoDB:</Label>
-                <Input
-                  type="text"
-                  value={currentMongodb}
-                  onChange={(e) => setCurrentMongodb(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      e.preventDefault();
-                      handleAddMongodb();
-                    }
-                  }}
+                <TextArea
+                  name="mongodb"
+                  value={formData.mongodb}
+                  onChange={handleChange}
+                  placeholder="Enter MongoDB entries here, separated by new lines"
                 />
-                <div>
-                  {formData.mongodb.map((item, index) => (
-                    <span
-                      key={index}
-                      style={{ marginRight: "10px", display: "inline-block" }}
-                    >
-                      {item}
-                      <span
-                        onClick={() => handleRemoveMongodb(item)}
-                        style={{
-                          cursor: "pointer",
-                          marginLeft: "5px",
-                          color: "black",
-                        }}
-                      >
-                        ×
-                      </span>
-                    </span>
-                  ))}
-                </div>
 
                 <ButtonContainer>
                   <UpdateButton type="submit">Update</UpdateButton>

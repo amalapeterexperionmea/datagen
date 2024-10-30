@@ -7,8 +7,8 @@ const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: left;
-  padding-left:15px;
-  padding-top:10px;
+  padding-left: 15px;
+  padding-top: 10px;
   background-color: #f4f4f9;
   height: 550px;
 
@@ -17,6 +17,7 @@ const FormContainer = styled.div`
     margin: 0px 0;
   }
 `;
+
 const StyledForm = styled.form`
   max-height: 470px; 
 `;
@@ -44,10 +45,21 @@ const Input = styled.input`
   box-sizing: border-box;
 `;
 
+const TextArea = styled.textarea`
+  width: 96%;
+  height:60px;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  resize: vertical;
+`;
+
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-right:20px;
+  margin-right: 20px;
 `;
 
 const GenerateButton = styled.button`
@@ -96,11 +108,9 @@ const Form = () => {
     name: "",
     shortName: "",
     domain: "",
-    postgres: [],
-    mongodb: [],
+    postgres: "",
+    mongodb: "",
   });
-  const [currentPostgres, setCurrentPostgres] = useState("");
-  const [currentMongodb, setCurrentMongodb] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -108,40 +118,6 @@ const Form = () => {
       ...formData,
       [name]: value,
     });
-  };
-
-  const handleAddPostgres = () => {
-    if (currentPostgres) {
-      setFormData((prevData) => ({
-        ...prevData,
-        postgres: [...prevData.postgres, currentPostgres],
-      }));
-      setCurrentPostgres("");
-    }
-  };
-
-  const handleAddMongodb = () => {
-    if (currentMongodb) {
-      setFormData((prevData) => ({
-        ...prevData,
-        mongodb: [...prevData.mongodb, currentMongodb],
-      }));
-      setCurrentMongodb("");
-    }
-  };
-
-  const handleRemovePostgres = (item) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      postgres: prevData.postgres.filter((entry) => entry !== item),
-    }));
-  };
-
-  const handleRemoveMongodb = (item) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      mongodb: prevData.mongodb.filter((entry) => entry !== item),
-    }));
   };
 
   const handleSubmit = (e) => {
@@ -163,7 +139,7 @@ const Form = () => {
           >
             <FormContainer>
               <Header>Registration Form</Header>
-              <StyledForm  onSubmit={handleSubmit}>
+              <StyledForm onSubmit={handleSubmit}>
                 <Label htmlFor="name">Name:</Label>
                 <Input
                   type="text"
@@ -193,70 +169,22 @@ const Form = () => {
                 />
 
                 <Label>PostgreSQL:</Label>
-                <Input
-                  type="text"
-                  value={currentPostgres}
-                  onChange={(e) => setCurrentPostgres(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      e.preventDefault();
-                      handleAddPostgres();
-                    }
-                  }}
+                <TextArea
+                  id="postgres"
+                  name="postgres"
+                  rows="3"
+                  value={formData.postgres}
+                  onChange={handleChange}
                 />
-                <div>
-                  {formData.postgres.map((item, index) => (
-                    <span
-                      key={index}
-                      style={{ marginRight: "10px", display: "inline-block" }}
-                    >
-                      {item}
-                      <span
-                        onClick={() => handleRemovePostgres(item)}
-                        style={{
-                          cursor: "pointer",
-                          marginLeft: "5px",
-                          color: "black",
-                        }}
-                      >
-                        ×
-                      </span>
-                    </span>
-                  ))}
-                </div>
 
                 <Label>MongoDB:</Label>
-                <Input
-                  type="text"
-                  value={currentMongodb}
-                  onChange={(e) => setCurrentMongodb(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      e.preventDefault();
-                      handleAddMongodb();
-                    }
-                  }}
+                <TextArea
+                  id="mongodb"
+                  name="mongodb"
+                  rows="3"
+                  value={formData.mongodb}
+                  onChange={handleChange}
                 />
-                <div>
-                  {formData.mongodb.map((item, index) => (
-                    <span
-                      key={index}
-                      style={{ marginRight: "10px", display: "inline-block" }}
-                    >
-                      {item}
-                      <span
-                        onClick={() => handleRemoveMongodb(item)}
-                        style={{
-                          cursor: "pointer",
-                          marginLeft: "5px",
-                          color: "black",
-                        }}
-                      >
-                        ×
-                      </span>
-                    </span>
-                  ))}
-                </div>
 
                 <ButtonContainer>
                   <GenerateButton type="submit">Add</GenerateButton>
@@ -264,7 +192,7 @@ const Form = () => {
                     Cancel
                   </CancelButton>
                 </ButtonContainer>
-              </StyledForm >
+              </StyledForm>
             </FormContainer>
           </Card>
         </Col>
