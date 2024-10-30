@@ -7,13 +7,14 @@ const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: left;
-  padding: 30px;
+  padding-left:15px;
+  padding-top:10px;
   background-color: #f4f4f9;
   height: 550px;
 
   @media (max-width: 768px) {
     width: 100%;
-    margin: 20px 0;
+    margin: 0px 0;
   }
 `;
 const StyledForm = styled.form`
@@ -35,7 +36,7 @@ const Header = styled.h2`
 `;
 
 const Input = styled.input`
-  width: 100%;
+  width: 96%;
   padding: 8px;
   margin-top: 5px;
   border: 1px solid #ccc;
@@ -46,10 +47,11 @@ const Input = styled.input`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
+  margin-right:20px;
 `;
 
 const GenerateButton = styled.button`
-  margin-top: 10px;
+  margin-top: 20px;
   margin-right: 10px;
   padding: 10px 20px;
   background-color: #2a6f97;
@@ -70,7 +72,7 @@ const GenerateButton = styled.button`
 `;
 
 const CancelButton = styled.button`
-  margin-top: 10px;
+  margin-top: 20px;
   padding: 10px 20px;
   background-color: gray;
   width: 85px;

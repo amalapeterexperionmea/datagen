@@ -7,12 +7,13 @@ const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: left;
-  padding: 30px;
+  padding-left:15px;
+  padding-top:10px;
   background-color: #f4f4f9; 
-  height:540px;
+  height:550px;
   @media (max-width: 768px) {
     width: 100%;
-    margin: 20px 0; 
+    margin: 0px 0; 
   }
 `;
 
@@ -31,7 +32,7 @@ const Header = styled.h2`
 `;
 
 const Input = styled.input`
-  width: 100%;
+  width: 96%;
   padding: 8px;
   margin-top: 5px;
   border: 1px solid #ccc;
@@ -42,6 +43,7 @@ const Input = styled.input`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
+  margin-right:20px;
 `;
 
 const UpdateButton = styled.button`
@@ -98,6 +100,7 @@ const Update = () => {
   
   const [currentPostgres, setCurrentPostgres] = useState("");
   const [currentMongodb, setCurrentMongodb] = useState("");
+
   useEffect(() => {
     if (rowData) {
       setFormData({
@@ -119,22 +122,26 @@ const Update = () => {
   };
 
   const handleAddPostgres = () => {
-    if (currentPostgres) {
+    if (currentPostgres && formData.postgres.length < 8) {
       setFormData((prevData) => ({
         ...prevData,
         postgres: [...prevData.postgres, currentPostgres],
       }));
       setCurrentPostgres("");
+    } else if (formData.postgres.length >= 8) {
+      alert("You can only add a maximum of 8 PostgreSQL entries.");
     }
   };
 
   const handleAddMongodb = () => {
-    if (currentMongodb) {
+    if (currentMongodb && formData.mongodb.length < 8) {
       setFormData((prevData) => ({
         ...prevData,
         mongodb: [...prevData.mongodb, currentMongodb],
       }));
       setCurrentMongodb("");
+    } else if (formData.mongodb.length >= 8) {
+      alert("You can only add a maximum of 8 MongoDB entries.");
     }
   };
 
