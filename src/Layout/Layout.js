@@ -53,7 +53,6 @@ const SidebarToggle = styled.button`
   transition: all 0.3s ease;
 
   &:hover {
- 
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   }
 
@@ -106,9 +105,7 @@ const BreadcrumbWrapper = styled.div`
   height: 50px;
 `;
 
-const BreadcrumbContainer = styled.div`
-  
-`;
+const BreadcrumbContainer = styled.div``;
 
 const Layout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth >= 768);
@@ -143,11 +140,14 @@ const Layout = () => {
         <HeaderWrapper>
           <Header />
         </HeaderWrapper>
-        <BreadcrumbWrapper isOpen={isSidebarOpen}>
-          <BreadcrumbContainer>
-            <Breadcrumb currentPath={currentPath} isSidebarOpen={isSidebarOpen} />  
-          </BreadcrumbContainer>
-        </BreadcrumbWrapper>
+       
+        {currentPath !== '/' && (
+          <BreadcrumbWrapper isOpen={isSidebarOpen}>
+            <BreadcrumbContainer>
+              <Breadcrumb currentPath={currentPath} isSidebarOpen={isSidebarOpen} />  
+            </BreadcrumbContainer>
+          </BreadcrumbWrapper>
+        )}
         <ContentWrapper>
           {currentPath === '/' ? <Dashboard /> : <Outlet />}
         </ContentWrapper>
@@ -157,4 +157,3 @@ const Layout = () => {
 };
 
 export default Layout;
-
