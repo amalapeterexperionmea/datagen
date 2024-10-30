@@ -1,12 +1,13 @@
 
 
+
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { menuItemsConfig } from '../../Config'; 
 
 const BaseMenuItem = styled.li`
-  padding: 20px 25px;
+  padding: 10px 15px;
   color: white;
   cursor: pointer;
   font-family: 'Poppins', sans-serif;
@@ -20,7 +21,6 @@ const BaseMenuItem = styled.li`
   margin-top: ${({ topMargin }) => topMargin || '0'};
   margin-bottom: ${({ bottomMargin }) => bottomMargin || '0'};
 
- 
   ${({ disableHoverEffects }) => !disableHoverEffects && `
     &:hover {
       background-color: rgba(255, 255, 255, 0.1);
@@ -34,10 +34,9 @@ const BaseMenuItem = styled.li`
     transition: transform 0.4s, color 0.4s;
   }
 
-  
   &:hover i {
     transform: scale(1.15);
-    color: #ffcc00;
+    color: ${({ hoverColor }) => hoverColor || '#ffcc00'};
   }
 `;
 
@@ -45,10 +44,15 @@ const MenuItem = () => {
   const navigate = useNavigate();
 
   const handleItemClick = (item) => {
-    if (!item.isLogout) {
-      navigate(item.route);
+    if (item.isLogout) {
+      // Ask for confirmation before logging out
+      const confirmed = window.confirm("Are you sure you want to logout?");
+      if (confirmed) {
+        // Navigate to login route
+        navigate('/login');
+      }
     } else {
-     
+      navigate(item.route);
     }
   };
 
@@ -62,6 +66,7 @@ const MenuItem = () => {
             topMargin={item.topMargin}
             bottomMargin={item.bottomMargin}
             disableHoverEffects={item.disableHoverEffects}
+            hoverColor={item.hoverColor} 
           >
             <i className={item.iconClass}></i>
             {item.label}
@@ -73,6 +78,7 @@ const MenuItem = () => {
         topMargin={menuItemsConfig[menuItemsConfig.length - 1].topMargin}
         bottomMargin={menuItemsConfig[menuItemsConfig.length - 1].bottomMargin}
         disableHoverEffects={menuItemsConfig[menuItemsConfig.length - 1].disableHoverEffects}
+        hoverColor={menuItemsConfig[menuItemsConfig.length - 1].hoverColor} 
       >
         <i className={menuItemsConfig[menuItemsConfig.length - 1].iconClass}></i>
         {menuItemsConfig[menuItemsConfig.length - 1].label}

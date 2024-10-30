@@ -25,7 +25,7 @@ const UserType = styled.div`
   background: linear-gradient(135deg, #5FA8D3 0%, #2A6F97 50%, #1B4965 100%); 
   border-bottom: 2px solid rgba(255, 255, 255, 0.2); 
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); 
-  font-family: "InterVariable", -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
   text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
     display: block;
     font-size: 1.25rem;
@@ -43,7 +43,7 @@ const Username = styled.div`
   background: linear-gradient(135deg, #6FAEDB 0%, #407EAF 50%, #305F8A 100%); 
   border-bottom: 3px solid rgba(0, 0, 0, 0.3); 
   box-shadow: inset 0 -2px 6px rgba(0, 0, 0, 0.15); 
-  font-family: "InterVariable", -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif; 
+  font-family:'Poppins', sans-serif;
   letter-spacing: 1.2px; 
   text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5); 
 `;

@@ -124,7 +124,7 @@ const InputWrapper = styled.div`
 const ButtonGroup = styled.div`
   display: flex;
   gap: 10px;
-  margin-top: 20px;
+  margin-top: 0px;
 `;
 
 const Button = styled.button`
@@ -160,6 +160,7 @@ const TogglePasswordButton = styled.button`
 const ForgotPasswordButton = styled.button`
   background: none;
   border: none;
+  margin-top: -10px;
   color: #2a6f97;
   cursor: pointer;
   font-size: 14px;
@@ -237,10 +238,11 @@ function LoginPage({ setIsAuthenticated }) {
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </TogglePasswordButton>
               </InputWrapper>
+              <ForgotPasswordButton type="button">Forgot Password?</ForgotPasswordButton>
               {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
               <ButtonGroup>
                 <Button type="submit">Login</Button>
-                <ForgotPasswordButton type="button">Forgot Password?</ForgotPasswordButton>
+                
               </ButtonGroup>
             </Form>
           </Wrapper>
