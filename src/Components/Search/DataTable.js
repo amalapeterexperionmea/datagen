@@ -2,6 +2,8 @@ import React from 'react';
 import { useTable, useSortBy, usePagination } from 'react-table';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { BiFirstPage, BiLastPage } from 'react-icons/bi';
+import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -86,7 +88,7 @@ const Td = styled.td`
 const PaginationWrapper = styled.div`
   position: fixed;
   bottom: 30px;
-  right:-70px;
+  right:-76px;
   transform: translateX(-50%);
   display: flex;
   gap: 10px;
@@ -97,7 +99,7 @@ const PaginationButton = styled.button`
   justify-content: center; 
   align-items: center; 
   height:25px;
-  width:80px;
+  width:30px;
   background-color: #2A6F97;
   color: white;
   border: none;
@@ -127,6 +129,7 @@ const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack   })
     canNextPage,
     previousPage,
     nextPage,
+    gotoPage,
     state: { pageIndex },
     pageOptions,
 
@@ -184,14 +187,20 @@ const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack   })
           </tbody>
         </Table>
         <PaginationWrapper>
-          <PaginationButton onClick={() => previousPage()} disabled={!canPreviousPage}>
-            Previous
+          <PaginationButton onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+            <BiFirstPage />
+          </PaginationButton>
+          <PaginationButton onClick={previousPage} disabled={!canPreviousPage}>
+            <MdKeyboardArrowLeft />
           </PaginationButton>
           <span>
-            {pageIndex + 1} of {pageOptions.length}
+            Page {pageIndex + 1} of {pageOptions.length}
           </span>
-          <PaginationButton onClick={() => nextPage()} disabled={!canNextPage}>
-            Next
+          <PaginationButton onClick={nextPage} disabled={!canNextPage}>
+            <MdKeyboardArrowRight />
+          </PaginationButton>
+          <PaginationButton onClick={() => gotoPage(pageOptions.length - 1)} disabled={!canNextPage}>
+            <BiLastPage />
           </PaginationButton>
         </PaginationWrapper>
       </TableWrapper>
