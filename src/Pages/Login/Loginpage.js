@@ -1,7 +1,10 @@
+
+
+
+
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; 
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import anime from "animejs/lib/anime.es.js";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; 
 import loginPattern2 from "../../Layout/icons/loginpattern2.jpg";
 
@@ -73,18 +76,19 @@ const Title = styled.h2`
   text-align: center;
 `;
 
-const EULA = styled.div`
-  color: #ffffff;
-  font-size: 14px;
-  line-height: 1.5;
-  text-align: center;
-  margin-top: 20px;
-`;
-
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
   margin-top: 20px; 
+`;
+
+const ErrorMessage = styled.p`
+  color: red;
+  position: absolute;
+  bottom: -50px; 
+  left: 0;
+  width: 100%;
+  text-align: center; 
 `;
 
 const Form = styled.form`
@@ -138,14 +142,6 @@ const Button = styled.button`
   }
 `;
 
-const ErrorContainer = styled.div`
-  color: red;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 10px; 
-  height: 40px; 
-`;
-
 const TogglePasswordButton = styled.button`
   position: absolute;
   right: 10px;
@@ -174,66 +170,41 @@ const ForgotPasswordButton = styled.button`
 `;
 
 function LoginPage({ setIsAuthenticated }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [errors, setErrors] = useState({ email: "", password: "" });
-  const [loginError, setLoginError] = useState("");
-  const [submitAttempted, setSubmitAttempted] = useState(false);
-  const navigate = useNavigate();
-
-  const superAdmins = [
-    { email: "admin@gmail.com", password: "admin" },
-  ];
-
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const validatePassword = (password) => {
-    return password.length >= 1;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmitAttempted(true);
-
-    const emailError = validateEmail(email) ? "" : "Invalid email address.";
-    const passwordError = validatePassword(password) ? "" : "Password must be at least 1 character long.";
-    setErrors({ email: emailError, password: passwordError });
-
-    const isAdmin = superAdmins.some(
-      (admin) => admin.email === email && admin.password === password
-    );
-
-    if (!emailError && !passwordError && isAdmin) {
-      setIsAuthenticated(true);
-      navigate("/");
-    } else if (!isAdmin && !emailError && !passwordError) {
-      setLoginError("Invalid email or password.");
-    }
-  };
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate(); // Get navigate function
 
   const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+    setShowPassword((prev) => !prev);
   };
 
-  const animatePath = (offset) => {
-    anime({
-      targets: "path",
-      strokeDashoffset: offset,
-      duration: 700,
-      easing: "easeOutQuart",
-    });
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('http://localhost:5000/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setIsAuthenticated(true); // Set authenticated state
+        navigate("/"); // Redirect to the root page
+      } else {
+        setErrorMessage(data.message);
+      }
+    } catch (error) {
+      console.error('Error logging in:', error);
+      setErrorMessage('Failed to connect to the server.');
+    }
   };
 
   return (
@@ -241,50 +212,37 @@ function LoginPage({ setIsAuthenticated }) {
       <Container>
         <Left>
           <Title>Login</Title>
-          <EULA></EULA>
         </Left>
         <Right>
           <Wrapper>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleLogin}>
               <Label htmlFor="email">Email</Label>
               <Input
                 type="email"
                 id="email"
                 value={email}
-                onChange={handleEmailChange}
-                onFocus={() => animatePath(0)}
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
-
               <Label htmlFor="password">Password</Label>
               <InputWrapper>
                 <Input
-                  type={showPassword ? "text" : "password"}
+                  type={showPassword ? 'text' : 'password'}
                   id="password"
                   value={password}
-                  onChange={handlePasswordChange}
-                  onFocus={() => animatePath(-336)}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
                 <TogglePasswordButton type="button" onClick={togglePasswordVisibility}>
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </TogglePasswordButton>
               </InputWrapper>
-
+              {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
               <ButtonGroup>
                 <Button type="submit">Login</Button>
-                <ForgotPasswordButton onClick={() => alert("Redirect to forgot password page")}>
-                  Forgot Password?
-                </ForgotPasswordButton>
+                <ForgotPasswordButton type="button">Forgot Password?</ForgotPasswordButton>
               </ButtonGroup>
             </Form>
-            <ErrorContainer>
-              {submitAttempted && (
-                <>
-                  {errors.email && <div>{errors.email}</div>}
-                  {errors.password && <div>{errors.password}</div>}
-                  {loginError && <div>{loginError}</div>}
-                </>
-              )}
-            </ErrorContainer>
           </Wrapper>
         </Right>
       </Container>
