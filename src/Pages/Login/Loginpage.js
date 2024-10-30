@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import anime from "animejs/lib/anime.es.js";
-import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
+import { FaEye, FaEyeSlash } from "react-icons/fa"; 
 import loginPattern2 from "../../Layout/icons/loginpattern2.jpg";
 
 const Page = styled.div`
@@ -84,12 +84,11 @@ const EULA = styled.div`
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
-  margin-top: 20px; /* Added margin to maintain position */
+  margin-top: 20px; 
 `;
 
 const Form = styled.form`
   display: flex;
-  margin-top: -60px;
   flex-direction: column;
   gap: 15px;
 `;
@@ -143,11 +142,8 @@ const ErrorContainer = styled.div`
   color: red;
   font-size: 12px;
   text-align: center;
-  position: absolute;
-  margin-top: 10px;
-  top: 105%;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-top: 10px; 
+  height: 40px; 
 `;
 
 const TogglePasswordButton = styled.button`
@@ -280,13 +276,15 @@ function LoginPage({ setIsAuthenticated }) {
                 </ForgotPasswordButton>
               </ButtonGroup>
             </Form>
-            {submitAttempted && (errors.email || errors.password || loginError) && (
-              <ErrorContainer>
-                {errors.email && <div>{errors.email}</div>}
-                {errors.password && <div>{errors.password}</div>}
-                {loginError && <div>{loginError}</div>}
-              </ErrorContainer>
-            )}
+            <ErrorContainer>
+              {submitAttempted && (
+                <>
+                  {errors.email && <div>{errors.email}</div>}
+                  {errors.password && <div>{errors.password}</div>}
+                  {loginError && <div>{loginError}</div>}
+                </>
+              )}
+            </ErrorContainer>
           </Wrapper>
         </Right>
       </Container>
