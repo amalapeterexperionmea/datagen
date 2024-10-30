@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Col, Form, Row, Container as BootstrapContainer, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { userTypes } from "../../Config";
 
 const Container = styled(BootstrapContainer)`
   margin-top: 80px;
@@ -13,7 +14,7 @@ const EditUser = ({ existingData }) => {
   const [formData, setFormData] = useState({
     name: "",
     username: "",
-    user_type: "Super Admin",
+    user_type: userTypes.SUPER_ADMIN.label, // Set default value from config
     email: "",
     password: "",
     confirm_password: "",
@@ -24,7 +25,7 @@ const EditUser = ({ existingData }) => {
       setFormData({
         name: existingData.name || "",
         username: existingData.username || "",
-        user_type: existingData.user_type || "Super Admin",
+        user_type: existingData.user_type || userTypes.SUPER_ADMIN.label,
         email: existingData.email || "",
         password: "",
         confirm_password: "",
@@ -42,13 +43,14 @@ const EditUser = ({ existingData }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("User Data Submitted:", formData);
   };
 
   const handleCancel = () => {
     setFormData({
       name: existingData?.name || "",
       username: existingData?.username || "",
-      user_type: existingData?.user_type || "Super Admin",
+      user_type: existingData?.user_type || userTypes.SUPER_ADMIN.label,
       email: existingData?.email || "",
       password: "",
       confirm_password: "",
@@ -92,10 +94,9 @@ const EditUser = ({ existingData }) => {
                   value={formData.user_type}
                   onChange={handleInputChange}
                 >
-                  <option value="Super Admin">Super Admin</option>
-                  <option value="Admin">Admin</option>
-                  <option value="User">User</option>
-                  <option value="Client">Client</option>
+                  {Object.values(userTypes).map((type) => (
+                    <option key={type.id} value={type.id}>{type.label}</option>
+                  ))}
                 </Form.Select>
               </Form.Group>
 

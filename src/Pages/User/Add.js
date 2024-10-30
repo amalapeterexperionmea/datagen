@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Col, Form, Row, Container as BootstrapContainer, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components"; 
+import { userTypes } from "../../Config";
 
 const Container = styled(BootstrapContainer)`
   margin-top: 80px; 
@@ -13,7 +14,7 @@ const AddUser = () => {
   const [formData, setFormData] = useState({
     name: '',
     username: '',
-    user_type: 'Super Admin', 
+    user_type: userTypes.SUPER_ADMIN.label,  // Set initial value from config
     email: '',
     password: '',
     confirm_password: '',
@@ -31,7 +32,7 @@ const AddUser = () => {
     setFormData({
       name: '',
       username: '',
-      user_type: 'Super Admin',
+      user_type: userTypes.SUPER_ADMIN.label,
       email: '',
       password: '',
       confirm_password: '',
@@ -80,10 +81,9 @@ const AddUser = () => {
                   value={formData.user_type}
                   onChange={handleInputChange}
                 >
-                  <option value="Super Admin">Super Admin</option>
-                  <option value="Admin">Admin</option>
-                  <option value="User">User</option>
-                  <option value="Client">Client</option>
+                  {Object.values(userTypes).map((type) => (
+                    <option key={type.id} value={type.id}>{type.label}</option>
+                  ))}
                 </Form.Select>
               </Form.Group>
 

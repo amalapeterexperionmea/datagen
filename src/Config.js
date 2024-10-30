@@ -51,3 +51,11 @@ export const menuItemsConfig = [
     disableHoverEffects: true,
   },
 ];
+
+// userTypes configuration
+export const userTypes = {
+  SUPER_ADMIN: { id: 1, label: "Super Admin" },
+  ADMIN: { id: 2, label: "Admin" },
+  USER: { id: 3, label: "User" },
+  CLIENT: { id: 4, label: "Client" }
+};
