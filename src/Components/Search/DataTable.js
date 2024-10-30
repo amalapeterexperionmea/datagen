@@ -3,7 +3,7 @@ import { useTable, useSortBy, usePagination } from 'react-table';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { BiFirstPage, BiLastPage } from 'react-icons/bi';
-import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md';
+import { MdKeyboardArrowRight, MdKeyboardArrowLeft, MdAddCircleOutline,MdOutlineFileDownload} from 'react-icons/md';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -12,13 +12,13 @@ const PageWrapper = styled.div`
   margin-top: 25px;
   height: 97vh;
 `;
-const AddButton = styled.button`
+const IconButton = styled.button`
   position: fixed; 
   top: 90px; 
-  right: 40px; 
+  right:90px; 
   background-color: #2a6f97; 
   color: white; 
-  width: 100px;
+  width: 32px;
   height: 32px;
   border: none; 
   border-radius: 4px; 
@@ -28,7 +28,22 @@ const AddButton = styled.button`
   align-items: center; 
   cursor: pointer; 
 `;
-
+const IconDownload = styled.button`
+  position: fixed; 
+  top: 90px; 
+  right:45px; 
+  background-color: #2a6f97; 
+  color: white; 
+  width: 32px;
+  height: 32px;
+  border: none; 
+  border-radius: 4px; 
+  padding: 0; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  cursor: pointer; 
+`;
 const BackButton = styled.button`
  position: fixed; 
   top: 90px; 
@@ -147,7 +162,18 @@ const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack   })
   return (
     <PageWrapper>
       <TableWrapper>
-      {!isSearchActive ? <AddButton onClick={onAdd}>Add</AddButton> : <BackButton onClick={onBack}>Back</BackButton>}
+      {!isSearchActive ? (
+          <>
+            <IconButton onClick={onAdd}>
+              <MdAddCircleOutline />
+            </IconButton>
+            <IconDownload>
+              <MdOutlineFileDownload />
+            </IconDownload>
+          </>
+        ) : (
+          <BackButton onClick={onBack}>Back</BackButton>
+        )}
         <Table {...getTableProps()}>
           <thead>
             {headerGroups.map(headerGroup => (
