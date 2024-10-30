@@ -1,120 +1,122 @@
-
-
-
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import anime from "animejs/lib/anime.es.js"; 
+import anime from "animejs/lib/anime.es.js";
 import loginPattern2 from "../../Layout/icons/loginpattern2.jpg";
-
-
 
 const Page = styled.div`
   background: url(${loginPattern2});
-  background-size: cover; 
-  background-repeat: no-repeat; 
+  background-size: cover;
+  background-repeat: no-repeat;
   display: flex;
-  flex-direction: column;
-  height: 100vh; 
-  width: 100vw; 
-  place-content: center;
-  position: fixed; 
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
   top: 0;
   left: 0;
 `;
 
-
 const Container = styled.div`
   display: flex;
-  height: 410px;
-  margin: 0 auto;
   width: 640px;
-
+  height: 450px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
   @media (max-width: 767px) {
     flex-direction: column;
-    height: 630px;
-    width: 320px;
+    width: 90%;
+    max-width: 320px;
+    height: auto;
   }
 `;
 
 const Left = styled.div`
-  
-  background:#F0F0F0;
-  height: calc(100% - 40px);
-  position: relative;
+  background: linear-gradient(135deg, #153448, #2a6f97);
   width: 50%;
   padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-
   @media (max-width: 767px) {
-    height: 100%;
-    width: calc(100% - 40px);
-    max-height: 270px;
+    width: 100%;
+    padding: 20px;
   }
 `;
 
-const Right = styled.div`
-  background: white;
-  position: relative;
-  width: 50%;
-  box-shadow: 0px 0px 40px 16px rgba(0, 0, 0, 0.22);
-  padding: 30px;
 
+
+const Right = styled.div`
+  background-color: white;
+  width: 50%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0px 0px 40px 16px rgba(0, 0, 0, 0.22);
   @media (max-width: 767px) {
-    height: 100%;
     width: 100%;
-    max-height: 350px;
+    padding: 20px;
   }
 `;
 
 const Title = styled.h2`
-  font-size: 50px;
-  font-weight: 100;
-  margin: 0;
-  
-  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5); 
+  font-size: 48px;
+  font-weight: 300;
+  color: #ffffff;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
   font-family: 'Poppins', sans-serif;
+  margin-bottom: 10px;
+  text-align: center;
 `;
 
 const EULA = styled.div`
-  color: #2A6F97;
-  font-size: 15px;
+  color: #ffffff;
+  font-size: 14px;
   line-height: 1.5;
+  text-align: center;
   margin-top: 20px;
 `;
 
-const Form = styled.form`
+const Wrapper = styled.div`
   position: relative;
-  margin-top: -230px;
+  width: 100%;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: -270px;
 `;
 
 const Label = styled.label`
-  color: black;
-  display: block;
+  color: #333;
   font-size: 14px;
   margin-bottom: 5px;
 `;
 
 const Input = styled.input`
   padding: 12px;
-  margin-bottom: 15px;
-  border-radius: 6px;
   border: 1px solid #ccc;
+  border-radius: 6px;
   font-size: 16px;
   width: 100%;
-  background: transparent;
-  color: black;
-
+  color: #333;
   &:focus {
-    border-color: #007bff;
+    border-color: #2a6f97;
     outline: none;
   }
 `;
 
 const ButtonGroup = styled.div`
   display: flex;
-  gap: 20px;
-  margin-top: 15px;
+  gap: 10px;
+  margin-top: 20px;
 `;
 
 const Button = styled.button`
@@ -123,30 +125,32 @@ const Button = styled.button`
   color: white;
   border: none;
   border-radius: 6px;
-  cursor: pointer;
   font-size: 16px;
-  flex: 1;
-
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
   &:hover {
     background-color: #0056b3;
   }
 `;
 
-const ErrorMessage = styled.p`
+const ErrorContainer = styled.div`
   color: red;
   font-size: 12px;
-  margin: 5px 0 15px;
+  text-align: center;
+  position: absolute;
+  margin-top: 20px;
+  top: 105%;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 
 const TogglePasswordButton = styled.button`
   background: none;
   border: none;
-  color: #007bff;
+  color: #2a6f97;
   cursor: pointer;
   font-size: 14px;
-  flex: 1;
-  text-align: left;
-
   &:hover {
     text-decoration: underline;
   }
@@ -155,12 +159,10 @@ const TogglePasswordButton = styled.button`
 const ForgotPasswordButton = styled.button`
   background: none;
   border: none;
-  color: #007bff;
+  color: #2a6f97;
   cursor: pointer;
   font-size: 14px;
-  flex: 1;
   text-align: right;
-
   &:hover {
     text-decoration: underline;
   }
@@ -177,7 +179,6 @@ function LoginPage({ setIsAuthenticated }) {
 
   const superAdmins = [
     { email: "admin@gmail.com", password: "admin" }
-    
   ];
 
   const validateEmail = (email) => {
@@ -192,15 +193,15 @@ function LoginPage({ setIsAuthenticated }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitAttempted(true);
-  
+
     const emailError = validateEmail(email) ? "" : "Invalid email address.";
     const passwordError = validatePassword(password) ? "" : "Password must be at least 1 character long.";
     setErrors({ email: emailError, password: passwordError });
-  
+
     const isAdmin = superAdmins.some(
       (admin) => admin.email === email && admin.password === password
     );
-  
+
     if (!emailError && !passwordError && isAdmin) {
       setIsAuthenticated(true); 
       navigate("/"); 
@@ -208,7 +209,6 @@ function LoginPage({ setIsAuthenticated }) {
       setLoginError("Invalid email or password.");
     }
   };
-  
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -222,7 +222,6 @@ function LoginPage({ setIsAuthenticated }) {
     setShowPassword(!showPassword);
   };
 
-  
   const animatePath = (offset) => {
     anime({
       targets: "path",
@@ -237,49 +236,54 @@ function LoginPage({ setIsAuthenticated }) {
       <Container>
         <Left>
           <Title>Login</Title>
-          <EULA>Datagen</EULA>
-         
+          <EULA></EULA>
         </Left>
         <Right>
           <svg viewBox="0 0 320 300">
             {/* SVG Path */}
           </svg>
-          <Form onSubmit={handleSubmit}>
-            <Label htmlFor="email">Email</Label>
-            <Input
-              type="email"
-              id="email"
-              placeholder="Email"
-              value={email}
-              onChange={handleEmailChange}
-              onFocus={() => animatePath(0)}
-            />
-            {submitAttempted && errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
+          <Wrapper>
+            <Form onSubmit={handleSubmit}>
+              <Label htmlFor="email">Email</Label>
+              <Input
+                type="email"
+                id="email"
+                placeholder="Email"
+                value={email}
+                onChange={handleEmailChange}
+                onFocus={() => animatePath(0)}
+              />
 
-            <Label htmlFor="password">Password</Label>
-            <Input
-              type={showPassword ? "text" : "password"}
-              id="password"
-              placeholder="Password"
-              value={password}
-              onChange={handlePasswordChange}
-              onFocus={() => animatePath(-336)}
-            />
-            {submitAttempted && errors.password && <ErrorMessage>{errors.password}</ErrorMessage>}
+              <Label htmlFor="password">Password</Label>
+              <Input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                placeholder="Password"
+                value={password}
+                onChange={handlePasswordChange}
+                onFocus={() => animatePath(-336)}
+              />
 
-            <ButtonGroup>
-              <TogglePasswordButton type="button" onClick={togglePasswordVisibility}>
-                {showPassword ? "Hide Password" : "Show Password"}
-              </TogglePasswordButton>
+              <ButtonGroup>
+                <TogglePasswordButton type="button" onClick={togglePasswordVisibility}>
+                  {showPassword ? "Hide Password" : "Show Password"}
+                </TogglePasswordButton>
 
-              <Button type="submit">Login</Button>
+                <Button type="submit">Login</Button>
 
-              <ForgotPasswordButton onClick={() => alert("Redirect to forgot password page")}>
-                Forgot Password?
-              </ForgotPasswordButton>
-            </ButtonGroup>
-            {submitAttempted && loginError && <ErrorMessage>{loginError}</ErrorMessage>}
-          </Form>
+                <ForgotPasswordButton onClick={() => alert("Redirect to forgot password page")}>
+                  Forgot Password?
+                </ForgotPasswordButton>
+              </ButtonGroup>
+            </Form>
+            {submitAttempted && (errors.email || errors.password || loginError) && (
+              <ErrorContainer>
+                {errors.email && <div>{errors.email}</div>}
+                {errors.password && <div>{errors.password}</div>}
+                {loginError && <div>{loginError}</div>}
+              </ErrorContainer>
+            )}
+          </Wrapper>
         </Right>
       </Container>
     </Page>
@@ -287,5 +291,3 @@ function LoginPage({ setIsAuthenticated }) {
 }
 
 export default LoginPage;
-
-
