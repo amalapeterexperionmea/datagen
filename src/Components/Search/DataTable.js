@@ -14,8 +14,8 @@ const PageWrapper = styled.div`
 `;
 const IconButton = styled.button`
   position: fixed; 
-  top: 90px; 
-  right:90px; 
+  top: 110px; 
+   right:45px; 
   background-color: #2a6f97; 
   color: white; 
   width: 32px;
@@ -30,8 +30,8 @@ const IconButton = styled.button`
 `;
 const IconDownload = styled.button`
   position: fixed; 
-  top: 90px; 
-  right:45px; 
+  top: 110px; 
+  right:90px; 
   background-color: #2a6f97; 
   color: white; 
   width: 32px;
@@ -61,7 +61,7 @@ const BackButton = styled.button`
   cursor: pointer; 
 `;
 const TableWrapper = styled.div`
-  position: fixed;
+
   width: 1300px;
   margin: 20px;
   left:250px;
@@ -73,7 +73,7 @@ const TableWrapper = styled.div`
 
 const Table = styled.table`
   width: 1205px;
-  margin-top:-150px;
+  margin-top:-50px;
   background-color: #ffffff;
   border-radius: 5px;
   overflow: hidden;
@@ -164,12 +164,13 @@ const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack   })
       <TableWrapper>
       {!isSearchActive ? (
           <>
-            <IconButton onClick={onAdd}>
-              <MdAddCircleOutline />
-            </IconButton>
+            
             <IconDownload>
               <MdOutlineFileDownload />
             </IconDownload>
+            <IconButton onClick={onAdd}> 
+              <MdAddCircleOutline />
+            </IconButton>
           </>
         ) : (
           <BackButton onClick={onBack}>Back</BackButton>
