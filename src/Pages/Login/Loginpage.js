@@ -238,12 +238,13 @@ function LoginPage({ setIsAuthenticated }) {
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </TogglePasswordButton>
               </InputWrapper>
-              <ForgotPasswordButton type="button">Forgot Password?</ForgotPasswordButton>
+              
               {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
               <ButtonGroup>
                 <Button type="submit">Login</Button>
                 
               </ButtonGroup>
+              <ForgotPasswordButton type="button">Forgot Password?</ForgotPasswordButton>
             </Form>
           </Wrapper>
         </Right>
