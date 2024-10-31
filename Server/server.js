@@ -1,6 +1,9 @@
+
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
+const connectDB = require('./Db'); 
+const User = require('./Models/User'); 
+const GeneratedData = require('./Models/GeneratedData'); 
 
 const app = express();
 const PORT = 5000;
@@ -8,23 +11,10 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 
-// MongoDB connection
-mongoose.connect('mongodb+srv://admin:experion1234@datagen.ypvo3.mongodb.net/generator?retryWrites=true&w=majority', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-  .then(() => console.log('MongoDB connected'))
-  .catch((err) => console.error('MongoDB connection error:', err));
+// Connect to MongoDB
+connectDB();
 
-// Define the Mongoose schema for the User collection
-const userSchema = new mongoose.Schema({
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
-});
-
-const User = mongoose.model('User', userSchema, 'User'); // Ensure collection name matches
-
-// API endpoint to validate user login
+//  login API
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -45,7 +35,10 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-//  API endpoint for data generation
+
+
+
+// API  data generation
 app.post('/api/generate', async (req, res) => {
   try {
     const newData = new GeneratedData(req.body);
@@ -57,7 +50,7 @@ app.post('/api/generate', async (req, res) => {
   }
 });
 
-// API endpoint to fetch data from MongoDB
+
 app.get('/api/data', async (req, res) => {
   try {
     const data = await GeneratedData.find();
@@ -67,6 +60,9 @@ app.get('/api/data', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch data', details: error.message });
   }
 });
+
+
+
 
 // Start the server
 app.listen(PORT, () => {
