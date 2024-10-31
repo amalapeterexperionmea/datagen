@@ -1,11 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-// const LabelName = styled.div`
 
-  
-// `
-const FilterDropdown = () => {
+const Finder = () => {
   return (
     <div>
       <label htmlFor="filter-select">Name:</label>
@@ -18,4 +15,4 @@ const FilterDropdown = () => {
   );
 };
 
-export default FilterDropdown;
+export default Finder;

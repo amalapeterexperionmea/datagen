@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from './Layout/Layout'; 
 import LoginPage from './Pages/Login/Loginpage';
-import Client from './Pages/Client/SearchClient'; 
+import Search from './Pages/Client/Search'; 
 import Form from './Pages/Client/Add'; 
 import Update from './Pages/Client/edit';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
@@ -41,7 +41,7 @@ function App() {
         >
           <Route path="/generated-grid/data-generation" element={<DataGenerationForm />} />
           <Route path="/generated-grid" element={<GeneratedGrid />} />
-          <Route path="/client" element={<Client />} />
+          <Route path="/client" element={<Search />} />
           <Route path="/client/form" element={<Form />} />
           <Route path="/client/update" element={<Update />} />
           <Route path="/searchuser" element={<SearchUser />} />

@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Search from '../../Components/Search';
+import Search from '../../../Components/Search';
 
 
-const Client = () => {
+const Grid = () => {
   const navigate = useNavigate();
   const columns = React.useMemo(
     () => [
@@ -53,4 +53,4 @@ const Client = () => {
   );
 };
 
-export default Client;
+export default Grid;
