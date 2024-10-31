@@ -52,7 +52,7 @@ const Sidebar = () => {
     return (
         <SidebarWrapper>
             <UserType>Admin</UserType>
-            <Username>User Name</Username> 
+            <Username>Username</Username> 
             <MenuItem />
         </SidebarWrapper>
     );
