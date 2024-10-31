@@ -1,21 +1,12 @@
-
+// Server/routes/api.js
 const express = require('express');
-const cors = require('cors');
-const connectDB = require('./Db'); 
-const User = require('./Models/User'); 
-const GeneratedData = require('./Models/GeneratedData'); 
+const User = require('../models/User'); 
+const GeneratedData = require('../models/GeneratedData'); 
 
-const app = express();
-const PORT = 5000;
+const router = express.Router();
 
-app.use(cors());
-app.use(express.json());
-
-// Connect to MongoDB
-connectDB();
-
-//  login API
-app.post('/api/login', async (req, res) => {
+// Login API
+router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -23,7 +14,6 @@ app.post('/api/login', async (req, res) => {
     if (!user || user.password !== password) {
       return res.status(401).json({ message: 'Invalid Credentials!' });
     }
-
     res.status(200).json({ message: 'Login successful', user });
   } catch (error) {
     console.error("Error logging in:", error);
@@ -31,12 +21,8 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-
-
-
-
-// API  data generation
-app.post('/api/generate', async (req, res) => {
+// Data generation API
+router.post('/generate', async (req, res) => {
   try {
     const newData = new GeneratedData(req.body);
     await newData.save();
@@ -47,8 +33,8 @@ app.post('/api/generate', async (req, res) => {
   }
 });
 
-
-app.get('/api/data', async (req, res) => {
+// Fetch data API
+router.get('/data', async (req, res) => {
   try {
     const data = await GeneratedData.find();
     res.status(200).json(data);
@@ -58,10 +44,4 @@ app.get('/api/data', async (req, res) => {
   }
 });
 
-
-
-
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+module.exports = router;
