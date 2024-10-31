@@ -25,7 +25,7 @@ const Page = styled.div`
 const Container = styled.div`
   display: flex;
   width: 640px;
-  height: 450px;
+  height: 400px;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   overflow: hidden;
