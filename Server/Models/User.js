@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose');
 
-// Define the Mongoose schema for the User collection
+//  Mongoose schema for the User collection
 const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true }

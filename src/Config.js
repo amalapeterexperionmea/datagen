@@ -47,7 +47,7 @@ export const menuItemsConfig = [
     label: "Logout",
     isLogout: true,
     topMargin: 'auto',
-    bottomMargin: '-25px',
+    bottomMargin: '-20px',
     disableHoverEffects: true,
     hoverColor: 'red' 
   },
