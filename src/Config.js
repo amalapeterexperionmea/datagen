@@ -24,7 +24,8 @@ export const menuItemsConfig = [
     route: "/client",
     topMargin: '10px',
     bottomMargin: '10px',
-    disableHoverEffects: false, 
+    disableHoverEffects: false,
+    hoverColor: '#00BFFF'  
   },
   {
     iconClass: "fas fa-users",
@@ -33,6 +34,7 @@ export const menuItemsConfig = [
     topMargin: '10px',
     bottomMargin: '10px',
     disableHoverEffects: false,  
+    hoverColor: '#00BFFF' 
   },
   {
     iconClass: "fas fa-chart-line",
@@ -41,6 +43,7 @@ export const menuItemsConfig = [
     topMargin: '10px',
     bottomMargin: '10px',
     disableHoverEffects: false,
+    hoverColor: '#00BFFF' 
   },
   {
     iconClass: "fas fa-sign-out-alt",
