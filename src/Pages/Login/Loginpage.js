@@ -175,7 +175,7 @@ function LoginPage({ setIsAuthenticated }) {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const navigate = useNavigate(); // Get navigate function
+  const navigate = useNavigate(); 
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
@@ -197,8 +197,8 @@ function LoginPage({ setIsAuthenticated }) {
       const data = await response.json();
 
       if (response.ok) {
-        setIsAuthenticated(true); // Set authenticated state
-        navigate("/"); // Redirect to the root page
+        setIsAuthenticated(true); 
+        navigate("/"); 
       } else {
         setErrorMessage(data.message);
       }
