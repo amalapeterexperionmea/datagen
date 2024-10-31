@@ -1,4 +1,4 @@
-// Server/routes/api.js
+
 const express = require('express');
 const User = require('../models/User'); 
 const GeneratedData = require('../models/GeneratedData'); 
