@@ -1,7 +1,8 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import { Input } from 'antd';
 import styled from 'styled-components';
 import { TbFilterDown } from "react-icons/tb";
+import FilterDropdown from './FilterDropdown';
 
 const { Search } = Input;
 
@@ -28,18 +29,41 @@ const IconContainer = styled.div`
   align-items: center; 
   cursor: pointer; 
 `;
+const DropdownContainer = styled.div`
+  border: 1.5px solid #2a6f97; 
+  border-radius: 4px; 
+  display:flex;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+  width: 93%; 
+  height:135px;
+  margin-left:42px;
+  margin-top:100px;
+`;
 
-const SearchBar = ({ onSearch }) => (
-  <div style={{ display: 'flex', alignItems: 'center' }}>
-    <Stylebar
-      placeholder="Search..."
-      onSearch={onSearch}  
-      enterButton
-    />
-    <IconContainer>
-      <TbFilterDown title="Filter" />
-    </IconContainer>
-  </div>
-);
+const SearchBar = ({ onSearch,onToggleFilter }) => {
+  const [isFilterVisible, setFilterVisible] = useState(false);
 
+  const toggleFilterDropdown = () => {
+    setFilterVisible(prev => !prev); 
+    onToggleFilter(!isFilterVisible); 
+  };
+
+  return (
+    <div style={{ display: 'flex', alignItems: 'center' }}>
+      <Stylebar
+        placeholder="Search..."
+        onSearch={onSearch}  
+        enterButton
+      />
+      <IconContainer onClick={toggleFilterDropdown} >
+        <TbFilterDown title="Filter" />
+      </IconContainer>
+      {isFilterVisible && ( 
+        <DropdownContainer>
+          <FilterDropdown />
+        </DropdownContainer>
+      )}
+    </div>
+  );
+};
 export default SearchBar;

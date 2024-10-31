@@ -62,21 +62,27 @@ const BackButton = styled.button`
 `;
 const TableWrapper = styled.div`
 
-  width: 1300px;
-  margin: 20px;
-  left:250px;
-  top:260px;
-  text-align: center;
+  // width: 1300px;
+  // margin: 20px;
+  // left:250px;
+  // top:260px;
+  // text-align: center;
+  // padding: 20px;
+   width: 100%; // Responsive width
+  max-width: 1300px; // Maximum width for larger screens
+  margin: 20px auto; // Center the table
   padding: 20px;
   
 `;
 
 const Table = styled.table`
   width: 1205px;
-  margin-top:-50px;
   background-color: #ffffff;
   border-radius: 5px;
   overflow: hidden;
+  transition: margin-top 0s; 
+  margin-top: ${({ isDropdownVisible }) => (isDropdownVisible ? '-190px' : '0')}; 
+  margin-left:20px;
 `;
 
 const Th = styled.th`
@@ -132,7 +138,7 @@ const NoDataMessage = styled.div`
   font-size: 22px;
   margin-top: 20px;
 `;
-const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack   }) => {
+const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack,isFilterDropdownVisible}) => {
   const navigate = useNavigate();
   const {
     getTableProps,
@@ -175,7 +181,7 @@ const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack   })
         ) : (
           <BackButton onClick={onBack}>Back</BackButton>
         )}
-        <Table {...getTableProps()}>
+         <Table {...getTableProps()} isDropdownVisible={isFilterDropdownVisible}>
           <thead>
             {headerGroups.map(headerGroup => (
               <tr {...headerGroup.getHeaderGroupProps()}>

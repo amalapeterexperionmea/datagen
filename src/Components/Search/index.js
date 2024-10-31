@@ -2,8 +2,9 @@ import React, { useState, useMemo } from 'react';
 import DataTable from './DataTable';
 import SearchBar from './SearchBar';
 
-const Search = ({ columns, data, onAdd, basePath }) => {
+const Search = ({ columns, data, onAdd, basePath, }) => {
   const [searchInput, setSearchInput] = useState('');
+  const [isFilterVisible, setFilterVisible] = useState(false);
   
   const filteredData = useMemo(() => {
     if (!searchInput) return data;
@@ -20,10 +21,12 @@ const Search = ({ columns, data, onAdd, basePath }) => {
   const handleBack = () => {
     setSearchInput('');  
   };
-
+  const handleToggleFilter = (isVisible) => {
+    setFilterVisible(isVisible); // Update filter visibility state
+  };
   return (
     <>
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar onSearch={handleSearch} onToggleFilter={handleToggleFilter} />
       <DataTable 
         columns={columns} 
         data={filteredData} 
@@ -31,6 +34,7 @@ const Search = ({ columns, data, onAdd, basePath }) => {
         basePath={basePath} 
         isSearchActive={!!searchInput} 
         onBack={handleBack} 
+        isFilterDropdownVisible={isFilterVisible}
       />
     </>
   );
