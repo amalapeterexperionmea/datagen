@@ -20,11 +20,7 @@ app.post('/api/login', async (req, res) => {
 
   try {
     const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(404).json({ message: 'Invalid Credentials!' });
-    }
-
-    if (user.password !== password) { 
+    if (!user || user.password !== password) {
       return res.status(401).json({ message: 'Invalid Credentials!' });
     }
 
@@ -34,6 +30,7 @@ app.post('/api/login', async (req, res) => {
     res.status(500).json({ message: 'Internal server error', details: error.message });
   }
 });
+
 
 
 
