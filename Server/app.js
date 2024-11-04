@@ -1,18 +1,21 @@
 
 const express = require('express');
-const cors = require('cors');
-const connectDB = require('./db'); 
-
 const app = express();
-
-app.use(cors());
 app.use(express.json());
 
+const cors = require('cors');
+app.use(cors());
+
+
 // Connect to MongoDB
+const connectDB = require('./db'); 
 connectDB();
 
 // Define routes
 const apiRouter = require('./routes/api');
-app.use('/api', apiRouter);
+app.use(apiRouter);
+
+
+
 
 module.exports = app;
