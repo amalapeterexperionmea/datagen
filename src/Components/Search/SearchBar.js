@@ -37,7 +37,7 @@ const DropdownContainer = styled.div`
   width: 93%; 
   height:135px;
   margin-left:42px;
-  margin-top:100px;
+  margin-top:70px;
 `;
 
 const SearchBar = ({ onSearch,onToggleFilter }) => {

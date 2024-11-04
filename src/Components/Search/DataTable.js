@@ -10,7 +10,7 @@ const PageWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 25px;
-  height: 97vh;
+  height: 95vh;
 `;
 const IconButton = styled.button`
   position: fixed; 
@@ -61,14 +61,7 @@ const BackButton = styled.button`
   cursor: pointer; 
 `;
 const TableWrapper = styled.div`
-
-  // width: 1300px;
-  // margin: 20px;
-  // left:250px;
-  // top:260px;
-  // text-align: center;
-  // padding: 20px;
-   width: 100%; // Responsive width
+  width: 100%; // Responsive width
   max-width: 1300px; // Maximum width for larger screens
   margin: 20px auto; // Center the table
   padding: 20px;
