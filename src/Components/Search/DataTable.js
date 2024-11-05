@@ -163,7 +163,6 @@ const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack,isFi
       <TableWrapper>
       {!isSearchActive ? (
           <>
-            
             <IconDownload>
               <MdOutlineFileDownload />
             </IconDownload>

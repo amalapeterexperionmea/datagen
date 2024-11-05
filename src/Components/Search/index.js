@@ -22,11 +22,15 @@ const Search = ({ columns, data, onAdd, basePath, }) => {
     setSearchInput('');  
   };
   const handleToggleFilter = (isVisible) => {
-    setFilterVisible(isVisible); // Update filter visibility state
+    setFilterVisible(isVisible); 
   };
   return (
     <>
-      <SearchBar onSearch={handleSearch} onToggleFilter={handleToggleFilter} />
+      <SearchBar 
+        onSearch={handleSearch} 
+        onToggleFilter={handleToggleFilter}  
+        columns={columns}  
+      />
       <DataTable 
         columns={columns} 
         data={filteredData} 

@@ -1,11 +1,11 @@
 import React from 'react'
 import Grid from './Grid'
-import Finder from './Finder';
+// import Finder from './Finder';
 
 const Search = () => {
     return (
         <>
-        <Finder></Finder>
+        {/* <Finder></Finder> */}
         <Grid></Grid>
         </>
       );

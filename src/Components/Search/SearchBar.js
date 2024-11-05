@@ -33,6 +33,7 @@ const DropdownContainer = styled.div`
   border: 1.5px solid #2a6f97; 
   border-radius: 4px; 
   display:flex;
+  flex-direction: column;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
   width: 93%; 
   height:135px;
@@ -40,7 +41,7 @@ const DropdownContainer = styled.div`
   margin-top:90px;
 `;
 
-const SearchBar = ({ onSearch,onToggleFilter }) => {
+const SearchBar = ({ onSearch,onToggleFilter,columns }) => {
   const [isFilterVisible, setFilterVisible] = useState(false);
 
   const toggleFilterDropdown = () => {
@@ -60,7 +61,7 @@ const SearchBar = ({ onSearch,onToggleFilter }) => {
       </IconContainer>
       {isFilterVisible && ( 
         <DropdownContainer>
-          <FilterDropdown />
+          <FilterDropdown columns={columns} />
         </DropdownContainer>
       )}
     </div>
