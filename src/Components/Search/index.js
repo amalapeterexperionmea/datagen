@@ -4,13 +4,15 @@ import SearchBar from './SearchBar';
 import FilterDropdown from './FilterDropdown';
 import styled from 'styled-components';
 import { TbFilterDown } from "react-icons/tb";
-
-
-
+const MainContent = styled.div`
+  height: 114vh;
+  overflow-y: ${({ isFilterVisible }) => (isFilterVisible ? 'auto' : 'hidden')};
+  padding: 0px;
+`;
 const IconContainer = styled.div`
-  position:fixed;
-  left:1370px;
-  top:110px;
+  position: fixed;
+  left: 1370px;
+  top: 110px;
   background-color: #2a6f97; 
   color: white; 
   width: 32px;
@@ -26,20 +28,17 @@ const IconContainer = styled.div`
 const DropdownContainer = styled.div`
   border: 1.5px solid #2a6f97; 
   border-radius: 4px; 
-  display:flex;
+  display: flex;
   flex-direction: column;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
-  width: 93%; 
-  height:135px;
-  margin-left:42px;
-  margin-top:90px;
+  width: 94.5%; 
+  height: 135px;
+  margin-left: 42px;
+  margin-top: 90px;
 `;
-const Search = ({ columns, data, onAdd, basePath,onToggleFilter }) => {
+const Search = ({ columns, data, onAdd, basePath, onToggleFilter }) => {
   const [searchInput, setSearchInput] = useState('');
   const [isFilterVisible, setFilterVisible] = useState(false);
-  
-  
-  
   const filteredData = useMemo(() => {
     if (!searchInput) return data;
     const lowercasedInput = searchInput.toLowerCase();
@@ -64,19 +63,18 @@ const Search = ({ columns, data, onAdd, basePath,onToggleFilter }) => {
       onToggleFilter(!isFilterVisible);
     }
   };
- 
   return (
-    <>
+    <MainContent isFilterVisible={isFilterVisible}>
       <SearchBar 
         onSearch={handleSearch} 
         onToggleFilter={handleToggleFilter}  
         columns={columns}  
       />
-       <IconContainer onClick={toggleFilterDropdown} >
+      <IconContainer onClick={toggleFilterDropdown}>
         <TbFilterDown title="Filter" />
       </IconContainer>
-      {isFilterVisible && ( 
-        <DropdownContainer >
+      {isFilterVisible && (
+        <DropdownContainer>
           <FilterDropdown columns={columns} />
         </DropdownContainer>
       )}
@@ -89,9 +87,8 @@ const Search = ({ columns, data, onAdd, basePath,onToggleFilter }) => {
         onBack={handleBack} 
         isFilterDropdownVisible={isFilterVisible}
       />
-     
-    </>
+    </MainContent>
   );
 };
-
 export default Search;
+ 

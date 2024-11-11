@@ -46,11 +46,11 @@ const IconDownload = styled.button`
 `;
 const BackButton = styled.button`
  position: fixed; 
-  top: 90px; 
-  right: 40px; 
+  top: 110px; 
+  right: 45px; 
   background-color: #2a6f97; 
   color: white; 
-  width: 100px;
+  width: 75px;
   height: 32px;
   border: none; 
   border-radius: 4px; 
@@ -61,9 +61,9 @@ const BackButton = styled.button`
   cursor: pointer; 
 `;
 const TableWrapper = styled.div`
-  width: 100%; // Responsive width
-  max-width: 1300px; // Maximum width for larger screens
-  margin: 20px auto; // Center the table
+  width: 100%; 
+  max-width: 1300px; 
+  margin: 20px auto; 
   padding: 20px;
   
 `;
@@ -100,13 +100,15 @@ const Td = styled.td`
 `;
 
 const PaginationWrapper = styled.div`
-  position: fixed;
-  bottom: 30px;
-  right:-76px;
-  transform: translateX(-50%);
+  position: relative; 
+  bottom: 0; 
+  margin-top: 15px;
   display: flex;
+  justify-content: flex-end;
+  margin-right: 8px;
   gap: 10px;
 `;
+
 
 const PaginationButton = styled.button`
   display: flex; 
@@ -234,3 +236,4 @@ const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack,isFi
 };
 
 export default DataTable;
+ 
