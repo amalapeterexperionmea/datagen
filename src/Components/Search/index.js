@@ -1,10 +1,44 @@
 import React, { useState, useMemo } from 'react';
 import DataTable from './DataTable';
 import SearchBar from './SearchBar';
+import FilterDropdown from './FilterDropdown';
+import styled from 'styled-components';
+import { TbFilterDown } from "react-icons/tb";
 
-const Search = ({ columns, data, onAdd, basePath, }) => {
+
+
+const IconContainer = styled.div`
+  position:fixed;
+  left:1370px;
+  top:110px;
+  background-color: #2a6f97; 
+  color: white; 
+  width: 32px;
+  height: 32px;
+  border: none; 
+  border-radius: 4px; 
+  padding: 0; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  cursor: pointer; 
+`;
+const DropdownContainer = styled.div`
+  border: 1.5px solid #2a6f97; 
+  border-radius: 4px; 
+  display:flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+  width: 93%; 
+  height:135px;
+  margin-left:42px;
+  margin-top:90px;
+`;
+const Search = ({ columns, data, onAdd, basePath,onToggleFilter }) => {
   const [searchInput, setSearchInput] = useState('');
   const [isFilterVisible, setFilterVisible] = useState(false);
+  
+  
   
   const filteredData = useMemo(() => {
     if (!searchInput) return data;
@@ -24,6 +58,13 @@ const Search = ({ columns, data, onAdd, basePath, }) => {
   const handleToggleFilter = (isVisible) => {
     setFilterVisible(isVisible); 
   };
+  const toggleFilterDropdown = () => {
+    setFilterVisible(prev => !prev);
+    if (onToggleFilter) {
+      onToggleFilter(!isFilterVisible);
+    }
+  };
+ 
   return (
     <>
       <SearchBar 
@@ -31,6 +72,14 @@ const Search = ({ columns, data, onAdd, basePath, }) => {
         onToggleFilter={handleToggleFilter}  
         columns={columns}  
       />
+       <IconContainer onClick={toggleFilterDropdown} >
+        <TbFilterDown title="Filter" />
+      </IconContainer>
+      {isFilterVisible && ( 
+        <DropdownContainer >
+          <FilterDropdown columns={columns} />
+        </DropdownContainer>
+      )}
       <DataTable 
         columns={columns} 
         data={filteredData} 
@@ -40,6 +89,7 @@ const Search = ({ columns, data, onAdd, basePath, }) => {
         onBack={handleBack} 
         isFilterDropdownVisible={isFilterVisible}
       />
+     
     </>
   );
 };

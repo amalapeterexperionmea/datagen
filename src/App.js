@@ -11,6 +11,7 @@ import EditUser from './Pages/User/Edit';
 import SearchUser from './Pages/User/Search';
 import DataGenerationForm from './Pages/Generate/Add';
 import GeneratedGrid from './Pages/Generate/Search';
+import SearchConnect from "./Pages/Connection/Search";
 
 function App() {
 
@@ -47,6 +48,7 @@ function App() {
           <Route path="/searchuser" element={<SearchUser />} />
           <Route path="/searchuser/adduser" element={<AddUser />} /> 
           <Route path="/searchuser/edituser" element={<EditUser />} /> 
+          <Route path="/connect" element={<SearchConnect />} /> 
         </Route>
       </Routes>
     </Router>
