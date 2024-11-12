@@ -132,6 +132,7 @@ const NoDataMessage = styled.div`
   color: Black;
   font-size: 22px;
   margin-top: 20px;
+  margin-left:500px;
 `;
 const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack,isFilterDropdownVisible}) => {
   const navigate = useNavigate();
@@ -207,7 +208,7 @@ const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack,isFi
             ) : (
               <tr>
                 <Td colSpan={columns.length}>
-                  <NoDataMessage>No Data </NoDataMessage> 
+                  <NoDataMessage>No Data Found </NoDataMessage> 
                 </Td>
               </tr>
             )}
