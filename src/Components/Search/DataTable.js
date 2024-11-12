@@ -105,7 +105,7 @@ const PaginationWrapper = styled.div`
   margin-top: 15px;
   display: flex;
   justify-content: flex-end;
-  margin-right: 8px;
+  margin-right: 21px;
   gap: 10px;
 `;
 
