@@ -5,19 +5,21 @@ const FilterInputContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding:10px;
+  padding: 10px;
 `;
+
 const FilterRow = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 8px; 
+  gap: 8px;
 `;
 
-const FilterDropdown = ({ columns }) => {
+const FilterDropdown = ({ columns, filterValues, onFilterChange }) => {
   const rows = [];
   for (let i = 0; i < columns.length; i += 5) {
     rows.push(columns.slice(i, i + 5));
   }
+
   return (
     <FilterInputContainer>
       {rows.map((row, rowIndex) => (
@@ -28,7 +30,9 @@ const FilterDropdown = ({ columns }) => {
               <input
                 type="text"
                 id={`${column.accessor}-input`}
+                value={filterValues[column.accessor] || ''}
                 placeholder={`Enter ${column.Header.toLowerCase()}`}
+                onChange={(e) => onFilterChange(column.accessor, e.target.value)}
               />
             </div>
           ))}

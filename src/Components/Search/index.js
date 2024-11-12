@@ -4,6 +4,10 @@ import SearchBar from './SearchBar';
 import FilterDropdown from './FilterDropdown';
 import styled from 'styled-components';
 import { TbFilterDown } from "react-icons/tb";
+
+
+
+
 const MainContent = styled.div`
   height: 114vh;
   overflow-y: ${({ isFilterVisible }) => (isFilterVisible ? 'auto' : 'hidden')};
@@ -36,18 +40,38 @@ const DropdownContainer = styled.div`
   margin-left: 42px;
   margin-top: 90px;
 `;
+
 const Search = ({ columns, data, onAdd, basePath, onToggleFilter }) => {
   const [searchInput, setSearchInput] = useState('');
   const [isFilterVisible, setFilterVisible] = useState(false);
+  const [filterValues, setFilterValues] = useState(
+    columns.reduce((acc, column) => {
+      acc[column.accessor] = '';
+      return acc;
+    }, {})
+  );
   const filteredData = useMemo(() => {
-    if (!searchInput) return data;
-    const lowercasedInput = searchInput.toLowerCase();
-    return data.filter(row =>
-      Object.values(row).some(val =>
-        String(val).toLowerCase().includes(lowercasedInput)
-      )
+    let filtered = data;
+    if (searchInput) {
+      const lowercasedInput = searchInput.toLowerCase();
+      filtered = filtered.filter(row =>
+        Object.values(row).some(val =>
+          String(val).toLowerCase().includes(lowercasedInput)
+        )
+      );
+    }
+    filtered = filtered.filter(row =>
+      columns.every(column => {
+        const filterValue = filterValues[column.accessor]?.toLowerCase();
+        const cellValue = String(row[column.accessor]).toLowerCase();
+        return !filterValue || cellValue.includes(filterValue);
+      })
     );
-  }, [data, searchInput]);
+
+    return filtered;
+  }, [data, searchInput, filterValues, columns]);
+
+
   const handleSearch = (value) => {
     setSearchInput(value);
   };
@@ -63,6 +87,12 @@ const Search = ({ columns, data, onAdd, basePath, onToggleFilter }) => {
       onToggleFilter(!isFilterVisible);
     }
   };
+  const handleFilterChange = (accessor, value) => {
+    setFilterValues(prev => ({
+      ...prev,
+      [accessor]: value
+    }));
+  };
   return (
     <MainContent isFilterVisible={isFilterVisible}>
       <SearchBar 
@@ -75,7 +105,10 @@ const Search = ({ columns, data, onAdd, basePath, onToggleFilter }) => {
       </IconContainer>
       {isFilterVisible && (
         <DropdownContainer>
-          <FilterDropdown columns={columns} />
+          <FilterDropdown 
+          columns={columns}
+          filterValues={filterValues}
+          onFilterChange={handleFilterChange} />
         </DropdownContainer>
       )}
       <DataTable 
