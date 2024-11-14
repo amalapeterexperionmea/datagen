@@ -47,10 +47,10 @@ const IconDownload = styled.button`
 const BackButton = styled.button`
  position: fixed; 
   top: 110px; 
-  right: 45px; 
+  right: 40px; 
   background-color: #2a6f97; 
   color: white; 
-  width: 75px;
+  width: 38px;
   height: 32px;
   border: none; 
   border-radius: 4px; 
@@ -166,9 +166,6 @@ const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack,isFi
       <TableWrapper>
       {!isSearchActive ? (
           <>
-            <IconDownload>
-              <MdOutlineFileDownload />
-            </IconDownload>
             <IconButton onClick={onAdd}> 
               <MdAddCircleOutline />
             </IconButton>
@@ -176,6 +173,9 @@ const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack,isFi
         ) : (
           <BackButton onClick={onBack}>Back</BackButton>
         )}
+        <IconDownload>
+              <MdOutlineFileDownload />
+            </IconDownload>
          <Table {...getTableProps()} isDropdownVisible={isFilterDropdownVisible}>
           <thead>
             {headerGroups.map(headerGroup => (
