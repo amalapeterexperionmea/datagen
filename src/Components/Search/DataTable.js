@@ -18,11 +18,12 @@ const TableWrapper = styled.div`
   max-width: 1300px; 
   margin: 20px auto; 
   padding: 20px;
-  min-height: 400px;
+  min-height: ${({ columnsCount }) => (columnsCount < 10 ? 'auto' : '400px')}; // Adjusted based on columns
   display: flex;
   flex-direction: column;
   justify-content: space-between; 
 `;
+
 
 const Table = styled.table`
   width: 1205px;
@@ -167,7 +168,7 @@ const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack,isFi
 
   return (
     <PageWrapper>
-      <TableWrapper>
+      <TableWrapper columnsCount={columns.length}>
       {!isSearchActive ? (
           <>
             <IconButton onClick={onAdd}> 
