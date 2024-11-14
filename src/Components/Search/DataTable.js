@@ -8,9 +8,30 @@ import { MdKeyboardArrowRight, MdKeyboardArrowLeft, MdAddCircleOutline,MdOutline
 const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-top: 25px;
+  align-items: flex-start; 
+  margin-top: ${({ isDropdownVisible }) => (isDropdownVisible ? '-200px' : '60px')};
   height: 95vh;
+`;
+
+const TableWrapper = styled.div`
+  width: 100%; 
+  max-width: 1300px; 
+  margin: 20px auto; 
+  padding: 20px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+`;
+
+const Table = styled.table`
+  width: 1205px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: ${({ isDropdownVisible }) => (isDropdownVisible ? '-80px' : '0')};
+  margin-left: 20px;
+  flex-grow: 1; 
 `;
 const IconButton = styled.button`
   position: fixed; 
@@ -59,23 +80,6 @@ const BackButton = styled.button`
   justify-content: center; 
   align-items: center; 
   cursor: pointer; 
-`;
-const TableWrapper = styled.div`
-  width: 100%; 
-  max-width: 1300px; 
-  margin: 20px auto; 
-  padding: 20px;
-  
-`;
-
-const Table = styled.table`
-  width: 1205px;
-  background-color: #ffffff;
-  border-radius: 5px;
-  overflow: hidden;
-  transition: margin-top 0s; 
-  margin-top: ${({ isDropdownVisible }) => (isDropdownVisible ? '-190px' : '0')}; 
-  margin-left:20px;
 `;
 
 const Th = styled.th`
