@@ -8,7 +8,7 @@ app.use(cors());
 
 
 // Connect to MongoDB
-const connectDB = require('./db'); 
+const connectDB = require('./Db'); 
 connectDB();
 
 // Define routes
