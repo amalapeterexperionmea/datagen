@@ -11,8 +11,8 @@ const Input = ({ label, name, type = "text", value, onChange, placeholder, min, 
       value={value} 
       onChange={onChange} 
       placeholder={placeholder}
-      min={min} // Useful for number, date, and time inputs
-      max={max} // Useful for number, date, and time inputs
+      min={min} 
+      max={max} 
     />
   </Form.Group>
 );

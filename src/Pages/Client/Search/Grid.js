@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import Search from '../../../Components/Search';
 
 
+
+
 const Grid = () => {
   const navigate = useNavigate();
   const columns = React.useMemo(
@@ -43,7 +45,7 @@ const Grid = () => {
     []
   );
   const onAdd = () => {
-    navigate('/client/form'); 
+    navigate('/client/Add'); 
   };
 
   return (
