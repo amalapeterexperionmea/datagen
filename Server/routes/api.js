@@ -16,6 +16,8 @@ router.patch('/updateclient/:clientId',clientController.updateClient);
 router.get('/userlist',userController.userlist);
 router.post('/adduser',userController.adduser);
 router.patch('/updateuser/:userId',userController.updateUser);
+
+
 module.exports = router;
 
 
