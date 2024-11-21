@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const loginController = require('../controllers/loginController');
+const clientController = require('../controllers/clientController')
 
 
 
@@ -9,6 +10,8 @@ const loginController = require('../controllers/loginController');
 
 // Login API
 router.post('/login', loginController.login);
+//create client api
+router.post('/addclient',clientController.addclient);
 
 
 
