@@ -8,9 +8,31 @@ import { MdKeyboardArrowRight, MdKeyboardArrowLeft, MdAddCircleOutline,MdOutline
 const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-top: 25px;
+  align-items: flex-start; 
+  margin-top: ${({ isDropdownVisible }) => (isDropdownVisible ? '-200px' : '60px')};
   height: 95vh;
+`;
+
+const TableWrapper = styled.div`
+  width: 100%; 
+  max-width: 1300px; 
+  margin: 20px auto; 
+  padding: 20px;
+  min-height: ${({ columnsCount }) => (columnsCount < 10 ? 'auto' : '400px')}; // Adjusted based on columns
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+`;
+
+
+const Table = styled.table`
+  width: 1205px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: ${({ isDropdownVisible }) => (isDropdownVisible ? '-80px' : '0')};
+  margin-left: 20px;
+  flex-grow: 1; 
 `;
 const IconButton = styled.button`
   position: fixed; 
@@ -47,10 +69,10 @@ const IconDownload = styled.button`
 const BackButton = styled.button`
  position: fixed; 
   top: 110px; 
-  right: 45px; 
+  right: 40px; 
   background-color: #2a6f97; 
   color: white; 
-  width: 75px;
+  width: 38px;
   height: 32px;
   border: none; 
   border-radius: 4px; 
@@ -59,23 +81,6 @@ const BackButton = styled.button`
   justify-content: center; 
   align-items: center; 
   cursor: pointer; 
-`;
-const TableWrapper = styled.div`
-  width: 100%; 
-  max-width: 1300px; 
-  margin: 20px auto; 
-  padding: 20px;
-  
-`;
-
-const Table = styled.table`
-  width: 1205px;
-  background-color: #ffffff;
-  border-radius: 5px;
-  overflow: hidden;
-  transition: margin-top 0s; 
-  margin-top: ${({ isDropdownVisible }) => (isDropdownVisible ? '-190px' : '0')}; 
-  margin-left:20px;
 `;
 
 const Th = styled.th`
@@ -163,12 +168,9 @@ const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack,isFi
 
   return (
     <PageWrapper>
-      <TableWrapper>
+      <TableWrapper columnsCount={columns.length}>
       {!isSearchActive ? (
           <>
-            <IconDownload>
-              <MdOutlineFileDownload />
-            </IconDownload>
             <IconButton onClick={onAdd}> 
               <MdAddCircleOutline />
             </IconButton>
@@ -176,6 +178,9 @@ const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack,isFi
         ) : (
           <BackButton onClick={onBack}>Back</BackButton>
         )}
+        <IconDownload>
+              <MdOutlineFileDownload />
+            </IconDownload>
          <Table {...getTableProps()} isDropdownVisible={isFilterDropdownVisible}>
           <thead>
             {headerGroups.map(headerGroup => (

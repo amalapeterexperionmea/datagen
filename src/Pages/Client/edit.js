@@ -179,7 +179,6 @@ const Update = () => {
                   name="postgres"
                   value={formData.postgres}
                   onChange={handleChange}
-                  placeholder="Enter PostgreSQL entries here, separated by new lines"
                 />
 
                 <Label>MongoDB:</Label>
@@ -187,7 +186,6 @@ const Update = () => {
                   name="mongodb"
                   value={formData.mongodb}
                   onChange={handleChange}
-                  placeholder="Enter MongoDB entries here, separated by new lines"
                 />
 
                 <ButtonContainer>
