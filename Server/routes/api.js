@@ -10,11 +10,8 @@ const clientController = require('../controllers/clientController')
 
 // Login API
 router.post('/login', loginController.login);
-//create client api
+//create client API
 router.post('/addclient',clientController.addclient);
-
-
-
 
 
 
