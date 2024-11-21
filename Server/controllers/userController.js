@@ -46,3 +46,37 @@ exports.userlist = async (req, res) => {
       return res.status(500).json({ message: 'Internal server error', details: error.message });
     }
   };
+
+  //updateuser
+
+  exports.updateUser = async (req, res) => {
+    const userId  = req.params.userId; 
+    const { name, username, user_type, email, password, confirm_password } = req.body;
+    try {
+      
+      if (password !== confirm_password) {
+        return res.status(400).json({ message: 'Passwords do not match!' });
+      }
+  
+      const existingUser = await User.findById(userId);
+
+      if (!existingUser) {
+        return res.status(404).json({ message: 'User not found!' });
+      }
+  
+      existingUser.name = name || existingUser.name;
+      existingUser.username = username || existingUser.username;
+      existingUser.user_type = user_type || existingUser.user_type;
+      existingUser.email = email || existingUser.email;
+      existingUser.password = password || existingUser.password;
+  
+      await existingUser.save();
+  
+      return res.status(200).json({ message: 'User updated successfully!' });
+    } catch (error) {
+      console.error('Error:', error);
+      return res.status(500).json({ message: 'Internal server error', details: error.message });
+    }
+  };
+  
+
