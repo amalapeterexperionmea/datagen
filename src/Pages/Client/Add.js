@@ -25,12 +25,32 @@ const clientFields = [
     { label: 'MongoDB', type: 'textline', name: 'mongodb' },
   ];
 
-
-
-  const clienthandleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Submitted:", formData);
+    try {
+      const response = await fetch('http://localhost:5000/api/addclient', {  
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),  
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Client added successfully:', data);
+        navigate('/client');  
+      } else {
+        const errorData = await response.json();
+        console.error('Error adding client:', errorData);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
+  
+  
+  
 
   const clienthandleCancel = () => {
     navigate("/client");
@@ -46,7 +66,7 @@ const clientFields = [
            fields={clientFields}  
               formData={formData}     
               onChange={handleChange}  
-              onSubmit={clienthandleSubmit} 
+              onSubmit={handleSubmit} 
               onCancel={clienthandleCancel}  
               showAdd={true}
               layout="Standard"
