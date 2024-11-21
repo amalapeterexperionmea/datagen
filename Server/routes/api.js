@@ -12,6 +12,8 @@ const clientController = require('../controllers/clientController')
 router.post('/login', loginController.login);
 //create client API
 router.post('/addclient',clientController.addclient);
+//fetch clientdata API
+router.get('/clientlist',clientController.clientlist);
 
 
 
