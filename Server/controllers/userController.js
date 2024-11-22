@@ -80,3 +80,26 @@ exports.userlist = async (req, res) => {
   };
   
 
+  //get username and usertype
+  exports.user = async (req, res) => {
+    const  email  = req.params.emailId;
+  
+    try {
+      const user = await User.findOne({ email });
+      if (!user) {
+        return res.status(401).json({ message: 'Invalid email!' });
+      }
+      res.status(200).json({
+        message: `successfully fetched username and user_type of email: ${email}`,
+        user: {
+          username: user.username,
+          userType: user.user_type,
+        },
+      })
+    } catch (error) {
+      console.error("Error logging in:", error);
+      res.status(500).json({ message: 'Internal server error', details: error.message });
+    }
+  };
+
+
