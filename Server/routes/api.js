@@ -15,7 +15,6 @@ router.get('/clientlist',clientController.clientlist);
 router.patch('/updateclient/:clientId',clientController.updateClient);
 // user API's
 router.get('/userlist',userController.userlist);
-router.get('/user/:emailId', userController.user);
 router.post('/adduser',userController.adduser);
 router.patch('/updateuser/:userId',userController.updateUser);
 
