@@ -198,6 +198,8 @@ function LoginPage({ setIsAuthenticated }) {
 
       if (response.ok) {
         setIsAuthenticated(true); 
+        sessionStorage.setItem("username", data.user.username || 'Guest'); 
+        sessionStorage.setItem("user_type", data.user.user_type || 'Test'); 
         navigate("/"); 
       } else {
         setErrorMessage(data.message);

@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import MenuItem from '../MenuItems/MenuItems';
 
@@ -48,11 +48,31 @@ const Username = styled.div`
   text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5); 
 `;
 
+
+
+
 const Sidebar = () => {
+  
+  const [userType, setUserType] = useState('');
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    
+    const storedUserType = sessionStorage.getItem('user_type') ; 
+    const storedUsername = sessionStorage.getItem('username') ; 
+
+
+    
+    const formatText = (text) => text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+
+
+    setUserType(formatText(storedUserType));
+    setUsername(formatText(storedUsername));
+  }, []);
     return (
         <SidebarWrapper>
-            <UserType>Admin</UserType>
-            <Username>Username</Username> 
+            <UserType>{userType}</UserType>
+            <Username>{username}</Username> 
             <MenuItem />
         </SidebarWrapper>
     );
