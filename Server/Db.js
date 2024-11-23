@@ -8,10 +8,7 @@ const mongoURI = 'mongodb+srv://admin:experion1234@datagen.ypvo3.mongodb.net/gen
 //  connect to MongoDB
 const connectDB = async () => {
   try {
-    await mongoose.connect(mongoURI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    });
+    await mongoose.connect(mongoURI);
     console.log('MongoDB connected');
   } catch (err) {
     console.error('MongoDB connection error:', err);
