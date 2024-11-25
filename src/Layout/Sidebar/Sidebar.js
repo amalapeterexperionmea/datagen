@@ -16,11 +16,11 @@ const SidebarWrapper = styled.aside`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
 `;
 
-const UserType = styled.div`
+const ProjectName = styled.div`
   font-size: 1.4em;
   color: white;
   font-weight: 700; 
-  letter-spacing: 1.5px; 
+  letter-spacing: 3px; 
   text-align: center;
   background: linear-gradient(135deg, #5FA8D3 0%, #2A6F97 50%, #1B4965 100%); 
   border-bottom: 2px solid rgba(255, 255, 255, 0.2); 
@@ -35,7 +35,7 @@ const UserType = styled.div`
     white-space: nowrap;
 `;
 
-const Username = styled.div`
+const UserType = styled.div`
   padding: 10px; 
   font-size: 1.1em;
   text-align: center;
@@ -54,12 +54,12 @@ const Username = styled.div`
 const Sidebar = () => {
   
   const [userType, setUserType] = useState('');
-  const [username, setUsername] = useState('');
+ 
 
   useEffect(() => {
     
     const storedUserType = sessionStorage.getItem('user_type') ; 
-    const storedUsername = sessionStorage.getItem('username') ; 
+     
 
 
     
@@ -67,12 +67,12 @@ const Sidebar = () => {
 
 
     setUserType(formatText(storedUserType));
-    setUsername(formatText(storedUsername));
+   
   }, []);
     return (
         <SidebarWrapper>
-            <UserType>{userType}</UserType>
-            <Username>{username}</Username> 
+            <ProjectName>Datagen</ProjectName>
+            <UserType>{userType}</UserType> 
             <MenuItem />
         </SidebarWrapper>
     );
