@@ -170,6 +170,14 @@ const ForgotPasswordButton = styled.button`
   }
 `;
 
+
+function preloadImage(src) {
+  const img = new Image();
+  img.src = src;
+}
+
+preloadImage(loginPattern2);
+
 function LoginPage({ setIsAuthenticated }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
