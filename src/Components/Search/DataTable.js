@@ -193,6 +193,7 @@ const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack,isFi
       startY: 20,
       styles: { fontSize: 8 },
       theme: "grid",
+      headStyles: { fillColor: [41, 128, 185] }
     });
 
     doc.save("table_data.pdf");
