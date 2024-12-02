@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { BiFirstPage, BiLastPage } from 'react-icons/bi';
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft, MdAddCircleOutline,MdOutlineFileDownload} from 'react-icons/md';
 import jsPDF from "jspdf";
+import "jspdf-autotable";
 import { CSVLink } from "react-csv";
 
 
@@ -177,20 +178,25 @@ const NoDataMessage = styled.div`
   margin-left:500px;
 `;
 const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack,isFilterDropdownVisible}) => {
+  
   const [isDownloadMenuVisible, setDownloadMenuVisible] = useState(false);
   const navigate = useNavigate();
+  
   const handlePDFDownload = () => {
     const doc = new jsPDF();
-    let y = 10;
-    doc.text(" ", 10, y);
-    y += 10;
+    const tableHeaders = columns.map((col) => col.Header);
 
-    data.forEach((row) => {
-      const rowText = columns
-        .map((col) => `${col.Header}: ${row[col.accessor] || ""}`)
-        .join(", ");
-      doc.text(rowText, 10, y);
-      y += 10;
+    const tableRows = data.map((row) =>
+      columns.map((col) => row[col.accessor] || "")
+    );
+
+    doc.text("Table Data", 14, 10);
+    doc.autoTable({
+      head: [tableHeaders],
+      body: tableRows,
+      startY: 20,
+      styles: { fontSize: 8 },
+      theme: "grid",
     });
 
     doc.save("table_data.pdf");
