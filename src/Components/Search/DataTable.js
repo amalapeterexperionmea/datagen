@@ -151,17 +151,13 @@ const DropdownMenu = styled.div`
     padding: 10px;
     text-align: center;
     background: none;
-    border: none;
+    border: .5px solid black; 
     cursor: pointer;
     width: 70px;
-    box-sizing: border-box;
+    box-sizing: border-box; 
 
     &:hover {
       background-color: #f0f0f0;
-    }
-
-    &:not(:last-child) {
-      border-bottom: 2px solid black; 
     }
   }
 
