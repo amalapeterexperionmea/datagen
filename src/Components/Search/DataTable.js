@@ -1,9 +1,13 @@
-import React from 'react'; 
+import React, { useState } from "react";
 import { useTable, useSortBy, usePagination } from 'react-table';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { BiFirstPage, BiLastPage } from 'react-icons/bi';
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft, MdAddCircleOutline,MdOutlineFileDownload} from 'react-icons/md';
+import jsPDF from "jspdf";
+import { CSVLink } from "react-csv";
+
+
 
 const PageWrapper = styled.div`
   display: flex;
@@ -18,7 +22,7 @@ const TableWrapper = styled.div`
   max-width: 1300px; 
   margin: 20px auto; 
   padding: 20px;
-  min-height: ${({ columnsCount }) => (columnsCount < 10 ? 'auto' : '400px')}; // Adjusted based on columns
+  min-height: ${({ columnsCount }) => (columnsCount < 10 ? 'auto' : '400px')}; 
   display: flex;
   flex-direction: column;
   justify-content: space-between; 
@@ -132,7 +136,40 @@ const PaginationButton = styled.button`
     cursor: not-allowed;
   }
 `;
+const DropdownMenu = styled.div`
+  position: absolute;
+  top: 150px;
+  right: 90px;
+  width:70px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
 
+  button {
+    padding: 10px;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  }
+
+  a {
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  }
+`;
 const NoDataMessage = styled.div`
   color: Black;
   font-size: 22px;
@@ -140,7 +177,30 @@ const NoDataMessage = styled.div`
   margin-left:500px;
 `;
 const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack,isFilterDropdownVisible}) => {
+  const [isDownloadMenuVisible, setDownloadMenuVisible] = useState(false);
   const navigate = useNavigate();
+  const handlePDFDownload = () => {
+    const doc = new jsPDF();
+    let y = 10;
+    doc.text(" ", 10, y);
+    y += 10;
+
+    data.forEach((row) => {
+      const rowText = columns
+        .map((col) => `${col.Header}: ${row[col.accessor] || ""}`)
+        .join(", ");
+      doc.text(rowText, 10, y);
+      y += 10;
+    });
+
+    doc.save("table_data.pdf");
+    setDownloadMenuVisible(false);
+  };
+
+  const csvHeaders = columns.map((col) => ({
+    label: col.Header,
+    key: col.accessor,
+  }));
   const {
     getTableProps,
     getTableBodyProps,
@@ -178,9 +238,20 @@ const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack,isFi
         ) : (
           <BackButton onClick={onBack}>Back</BackButton>
         )}
-        <IconDownload>
-              <MdOutlineFileDownload />
-            </IconDownload>
+        <IconDownload onClick={() => setDownloadMenuVisible((prev) => !prev)}>
+          <MdOutlineFileDownload />
+        </IconDownload>
+        {isDownloadMenuVisible && (
+          <DropdownMenu>
+            <button onClick={handlePDFDownload}>PDF</button>
+            <CSVLink
+              data={data}
+              headers={csvHeaders}
+              filename="table_data.csv"
+              onClick={() => setDownloadMenuVisible(false)}
+            > CSV </CSVLink>
+          </DropdownMenu>
+        )}
          <Table {...getTableProps()} isDropdownVisible={isFilterDropdownVisible}>
           <thead>
             {headerGroups.map(headerGroup => (
