@@ -43,7 +43,7 @@ const Grid = () => {
     []
   );
   const onAdd = () => {
-    navigate('/client/form'); 
+    navigate('/client/Add'); 
   };
 
   return (
