@@ -140,37 +140,37 @@ const PaginationButton = styled.button`
 const DropdownMenu = styled.div`
   position: absolute;
   top: 150px;
-  right: 90px;
-  width:70px;
+  right: 60px;
+  width: 70px;
   background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 4px;
   display: flex;
   flex-direction: column;
-  align-items:center;
+  align-items: center;
 
-  button {
+  button, a {
     padding: 10px;
-    text-align: left;
+    text-align: center;
     background: none;
     border: none;
     cursor: pointer;
+    width: 70px;
+    box-sizing: border-box;
 
     &:hover {
       background-color: #f0f0f0;
+    }
+
+    &:not(:last-child) {
+      border-bottom: 2px solid black; 
     }
   }
 
   a {
-    padding: 10px;
     text-decoration: none;
     color: black;
-
-    &:hover {
-      background-color: #f0f0f0;
-    }
   }
 `;
+
 const NoDataMessage = styled.div`
   color: Black;
   font-size: 22px;
