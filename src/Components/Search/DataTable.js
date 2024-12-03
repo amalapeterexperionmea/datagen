@@ -141,7 +141,7 @@ const DropdownMenu = styled.div`
   position: absolute;
   top: 150px;
   right: 60px;
-  width: 70px;
+  width: 50px;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -153,8 +153,10 @@ const DropdownMenu = styled.div`
     background: none;
     border: .5px solid black; 
     cursor: pointer;
-    width: 70px;
+    width: 50px;
     box-sizing: border-box; 
+    border-radius:1px; 
+ 
 
     &:hover {
       background-color: #f0f0f0;
