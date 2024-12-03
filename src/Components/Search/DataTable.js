@@ -175,7 +175,7 @@ const NoDataMessage = styled.div`
   margin-top: 20px;
   margin-left:500px;
 `;
-const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack,isFilterDropdownVisible}) => {
+const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack,isFilterDropdownVisible,currentPage}) => {
   
   const [isDownloadMenuVisible, setDownloadMenuVisible] = useState(false);
   const navigate = useNavigate();
@@ -187,8 +187,8 @@ const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack,isFi
     const tableRows = data.map((row) =>
       columns.map((col) => row[col.accessor] || "")
     );
-
-    doc.text("Table Data", 14, 10);
+    const pdfHeader = `${currentPage} Data`;
+    doc.text(pdfHeader, 14, 10);
     doc.autoTable({
       head: [tableHeaders],
       body: tableRows,
@@ -198,7 +198,7 @@ const DataTable = ({ columns, data, onAdd, basePath , isSearchActive,onBack,isFi
       headStyles: { fillColor: [41, 128, 185] }
     });
 
-    doc.save("table_data.pdf");
+    doc.save(`${currentPage.toLowerCase().replace(/\s+/g, '_')}_data.pdf`);
     setDownloadMenuVisible(false);
   };
 

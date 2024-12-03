@@ -41,7 +41,7 @@ const DropdownContainer = styled.div`
   margin-top: 90px;
 `;
 
-const Search = ({ columns, data, onAdd, basePath, onToggleFilter }) => {
+const Search = ({ columns, data, onAdd, basePath, onToggleFilter,currentPage  }) => {
   const [searchInput, setSearchInput] = useState('');
   const [isFilterVisible, setFilterVisible] = useState(false);
   const [filterValues, setFilterValues] = useState(
@@ -119,6 +119,7 @@ const Search = ({ columns, data, onAdd, basePath, onToggleFilter }) => {
         isSearchActive={!!searchInput} 
         onBack={handleBack} 
         isFilterDropdownVisible={isFilterVisible}
+        currentPage={currentPage}
       />
     </MainContent>
   );

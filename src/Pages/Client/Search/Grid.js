@@ -48,7 +48,7 @@ const Grid = () => {
 
   return (
     <div>
-      <Search columns={columns} data={data} onAdd={onAdd} basePath="/client/update"></Search>
+      <Search columns={columns} data={data} onAdd={onAdd} basePath="/client/update" currentPage="Client"></Search>
     </div>
   );
 };

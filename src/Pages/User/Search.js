@@ -46,7 +46,7 @@ const navigate = useNavigate();
 
   return (
     <div>
-      <Search columns={columns} data={data} onAdd={onAdd} basePath="/searchuser/edituser" />
+      <Search columns={columns} data={data} onAdd={onAdd} basePath="/searchuser/edituser" currentPage="User"/>
     </div>
   );
 };
