@@ -107,7 +107,7 @@ const Td = styled.td`
   border: 1px solid #ddd;
   cursor: pointer;
   width: 100px;
-  font-size: 15px;
+  font-size: ${({ fontSize }) => fontSize || '13px'}
 `;
 
 const PaginationWrapper = styled.div`
