@@ -19,24 +19,26 @@ const Grid = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-
       try {
         const response = await fetch('http://localhost:5000/clientlist');
         const result = await response.json();
+        console.log('Raw Response:', result);  
+  
         const transformedData = result.clients.map(client => ({
           ...client,
-          postgres: client.postgres.version,
-          mongodb: client.mongodb.version,
+          postgres: client.postgres ? Object.values(client.postgres) : 'N/A',
+          mongodb: client.mongodb ? Object.values(client.mongodb): 'N/A',
         }));
-        console.log('Transformed Data:', transformedData);
+        console.log('Transformed Data:', transformedData);  
         setData(transformedData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-
+  
     fetchData();
   }, []);
+  
 
   const onAdd = () => {
     navigate('/client/Add');
