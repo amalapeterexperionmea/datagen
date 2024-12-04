@@ -1,24 +1,21 @@
 const Client = require('../models/Client');
 
-//clientlist 
 exports.clientlist = async (req, res) => {
   try {
-    
     const allClients = await Client.find();
-   
     return res.status(200).json({
       message: 'Client list fetched successfully!',
       clients: allClients,
     });
-
   } catch (error) {
     console.error('Error:', error);
     return res.status(500).json({
       message: 'Internal server error',
-      details: error.message, 
+      details: error.message,
     });
   }
 };
+
 
 
 //add client 
