@@ -112,7 +112,7 @@ const Td = styled.td`
 const PaginationWrapper = styled.div`
   position: relative; 
   bottom: 0; 
-  margin-top: 15px;
+  margin-top: 12px;
   display: flex;
   justify-content: flex-end;
   margin-right: 21px;
